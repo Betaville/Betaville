@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: net.betaville
+OpenIDE-Module-Localizing-Bundle: net/betaville/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

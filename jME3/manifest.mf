@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: com.jme3
+OpenIDE-Module-Localizing-Bundle: com/jme3/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
