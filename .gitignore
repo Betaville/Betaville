@@ -2,3 +2,5 @@
 /jME3/build/
 /SceneModule/build/
 /SceneModule/nbproject/private/
+/SceneModule/liblwjgl.jnilib
+/liblwjgl.jnilib
