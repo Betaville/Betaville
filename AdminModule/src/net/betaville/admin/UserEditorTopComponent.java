@@ -51,6 +51,7 @@ public final class UserEditorTopComponent extends TopComponent {
         jTextField2 = new javax.swing.JTextField();
         topPanel = new javax.swing.JPanel();
         userNameLabel = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         bottomPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -90,15 +91,21 @@ public final class UserEditorTopComponent extends TopComponent {
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(userNameLabel)
-                .addContainerGap(698, Short.MAX_VALUE))
+                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topPanelLayout.createSequentialGroup()
+                        .addComponent(userNameLabel)
+                        .addGap(0, 692, Short.MAX_VALUE))
+                    .addComponent(jSeparator2))
+                .addContainerGap())
         );
         topPanelLayout.setVerticalGroup(
             topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(userNameLabel)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         add(topPanel, java.awt.BorderLayout.PAGE_START);
@@ -123,8 +130,8 @@ public final class UserEditorTopComponent extends TopComponent {
             .addGroup(bottomPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -283,6 +290,7 @@ public final class UserEditorTopComponent extends TopComponent {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
