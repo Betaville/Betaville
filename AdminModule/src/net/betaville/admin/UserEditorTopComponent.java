@@ -4,6 +4,7 @@
  */
 package net.betaville.admin;
 
+import edu.poly.bxmc.betaville.net.SecureClientManager;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -31,6 +32,11 @@ preferredID = "UserEditorTopComponent")
     "HINT_UserEditorTopComponent=This is a UserEditor window"
 })
 public final class UserEditorTopComponent extends TopComponent {
+    
+    private String userToEdit = "sbook";
+    private String server = "localhost";
+    
+    private SecureClientManager scm;
 
     public UserEditorTopComponent() {
         initComponents();
@@ -57,8 +63,6 @@ public final class UserEditorTopComponent extends TopComponent {
         jButton2 = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         changePasswordLabel = new javax.swing.JLabel();
-        changePasswordField1 = new javax.swing.JTextField();
-        changePasswordField2 = new javax.swing.JTextField();
         changePasswordSubmitButton = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
@@ -71,6 +75,8 @@ public final class UserEditorTopComponent extends TopComponent {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        newPasswordEntryField1 = new javax.swing.JPasswordField();
+        newPasswordEntryField2 = new javax.swing.JPasswordField();
 
         jTextField1.setText(org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.jTextField1.text")); // NOI18N
 
@@ -139,15 +145,6 @@ public final class UserEditorTopComponent extends TopComponent {
 
         org.openide.awt.Mnemonics.setLocalizedText(changePasswordLabel, org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.changePasswordLabel.text")); // NOI18N
 
-        changePasswordField1.setText(org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.changePasswordField1.text")); // NOI18N
-        changePasswordField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                changePasswordField1ActionPerformed(evt);
-            }
-        });
-
-        changePasswordField2.setText(org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.changePasswordField2.text")); // NOI18N
-
         org.openide.awt.Mnemonics.setLocalizedText(changePasswordSubmitButton, org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.changePasswordSubmitButton.text")); // NOI18N
         changePasswordSubmitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,6 +181,10 @@ public final class UserEditorTopComponent extends TopComponent {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
+        newPasswordEntryField1.setText(org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.newPasswordEntryField1.text")); // NOI18N
+
+        newPasswordEntryField2.setText(org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.newPasswordEntryField2.text")); // NOI18N
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -194,9 +195,9 @@ public final class UserEditorTopComponent extends TopComponent {
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(changePasswordLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(changePasswordField1)
-                            .addComponent(changePasswordField2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 532, Short.MAX_VALUE)
+                            .addComponent(newPasswordEntryField1)
+                            .addComponent(newPasswordEntryField2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -216,7 +217,7 @@ public final class UserEditorTopComponent extends TopComponent {
                                     .addComponent(updateWebsiteField, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                                     .addComponent(updateEmailField)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 487, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         mainPanelLayout.setVerticalGroup(
@@ -228,13 +229,13 @@ public final class UserEditorTopComponent extends TopComponent {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(changePasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(newPasswordEntryField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(changePasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(newPasswordEntryField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(changePasswordSubmitButton)
-                .addGap(32, 32, 32)
+                .addGap(72, 72, 72)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -250,15 +251,11 @@ public final class UserEditorTopComponent extends TopComponent {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         add(mainPanel, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void changePasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_changePasswordField1ActionPerformed
 
     private void changePasswordSubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordSubmitButtonActionPerformed
         // TODO add your handling code here:
@@ -278,8 +275,6 @@ public final class UserEditorTopComponent extends TopComponent {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
-    private javax.swing.JTextField changePasswordField1;
-    private javax.swing.JTextField changePasswordField2;
     private javax.swing.JLabel changePasswordLabel;
     private javax.swing.JButton changePasswordSubmitButton;
     private javax.swing.JButton jButton1;
@@ -295,6 +290,8 @@ public final class UserEditorTopComponent extends TopComponent {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JPasswordField newPasswordEntryField1;
+    private javax.swing.JPasswordField newPasswordEntryField2;
     private javax.swing.JPanel topPanel;
     private javax.swing.JTextField updateEmailField;
     private javax.swing.JLabel updateEmailLabel;
@@ -304,12 +301,15 @@ public final class UserEditorTopComponent extends TopComponent {
     // End of variables declaration//GEN-END:variables
     @Override
     public void componentOpened() {
-        // TODO add custom code on component opening
+        System.setProperty("betaville.server", server);
+        scm = new SecureClientManager(null, true);
     }
 
     @Override
     public void componentClosed() {
-        // TODO add custom code on component closing
+        if(scm.isAlive()){
+            scm.close();
+        }
     }
 
     void writeProperties(java.util.Properties p) {
