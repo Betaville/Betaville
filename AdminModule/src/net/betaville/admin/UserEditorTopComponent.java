@@ -4,6 +4,7 @@
  */
 package net.betaville.admin;
 
+import edu.poly.bxmc.betaville.model.IUser.UserType;
 import edu.poly.bxmc.betaville.net.SecureClientManager;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
@@ -36,13 +37,31 @@ public final class UserEditorTopComponent extends TopComponent {
     private String userToEdit = "sbook";
     private String server = "localhost";
     
+    private UserType originalUserType = UserType.MODERATOR;
+    private String originalEmail = "skye.book@gmail.com";
+    private String originalWebsite = "http://skyebook.net";
+    private String originalBio = "My Biography.";
+    
+    private UserType newUserType;
+    private String newEmail;
+    private String newWebsite;
+    private String newBio;
+    
+    
+    
     private SecureClientManager scm;
 
     public UserEditorTopComponent() {
         initComponents();
         setName(Bundle.CTL_UserEditorTopComponent());
         setToolTipText(Bundle.HINT_UserEditorTopComponent());
-
+        
+        userTypeComboBox.removeAll();
+        for(UserType type : UserType.values()){
+            userTypeComboBox.addItem(type);
+        }
+        
+        
     }
 
     /**
@@ -59,12 +78,12 @@ public final class UserEditorTopComponent extends TopComponent {
         userNameLabel = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         bottomPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        saveChangesButton = new javax.swing.JButton();
+        revertChangesButton = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         changePasswordLabel = new javax.swing.JLabel();
         changePasswordSubmitButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
+        userTypeComboBox = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
@@ -74,7 +93,7 @@ public final class UserEditorTopComponent extends TopComponent {
         updateWebsiteField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        updateBioArea = new javax.swing.JTextArea();
         newPasswordEntryField1 = new javax.swing.JPasswordField();
         newPasswordEntryField2 = new javax.swing.JPasswordField();
 
@@ -116,9 +135,19 @@ public final class UserEditorTopComponent extends TopComponent {
 
         add(topPanel, java.awt.BorderLayout.PAGE_START);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.jButton1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(saveChangesButton, org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.saveChangesButton.text")); // NOI18N
+        saveChangesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveChangesButtonActionPerformed(evt);
+            }
+        });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButton2, org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.jButton2.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(revertChangesButton, org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.revertChangesButton.text")); // NOI18N
+        revertChangesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                revertChangesButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bottomPanelLayout = new javax.swing.GroupLayout(bottomPanel);
         bottomPanel.setLayout(bottomPanelLayout);
@@ -126,9 +155,9 @@ public final class UserEditorTopComponent extends TopComponent {
             bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bottomPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(saveChangesButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 562, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(revertChangesButton)
                 .addContainerGap())
         );
         bottomPanelLayout.setVerticalGroup(
@@ -136,8 +165,8 @@ public final class UserEditorTopComponent extends TopComponent {
             .addGroup(bottomPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bottomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(revertChangesButton)
+                    .addComponent(saveChangesButton))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -152,10 +181,10 @@ public final class UserEditorTopComponent extends TopComponent {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        userTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        userTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                userTypeComboBoxActionPerformed(evt);
             }
         });
 
@@ -178,8 +207,8 @@ public final class UserEditorTopComponent extends TopComponent {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.jLabel3.text")); // NOI18N
 
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        updateBioArea.setRows(5);
+        jScrollPane1.setViewportView(updateBioArea);
 
         newPasswordEntryField1.setText(org.openide.util.NbBundle.getMessage(UserEditorTopComponent.class, "UserEditorTopComponent.newPasswordEntryField1.text")); // NOI18N
 
@@ -200,7 +229,7 @@ public final class UserEditorTopComponent extends TopComponent {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(userTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jSeparator1)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +258,7 @@ public final class UserEditorTopComponent extends TopComponent {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newPasswordEntryField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(newPasswordEntryField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,9 +290,9 @@ public final class UserEditorTopComponent extends TopComponent {
         // TODO add your handling code here:
     }//GEN-LAST:event_changePasswordSubmitButtonActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void userTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userTypeComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_userTypeComboBoxActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -273,36 +302,56 @@ public final class UserEditorTopComponent extends TopComponent {
         // TODO add your handling code here:
     }//GEN-LAST:event_updateEmailFieldActionPerformed
 
+    private void revertChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revertChangesButtonActionPerformed
+        updateEmailField.setText(originalEmail);
+        updateWebsiteField.setText(originalWebsite);
+        updateBioArea.setText(originalBio);
+        userTypeComboBox.setSelectedItem(originalUserType);
+    }//GEN-LAST:event_revertChangesButtonActionPerformed
+
+    private void saveChangesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveChangesButtonActionPerformed
+        newEmail = updateEmailField.getText();
+        newWebsite = updateWebsiteField.getText();
+        newBio = updateBioArea.getText();
+        newUserType = (UserType)userTypeComboBox.getSelectedItem();
+    }//GEN-LAST:event_saveChangesButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bottomPanel;
     private javax.swing.JLabel changePasswordLabel;
     private javax.swing.JButton changePasswordSubmitButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPasswordField newPasswordEntryField1;
     private javax.swing.JPasswordField newPasswordEntryField2;
+    private javax.swing.JButton revertChangesButton;
+    private javax.swing.JButton saveChangesButton;
     private javax.swing.JPanel topPanel;
+    private javax.swing.JTextArea updateBioArea;
     private javax.swing.JTextField updateEmailField;
     private javax.swing.JLabel updateEmailLabel;
     private javax.swing.JTextField updateWebsiteField;
     private javax.swing.JLabel updateWebsiteLabel;
     private javax.swing.JLabel userNameLabel;
+    private javax.swing.JComboBox userTypeComboBox;
     // End of variables declaration//GEN-END:variables
     @Override
     public void componentOpened() {
         System.setProperty("betaville.server", server);
         scm = new SecureClientManager(null, true);
+        
+        updateEmailField.setText(originalEmail);
+        updateWebsiteField.setText(originalWebsite);
+        updateBioArea.setText(originalBio);
+        userTypeComboBox.setSelectedItem(originalUserType);
+        
     }
 
     @Override
