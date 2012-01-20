@@ -6,6 +6,7 @@ package net.betaville.scene;
 
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeCanvasContext;
+import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -40,6 +41,7 @@ public class SceneTopComponent extends TopComponent implements ActionListener, C
     private Canvas canvas;
     
     public SceneTopComponent(){
+        setName("Scene");
         setLayout(new BoxLayout(this, WIDTH));
         AppSettings settings = new AppSettings(true);
         settings.setWidth(640);
@@ -55,28 +57,7 @@ public class SceneTopComponent extends TopComponent implements ActionListener, C
         canvas = context.getCanvas();
         canvas.setSize(settings.getWidth(), settings.getHeight());
         
-        canvas.addComponentListener(new ComponentListener() {
-
-            @Override
-            public void componentResized(ComponentEvent ce) {
-                System.out.println("canvas resized");
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent ce) {
-            }
-
-            @Override
-            public void componentShown(ComponentEvent ce) {
-            }
-
-            @Override
-            public void componentHidden(ComponentEvent ce) {
-            }
-        });
-        
         add(canvas);
-        setSize(getSize());
     }
 
     @Override
