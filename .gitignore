@@ -9,3 +9,5 @@
 /AdminModule/build/
 /BetavilleApp/build/
 /LookAndFeelModule/build/
+/LookAndFeelModule/nbproject/private/
+/dist/
