@@ -14,6 +14,8 @@ import com.jme3.scene.shape.Box;
  * @author skyebook
  */
 public class BetavilleGame extends SimpleApplication{
+    
+    // Core Nodes
 
     @Override
     public void simpleInitApp(){
