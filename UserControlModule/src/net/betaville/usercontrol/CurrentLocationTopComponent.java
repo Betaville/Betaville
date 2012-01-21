@@ -48,22 +48,22 @@ public final class CurrentLocationTopComponent extends TopComponent {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        tabbedPane = new javax.swing.JTabbedPane();
+        latLonPane = new javax.swing.JPanel();
         latitudeValueLabel = new javax.swing.JLabel();
         longitudeValueLabel = new javax.swing.JLabel();
         latitudeValueData = new javax.swing.JLabel();
         longitudeValueData = new javax.swing.JLabel();
         wgsAltitudeValueLabel = new javax.swing.JLabel();
         wgsAltitudeValueData = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        utmPane = new javax.swing.JPanel();
         northingValueLabel = new javax.swing.JLabel();
         eastingValueLabel = new javax.swing.JLabel();
         utmAltitudeValueLabel = new javax.swing.JLabel();
         utmAltitudeValueData = new javax.swing.JLabel();
         eastingValueData = new javax.swing.JLabel();
         northingValueData = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        glPane = new javax.swing.JPanel();
         xValueLabel = new javax.swing.JLabel();
         yValueLabel = new javax.swing.JLabel();
         zValueLabel = new javax.swing.JLabel();
@@ -83,46 +83,46 @@ public final class CurrentLocationTopComponent extends TopComponent {
 
         org.openide.awt.Mnemonics.setLocalizedText(wgsAltitudeValueData, org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.wgsAltitudeValueData.text")); // NOI18N
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout latLonPaneLayout = new javax.swing.GroupLayout(latLonPane);
+        latLonPane.setLayout(latLonPaneLayout);
+        latLonPaneLayout.setHorizontalGroup(
+            latLonPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(latLonPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(latLonPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(latLonPaneLayout.createSequentialGroup()
                         .addComponent(latitudeValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(latitudeValueData))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(latLonPaneLayout.createSequentialGroup()
                         .addComponent(longitudeValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
                         .addComponent(longitudeValueData))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(latLonPaneLayout.createSequentialGroup()
                         .addComponent(wgsAltitudeValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(wgsAltitudeValueData)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        latLonPaneLayout.setVerticalGroup(
+            latLonPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(latLonPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(latLonPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(latitudeValueLabel)
                     .addComponent(latitudeValueData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(latLonPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(longitudeValueLabel)
                     .addComponent(longitudeValueData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(latLonPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wgsAltitudeValueLabel)
                     .addComponent(wgsAltitudeValueData))
                 .addContainerGap(188, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
+        tabbedPane.addTab(org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.latLonPane.TabConstraints.tabTitle"), latLonPane); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(northingValueLabel, org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.northingValueLabel.text")); // NOI18N
 
@@ -136,46 +136,46 @@ public final class CurrentLocationTopComponent extends TopComponent {
 
         org.openide.awt.Mnemonics.setLocalizedText(northingValueData, org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.northingValueData.text")); // NOI18N
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout utmPaneLayout = new javax.swing.GroupLayout(utmPane);
+        utmPane.setLayout(utmPaneLayout);
+        utmPaneLayout.setHorizontalGroup(
+            utmPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(utmPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(utmPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(utmPaneLayout.createSequentialGroup()
                         .addComponent(northingValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(northingValueData))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(utmPaneLayout.createSequentialGroup()
                         .addComponent(eastingValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
                         .addComponent(eastingValueData))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(utmPaneLayout.createSequentialGroup()
                         .addComponent(utmAltitudeValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(utmAltitudeValueData)))
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        utmPaneLayout.setVerticalGroup(
+            utmPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(utmPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(utmPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(northingValueLabel)
                     .addComponent(northingValueData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(utmPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eastingValueLabel)
                     .addComponent(eastingValueData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(utmPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(utmAltitudeValueLabel)
                     .addComponent(utmAltitudeValueData))
                 .addContainerGap(188, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.jPanel2.TabConstraints.tabTitle"), jPanel2); // NOI18N
+        tabbedPane.addTab(org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.utmPane.TabConstraints.tabTitle"), utmPane); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(xValueLabel, org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.xValueLabel.text")); // NOI18N
 
@@ -189,74 +189,74 @@ public final class CurrentLocationTopComponent extends TopComponent {
 
         org.openide.awt.Mnemonics.setLocalizedText(xValueData, org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.xValueData.text")); // NOI18N
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout glPaneLayout = new javax.swing.GroupLayout(glPane);
+        glPane.setLayout(glPaneLayout);
+        glPaneLayout.setHorizontalGroup(
+            glPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(glPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(glPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(glPaneLayout.createSequentialGroup()
                         .addComponent(xValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(xValueData))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(glPaneLayout.createSequentialGroup()
                         .addComponent(yValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
                         .addComponent(yValueData))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(glPaneLayout.createSequentialGroup()
                         .addComponent(zValueLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(zValueData)))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        glPaneLayout.setVerticalGroup(
+            glPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(glPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(glPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xValueLabel)
                     .addComponent(xValueData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(glPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yValueLabel)
                     .addComponent(yValueData))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(glPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zValueLabel)
                     .addComponent(zValueData))
                 .addContainerGap(188, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.jPanel3.TabConstraints.tabTitle"), jPanel3); // NOI18N
+        tabbedPane.addTab(org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.glPane.TabConstraints.tabTitle"), glPane); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabbedPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabbedPane)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel eastingValueData;
     private javax.swing.JLabel eastingValueLabel;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel glPane;
+    private javax.swing.JPanel latLonPane;
     private javax.swing.JLabel latitudeValueData;
     private javax.swing.JLabel latitudeValueLabel;
     private javax.swing.JLabel longitudeValueData;
     private javax.swing.JLabel longitudeValueLabel;
     private javax.swing.JLabel northingValueData;
     private javax.swing.JLabel northingValueLabel;
+    private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JLabel utmAltitudeValueData;
     private javax.swing.JLabel utmAltitudeValueLabel;
+    private javax.swing.JPanel utmPane;
     private javax.swing.JLabel wgsAltitudeValueData;
     private javax.swing.JLabel wgsAltitudeValueLabel;
     private javax.swing.JLabel xValueData;
