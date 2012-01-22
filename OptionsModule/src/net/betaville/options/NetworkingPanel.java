@@ -4,6 +4,9 @@
  */
 package net.betaville.options;
 
+import edu.poly.bxmc.betaville.net.InsecureClientManager;
+import org.openide.util.NbPreferences;
+
 final class NetworkingPanel extends javax.swing.JPanel {
 
     private final NetworkingOptionsPanelController controller;
@@ -105,23 +108,14 @@ final class NetworkingPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_javaServerRadioButtonActionPerformed
 
     void load() {
-        // TODO read settings and initialize GUI
-        // Example:        
-        // someCheckBox.setSelected(Preferences.userNodeForPackage(NetworkingPanel.class).getBoolean("someFlag", false));
-        // or for org.openide.util with API spec. version >= 7.4:
-        // someCheckBox.setSelected(NbPreferences.forModule(NetworkingPanel.class).getBoolean("someFlag", false));
-        // or:
-        // someTextField.setText(SomeSystemOption.getDefault().getSomeStringProperty());
+        javaServerRadioButton.setSelected(true);
+        serverAddressField.setText(NbPreferences.forModule(NetworkingPanel.class).get("ServerAddress", "master.betaville.net"));
     }
 
     void store() {
-        // TODO store modified settings
-        // Example:
-        // Preferences.userNodeForPackage(NetworkingPanel.class).putBoolean("someFlag", someCheckBox.isSelected());
-        // or for org.openide.util with API spec. version >= 7.4:
-        // NbPreferences.forModule(NetworkingPanel.class).putBoolean("someFlag", someCheckBox.isSelected());
-        // or:
-        // SomeSystemOption.getDefault().setSomeStringProperty(someTextField.getText());
+        if(javaServerRadioButton.isSelected()) NbPreferences.forModule(NetworkingPanel.class).put("NetworkConnection", InsecureClientManager.class.getName());
+        else NbPreferences.forModule(NetworkingPanel.class).put("NetworkConnection", "JSON CONNECTION CLASS");
+        NbPreferences.forModule(NetworkingPanel.class).put("ServerAddress", serverAddressField.getText());
     }
 
     boolean valid() {
