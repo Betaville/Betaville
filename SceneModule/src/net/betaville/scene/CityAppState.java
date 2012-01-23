@@ -18,6 +18,8 @@ import edu.poly.bxmc.betaville.model.*;
  */
 public class CityAppState implements AppState{
     
+    private boolean enabled = true;
+    
     private Node rootNode;
     
     private Node designNode;
@@ -33,7 +35,7 @@ public class CityAppState implements AppState{
     }
     
     public void addDesignToScene(Design design){
-       // TODO: Implement me!
+        designNode.attachChild(loadDesign(design));
     }
     
     public Node getDesignFromScene(Design design){
@@ -41,20 +43,19 @@ public class CityAppState implements AppState{
     }
     
     public void removeDesignFromScene(Design design){
-         // TODO: Implement me!
+        designNode.detachChildNamed(design.getFullIdentifier());
     }
     
     public void addDesignToTerrain(Design design){
-         // TODO: Implement me!
+        terrainNode.attachChild(loadDesign(design));
     }
     
     public Node getDesignFromTerrain(Design design){
-         // TODO: Implement me!
-        return null;
+        return (Node)terrainNode.getChild(design.getFullIdentifier());
     }
     
     public void removeDesignFromTerrain(Design design){
-         // TODO: Implement me!
+        terrainNode.detachChildNamed(design.getFullIdentifier());
     }
     
     /**
@@ -101,47 +102,50 @@ public class CityAppState implements AppState{
 
     @Override
     public boolean isInitialized() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return rootNode!=null && designNode!=null;
     }
 
     @Override
     public void setEnabled(boolean bln) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        enabled = bln;
     }
 
     @Override
     public boolean isEnabled() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return enabled;
     }
 
     @Override
     public void stateAttached(AppStateManager asm) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        rootNode.attachChild(designNode);
+        rootNode.attachChild(terrainNode);
     }
 
     @Override
     public void stateDetached(AppStateManager asm) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        rootNode.detachChild(designNode);
+        rootNode.detachChild(terrainNode);
     }
 
     @Override
     public void update(float f) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Nothing to see here
     }
 
     @Override
     public void render(RenderManager rm) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Nothing to see here
     }
 
     @Override
     public void postRender() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // Nothing to see here
     }
 
     @Override
     public void cleanup() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
+        // release all designs for garbage collection
+        designNode.detachAllChildren();
+        terrainNode.detachAllChildren();
+    }    
 }
