@@ -5,7 +5,24 @@
         <data xmlns="http://www.netbeans.org/ns/nb-module-project/3">
             <code-name-base>edu.poly.bxmc.betaville</code-name-base>
             <suite-component/>
-            <module-dependencies/>
+            <module-dependencies>
+                <dependency>
+                    <code-name-base>org.openide.modules</code-name-base>
+                    <build-prerequisite/>
+                    <compile-dependency/>
+                    <run-dependency>
+                        <specification-version>7.27.1</specification-version>
+                    </run-dependency>
+                </dependency>
+                <dependency>
+                    <code-name-base>org.openide.util</code-name-base>
+                    <build-prerequisite/>
+                    <compile-dependency/>
+                    <run-dependency>
+                        <specification-version>8.19.1</specification-version>
+                    </run-dependency>
+                </dependency>
+            </module-dependencies>
             <public-packages>
                 <package>bvtest.feng</package>
                 <package>bvtest.map</package>
@@ -67,8 +84,16 @@
                 <package>geotools</package>
             </public-packages>
             <class-path-extension>
+                <runtime-relative-path>ext/log4j-1.2.16.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/log4j-1.2.16.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
                 <runtime-relative-path>ext/BetavilleApp.jar</runtime-relative-path>
                 <binary-origin>release/modules/ext/BetavilleApp.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/jdom.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/jdom.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>

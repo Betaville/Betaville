@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 OpenIDE-Module: edu.poly.bxmc.betaville
+OpenIDE-Module-Install: edu/poly/bxmc/betaville/Installer.class
 OpenIDE-Module-Localizing-Bundle: edu/poly/bxmc/betaville/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.0
 
