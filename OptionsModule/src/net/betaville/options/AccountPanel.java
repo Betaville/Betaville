@@ -136,7 +136,15 @@ final class AccountPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
+        if(usernameField.getText().isEmpty() || passwordField.getPassword()==null){
+            // show error to user
+        }
+        else{
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
+	    
+	    // Grab a connection and log in
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed

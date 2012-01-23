@@ -19,7 +19,7 @@ public class Installer extends ModuleInstall {
     @Override
     public void restored() {
 	// Bootstrap the original Betaville preferences
-	// Try to load the preferences
+	logger.info("Loading original preferences");
 	try {
 		PreferenceReader preferenceReader = new PreferenceReader(new File(
 				DriveFinder.getHomeDir().toString()
@@ -27,6 +27,7 @@ public class Installer extends ModuleInstall {
 		if (preferenceReader.isXMLLoaded()) {
 			preferenceReader.parse();
 			UpdatedPreferenceWriter.writeDefaultPreferences();
+			
 		} else
 			logger.info("Preferences file not found");
 	} catch (JDOMException e) {
