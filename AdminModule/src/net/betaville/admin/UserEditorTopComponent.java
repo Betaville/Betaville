@@ -357,9 +357,9 @@ public final class UserEditorTopComponent extends TopComponent {
             updateBioArea.setText(originalBio);
             userTypeComboBox.setSelectedItem(originalUserType);
         } catch (UnknownHostException ex) {
-             DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message(ex.getMessage()));
+            DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message("Could not connect to " + server));
         } catch (IOException ex) {
-             DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message(ex.getMessage()));
+            DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message("Error while communicating with " + server));
         }
         
     }

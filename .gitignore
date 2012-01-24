@@ -16,5 +16,6 @@
 /MapViewerModule/build/
 /OpenAL64.dll
 /lwjgl64.dll
+*.dll
 /OptionsModule/build/
 /BetavilleApp/liblwjgl.jnilib

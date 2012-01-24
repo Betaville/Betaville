@@ -146,9 +146,9 @@ final class NetworkingPanel extends javax.swing.JPanel {
             System.out.println("Server is running " + testCall);
             icm.close();
         } catch (UnknownHostException ex) {
-            DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message(ex.getMessage()));
+            DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message("Could not connect to " + serverAddressField.getText()));
         } catch (IOException ex) {
-            DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message(ex.getMessage()));
+            DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message("Error while communicating with " + serverAddressField.getText()));
         }
     }//GEN-LAST:event_testServerConnectionButtonActionPerformed
 
