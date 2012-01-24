@@ -6,9 +6,14 @@ package net.betaville.admin;
 
 import edu.poly.bxmc.betaville.model.IUser.UserType;
 import edu.poly.bxmc.betaville.net.SecureClientManager;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import org.netbeans.api.settings.ConvertAsProperties;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.util.Exceptions;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 
@@ -344,13 +349,18 @@ public final class UserEditorTopComponent extends TopComponent {
     // End of variables declaration//GEN-END:variables
     @Override
     public void componentOpened() {
-        System.setProperty("betaville.server", server);
-        scm = new SecureClientManager(null, true);
-        
-        updateEmailField.setText(originalEmail);
-        updateWebsiteField.setText(originalWebsite);
-        updateBioArea.setText(originalBio);
-        userTypeComboBox.setSelectedItem(originalUserType);
+        try {
+            System.setProperty("betaville.server", server);
+            scm = new SecureClientManager(null, true);
+            updateEmailField.setText(originalEmail);
+            updateWebsiteField.setText(originalWebsite);
+            updateBioArea.setText(originalBio);
+            userTypeComboBox.setSelectedItem(originalUserType);
+        } catch (UnknownHostException ex) {
+             DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message(ex.getMessage()));
+        } catch (IOException ex) {
+             DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message(ex.getMessage()));
+        }
         
     }
 

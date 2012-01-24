@@ -6,6 +6,10 @@ package net.betaville.options;
 
 import edu.poly.bxmc.betaville.net.InsecureClientManager;
 import java.awt.Color;
+import java.io.IOException;
+import java.net.UnknownHostException;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.util.NbPreferences;
 
 final class NetworkingPanel extends javax.swing.JPanel {
@@ -127,20 +131,25 @@ final class NetworkingPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_javaServerRadioButtonActionPerformed
 
     private void testServerConnectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testServerConnectionButtonActionPerformed
-	testConnectionProgressBar.setValue(0);
-	connectionStatusLabel.setForeground(Color.RED);
-	connectionStatusLabel.setText("Establishing Connection");
-	System.out.println("Server is " + System.getProperty("betaville.server"));
-	InsecureClientManager icm = new InsecureClientManager(null, serverAddressField.getText());
-	testConnectionProgressBar.setValue(50);
-	connectionStatusLabel.setForeground(Color.YELLOW);
-	connectionStatusLabel.setText("Sending Request");
-	long testCall = icm.getDesignVersion();
-	testConnectionProgressBar.setValue(100);
-	connectionStatusLabel.setForeground(Color.GREEN);
-	connectionStatusLabel.setText("Test Successful");
-	System.out.println("Server is running " + testCall);
-	icm.close();
+        try {
+            testConnectionProgressBar.setValue(0);
+            connectionStatusLabel.setForeground(Color.RED);
+            connectionStatusLabel.setText("Establishing Connection");
+            InsecureClientManager icm = new InsecureClientManager(null, serverAddressField.getText());
+            testConnectionProgressBar.setValue(50);
+            connectionStatusLabel.setForeground(Color.YELLOW);
+            connectionStatusLabel.setText("Sending Request");
+            long testCall = icm.getDesignVersion();
+            testConnectionProgressBar.setValue(100);
+            connectionStatusLabel.setForeground(Color.GREEN);
+            connectionStatusLabel.setText("Test Successful");
+            System.out.println("Server is running " + testCall);
+            icm.close();
+        } catch (UnknownHostException ex) {
+            DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message(ex.getMessage()));
+        } catch (IOException ex) {
+            DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message(ex.getMessage()));
+        }
     }//GEN-LAST:event_testServerConnectionButtonActionPerformed
 
     void load() {
