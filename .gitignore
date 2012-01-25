@@ -18,3 +18,4 @@
 /OptionsModule/build/
 *liblwjgl.jnilib
 /GeospatialGenerationModule/build/
+/UserControlModule/nbproject/private/

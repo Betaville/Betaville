@@ -5,7 +5,6 @@
 package net.betaville.options;
 
 import edu.poly.bxmc.betaville.net.InsecureClientManager;
-import java.awt.Color;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import org.openide.DialogDisplayer;
