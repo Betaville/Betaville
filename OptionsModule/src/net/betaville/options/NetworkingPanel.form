@@ -42,10 +42,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="testServerConnectionButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="connectionStatusLabel" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
-                              <Component id="testConnectionProgressBar" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="testConnectionProgressBar" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -72,9 +69,7 @@
               <Component id="testServerConnectionButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="testConnectionProgressBar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="connectionStatusLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="234" max="32767" attributes="0"/>
+              <EmptySpace pref="256" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -138,16 +133,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JProgressBar" name="testConnectionProgressBar">
-    </Component>
-    <Component class="javax.swing.JLabel" name="connectionStatusLabel">
-      <Properties>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="net/betaville/options/Bundle.properties" key="NetworkingPanel.connectionStatusLabel.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
-        </Property>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

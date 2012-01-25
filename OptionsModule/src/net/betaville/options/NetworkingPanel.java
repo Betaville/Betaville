@@ -38,7 +38,6 @@ final class NetworkingPanel extends javax.swing.JPanel {
         serverTypeLabel = new javax.swing.JLabel();
         testServerConnectionButton = new javax.swing.JButton();
         testConnectionProgressBar = new javax.swing.JProgressBar();
-        connectionStatusLabel = new javax.swing.JLabel();
 
         org.openide.awt.Mnemonics.setLocalizedText(serverAddressLabel, org.openide.util.NbBundle.getMessage(NetworkingPanel.class, "NetworkingPanel.serverAddressLabel.text")); // NOI18N
 
@@ -69,9 +68,6 @@ final class NetworkingPanel extends javax.swing.JPanel {
             }
         });
 
-        connectionStatusLabel.setForeground(new java.awt.Color(255, 0, 0));
-        org.openide.awt.Mnemonics.setLocalizedText(connectionStatusLabel, org.openide.util.NbBundle.getMessage(NetworkingPanel.class, "NetworkingPanel.connectionStatusLabel.text")); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,9 +90,7 @@ final class NetworkingPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(testServerConnectionButton)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(connectionStatusLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(testConnectionProgressBar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(testConnectionProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -116,9 +110,7 @@ final class NetworkingPanel extends javax.swing.JPanel {
                 .addComponent(testServerConnectionButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(testConnectionProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(connectionStatusLabel)
-                .addContainerGap(234, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,16 +125,14 @@ final class NetworkingPanel extends javax.swing.JPanel {
     private void testServerConnectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_testServerConnectionButtonActionPerformed
         try {
             testConnectionProgressBar.setValue(0);
-            connectionStatusLabel.setForeground(Color.RED);
-            connectionStatusLabel.setText("Establishing Connection");
+	    testConnectionProgressBar.setStringPainted(true);
+	    testConnectionProgressBar.setString("Establishing Connection");
             InsecureClientManager icm = new InsecureClientManager(null, serverAddressField.getText());
             testConnectionProgressBar.setValue(50);
-            connectionStatusLabel.setForeground(Color.YELLOW);
-            connectionStatusLabel.setText("Sending Request");
+	    testConnectionProgressBar.setString("Sending Request");
             long testCall = icm.getDesignVersion();
             testConnectionProgressBar.setValue(100);
-            connectionStatusLabel.setForeground(Color.GREEN);
-            connectionStatusLabel.setText("Test Successful");
+	    testConnectionProgressBar.setString("Test Successful");
             System.out.println("Server is running " + testCall);
             icm.close();
         } catch (UnknownHostException ex) {
@@ -168,7 +158,6 @@ final class NetworkingPanel extends javax.swing.JPanel {
         return true;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel connectionStatusLabel;
     private javax.swing.JRadioButton javaServerRadioButton;
     private javax.swing.JTextField serverAddressField;
     private javax.swing.JLabel serverAddressLabel;
