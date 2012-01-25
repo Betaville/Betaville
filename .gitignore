@@ -19,3 +19,4 @@
 *.dll
 /OptionsModule/build/
 /BetavilleApp/liblwjgl.jnilib
+/GeospatialGenerationModule/build/
