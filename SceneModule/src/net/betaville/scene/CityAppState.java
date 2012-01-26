@@ -247,7 +247,7 @@ public class CityAppState implements AppState {
                     System.out.println("This is bad");
                     continue;
                 } else {
-                    loadDesign(design);
+                    addDesignToScene(design);
                     itemsLoaded.incrementAndGet();
                     updateStatusBar(itemsLoaded.get(), designs.size(), "Models Loaded");
                 }
