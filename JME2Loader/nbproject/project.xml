@@ -16,6 +16,38 @@
                 </dependency>
             </module-dependencies>
             <public-packages>
+                <package>com.jme.animation</package>
+                <package>com.jme.bounding</package>
+                <package>com.jme.image</package>
+                <package>com.jme.image.util</package>
+                <package>com.jme.input.util</package>
+                <package>com.jme.intersection</package>
+                <package>com.jme.light</package>
+                <package>com.jme.math</package>
+                <package>com.jme.math.spring</package>
+                <package>com.jme.renderer</package>
+                <package>com.jme.scene</package>
+                <package>com.jme.scene.geometryinstancing</package>
+                <package>com.jme.scene.geometryinstancing.instance</package>
+                <package>com.jme.scene.lod</package>
+                <package>com.jme.scene.shape</package>
+                <package>com.jme.scene.state</package>
+                <package>com.jme.system</package>
+                <package>com.jme.system.dummy</package>
+                <package>com.jme.util</package>
+                <package>com.jme.util.geom</package>
+                <package>com.jmex.model</package>
+                <package>com.jmex.model.animation</package>
+                <package>com.jmex.model.converters</package>
+                <package>com.jmex.model.converters.maxutils</package>
+                <package>com.jmex.model.util</package>
+                <package>com.jmex.pool</package>
+                <package>com.jmex.scene</package>
+                <package>com.jmex.terrain</package>
+                <package>com.jmex.terrain.util</package>
+                <package>com.jmex.xml</package>
+                <package>com.jmex.xml.types</package>
+                <package>com.jmex.xml.xml</package>
                 <package>net.skyebook.jme2loader</package>
             </public-packages>
             <class-path-extension>
