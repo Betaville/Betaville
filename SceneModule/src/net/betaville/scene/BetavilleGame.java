@@ -6,8 +6,11 @@ package net.betaville.scene;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.light.DirectionalLight;
+import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.shape.Box;
 import edu.poly.bxmc.betaville.SettingsPreferences;
 import edu.poly.bxmc.betaville.model.Wormhole;
 import net.betaville.usercontrol.lookup.CentralLookup;
@@ -32,8 +35,10 @@ public class BetavilleGame extends SimpleApplication {
 	cityAppState = new CityAppState(SettingsPreferences.getCity(), wormhole.getLocation());
         cityAppState.provide(rootNode, assetManager);
         cityAppState.loadBase(wormhole.getLocation());
+	cam.setLocation(cityAppState.getCoordinateTransformer().locationToBetaville(wormhole.getLocation()));
 	
-	//stateManager.attach(cityAppState);
+	stateManager.attach(cityAppState);
+	cityAppState.setEnabled(true);
 	
 	
 	// create lights
@@ -51,21 +56,18 @@ public class BetavilleGame extends SimpleApplication {
 	rootNode.addLight(directionalLight);
 	rootNode.addLight(fillLight);
 
+	
 	/*
-	 * Box box = new Box(1, 1, 1); Geometry geometry = new Geometry("box",
-	 * box); Material material = new Material(assetManager,
-	 * "Common/MatDefs/Misc/Unshaded.j3md"); geometry.setMaterial(material);
-	 * rootNode.attachChild(geometry);
-	 */
+	Box box = new Box(1, 1, 1); Geometry geometry = new Geometry("box", box);
+	Material material = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
+	geometry.setMaterial(material);
+	rootNode.attachChild(geometry);
+	*/
+	 
 
 	flyCam.setDragToRotate(true);
     }
-    
-    public void triggerCityLoad(){
-        cityAppState.loadBase(wormhole.getLocation());
-    }
 
     @Override
-    public void simpleUpdate(float tpf) {
-    }
+    public void simpleUpdate(float tpf) {}
 }

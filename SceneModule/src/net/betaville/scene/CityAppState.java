@@ -259,4 +259,8 @@ public class CityAppState implements AppState {
             Exceptions.printStackTrace(ex);
         }
     }
+    
+    public JME3MapManager getCoordinateTransformer(){
+	return mapManager;
+    }
 }
