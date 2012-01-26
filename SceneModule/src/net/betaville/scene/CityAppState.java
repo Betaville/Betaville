@@ -17,7 +17,9 @@ import edu.poly.bxmc.betaville.CacheManager;
 import edu.poly.bxmc.betaville.jme.loaders.util.DriveFinder;
 import edu.poly.bxmc.betaville.jme.map.ILocation;
 import edu.poly.bxmc.betaville.model.*;
+import edu.poly.bxmc.betaville.net.InsecureClientManager;
 import edu.poly.bxmc.betaville.net.NetPool;
+import edu.poly.bxmc.betaville.net.ProgressInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -88,21 +90,23 @@ public class CityAppState implements AppState {
     private Node loadDesign(Design design) throws IOException {
         assetManager.registerLocator(DriveFinder.getBetavilleFolder().toString(), FileLocator.class);
 
-        Node node;
+        Node node = null;
+	// strip the extension from the filename
+	String fileWithoutExtension = design.getFilepath().substring(0, design.getFilepath().lastIndexOf("."));
         if (design.getFilepath().endsWith("jme")) {
             // check if we have the j30 first
             try {
                 assetManager.registerLoader(BinaryImporter.class, "j30");
-                node = (Node) assetManager.loadModel("cache/" + design.getID() + ".j30");
+                node = (Node) assetManager.loadModel("cache/" +fileWithoutExtension + ".j30");
             } catch (AssetNotFoundException e) {
                 // if we don't have the j30 yet, convert this to the jME3 format
                 assetManager.registerLoader(JME2Loader.class, "jme");
                 StatusDisplayer.getDefault().setStatusText("Converting model to jME3 format and caching locally");
-                node = (Node) assetManager.loadModel("cache/" + design.getID() + ".jme");
-                BinaryExporter.getInstance().save(node, new File(DriveFinder.getBetavilleFolder().toString() + "/cache/" + design.getID() + ".j30"));
+                node = (Node) assetManager.loadModel("cache/" +fileWithoutExtension + ".jme");
+                BinaryExporter.getInstance().save(node, new File(DriveFinder.getBetavilleFolder().toString() + "/cache/" + fileWithoutExtension + ".j30"));
             }
         } else {
-            node = (Node) assetManager.loadModel(design.getID() + ".j30");
+            node = (Node) assetManager.loadModel("cache/"+fileWithoutExtension + ".j30");
         }
 
         node.setName(design.getFullIdentifier());
@@ -195,6 +199,15 @@ public class CityAppState implements AppState {
             StatusDisplayer.getDefault().setStatusText("Retrieving Base Models");
 
             final AtomicInteger itemsLoaded = new AtomicInteger(0);
+	    
+	    InsecureClientManager icm = NetPool.getPool().getConnection();
+	    icm.getProgressInputStream().setListener(new ProgressInputStream.ProgressInputListener() {
+
+		@Override
+		public void readProgressUpdate(int i) {
+		    System.out.println(i + " bytes read");
+		}
+	    });
 
             List<Design> designs = NetPool.getPool().getConnection().findBaseDesignsByCity(thisCity.getCityID());
 
