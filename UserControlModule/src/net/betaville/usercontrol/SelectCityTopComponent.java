@@ -50,7 +50,7 @@ preferredID = "SelectCityTopComponent")
     "CTL_SelectCityTopComponent=SelectCity Window",
     "HINT_SelectCityTopComponent=This is a SelectCity window"
 })
-public final class SelectCityTopComponent extends TopComponent {
+public final class SelectCityTopComponent extends TopComponent{
 
     private List<Wormhole> locations = null;
 
@@ -113,8 +113,11 @@ public final class SelectCityTopComponent extends TopComponent {
 	    Wormhole location = locations.get(cityList.getSelectedIndex());
 	    String[] cityInfo = NetPool.getPool().getConnection().findCityByID(location.getCityID());
 	    City city = new City(cityInfo[0], cityInfo[1], cityInfo[2]);
+	    
 	    SceneScape.setUTMZone(location.getLocation().getLonZone(), location.getLocation().getLatZone());
 	    SceneScape.addCityAndSetToCurrent(city);
+	    associateLookup(Lookups.singleton(location));
+	    // Start scene
 	} catch (UnknownHostException ex) {
 	    DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message("Could not connect to server"));
 	    cityList.setModel(new DefaultListModel());
