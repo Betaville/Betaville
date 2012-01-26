@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: net.skyebook
+OpenIDE-Module-Localizing-Bundle: net/skyebook/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

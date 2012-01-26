@@ -1,0 +1,23 @@
+h1. JME2Loader - _loads jME2 assets into jME3_
+
+This project is an implementation of the jME3 AssetLoader that provides the capability to load jME2 assets into a jME3 application.
+Of course, its probably easier to simply load the model in a format provided by jME3, but this loader is good for a few use cases:
+
+h2. Why use it?
+
+* Unmaintained legacy assets
+** _I built a model, converted it to the jME2 file format, and {select excuse: lost || deleted || didn't save the source files}_
+* User-contributed assets in an online system
+** _Users contributed their time and effort to build assets, and only the .jme files were saved on the server. oops._
+* Workaround for loading model formats that were supported in jME2
+** If you've got some MD2, or some other esoteric format, assets around, then you should be able to load it into jME2 and send an export to this AssetLoader.
+** You should think long and hard about why you aren't archiving in another format
+
+h3. Example
+
+@// Setup the jME2Loader in your application's AssetManager@
+@assetManager.registerLoader(JME2Loader.class, "jme");@
+@// Load the model@
+@Spatial model = assetManager.loadModel("my_model.jme");@
+@// Add the model to the scene@
+@rootNode.attachChild(model);@
