@@ -25,6 +25,7 @@
             </module-dependencies>
             <public-packages>
                 <package>edu.poly.bxmc.betaville</package>
+                <package>edu.poly.bxmc.betaville.jme.loaders.util</package>
                 <package>edu.poly.bxmc.betaville.jme.map</package>
                 <package>edu.poly.bxmc.betaville.model</package>
                 <package>edu.poly.bxmc.betaville.net</package>
