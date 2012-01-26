@@ -29,6 +29,7 @@
                 <package>edu.poly.bxmc.betaville.jme.map</package>
                 <package>edu.poly.bxmc.betaville.model</package>
                 <package>edu.poly.bxmc.betaville.net</package>
+                <package>edu.poly.bxmc.betaville.updater</package>
                 <package>edu.poly.bxmc.betaville.xml</package>
             </public-packages>
             <class-path-extension>
