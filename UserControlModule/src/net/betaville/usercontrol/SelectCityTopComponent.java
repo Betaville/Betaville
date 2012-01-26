@@ -4,30 +4,24 @@
  */
 package net.betaville.usercontrol;
 
+import edu.poly.bxmc.betaville.SettingsPreferences;
+import edu.poly.bxmc.betaville.jme.map.MapManager;
 import edu.poly.bxmc.betaville.model.City;
 import edu.poly.bxmc.betaville.model.Wormhole;
 import edu.poly.bxmc.betaville.net.NetPool;
-import edu.poly.bxmc.betaville.SceneScape;
-import edu.poly.bxmc.betaville.SettingsPreferences;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import net.betaville.usercontrol.lookup.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
-import org.openide.util.Lookup;
 import org.openide.util.NbBundle.Messages;
-import org.openide.util.Utilities;
-import org.openide.util.lookup.Lookups;
 import org.openide.windows.TopComponent;
 
 /**
@@ -38,7 +32,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "SelectCityTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "editor", openAtStartup = true)
+@TopComponent.Registration(mode = "explorer", openAtStartup = true)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.SelectCityTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333
@@ -59,6 +53,7 @@ public final class SelectCityTopComponent extends TopComponent{
 	setName(Bundle.CTL_SelectCityTopComponent());
 	setToolTipText(Bundle.HINT_SelectCityTopComponent());
 	//putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
+        populateCityList();
     }
 
     /**
@@ -71,7 +66,6 @@ public final class SelectCityTopComponent extends TopComponent{
 
         jScrollPane1 = new javax.swing.JScrollPane();
         cityList = new javax.swing.JList();
-        populateCityList();
         selectButton = new javax.swing.JButton();
 
         cityList.setModel(new javax.swing.AbstractListModel() {
@@ -113,10 +107,11 @@ public final class SelectCityTopComponent extends TopComponent{
 	    Wormhole location = locations.get(cityList.getSelectedIndex());
 	    String[] cityInfo = NetPool.getPool().getConnection().findCityByID(location.getCityID());
 	    City city = new City(cityInfo[0], cityInfo[1], cityInfo[2]);
+            city.setCityID(location.getCityID());
 	    
-	    SceneScape.setUTMZone(location.getLocation().getLonZone(), location.getLocation().getLatZone());
-	    SceneScape.addCityAndSetToCurrent(city);
-	    associateLookup(Lookups.singleton(location));
+	    MapManager.setUTMZone(location.getLocation().getLonZone(), location.getLocation().getLatZone());
+	    SettingsPreferences.addCityAndSetToCurrent(city);
+            CentralLookup.getDefault().add(location);
 	    // Start scene
 	} catch (UnknownHostException ex) {
 	    DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message("Could not connect to server"));

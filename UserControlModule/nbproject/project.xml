@@ -64,7 +64,9 @@
                     </run-dependency>
                 </dependency>
             </module-dependencies>
-            <public-packages/>
+            <public-packages>
+                <package>net.betaville.usercontrol.lookup</package>
+            </public-packages>
         </data>
     </configuration>
 </project>

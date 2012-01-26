@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.betaville.usercontrol;
+package net.betaville.usercontrol.lookup;
 
 import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;

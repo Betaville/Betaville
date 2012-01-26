@@ -51,9 +51,6 @@
               </StringArray>
             </Property>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="populateCityList();"/>
-          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

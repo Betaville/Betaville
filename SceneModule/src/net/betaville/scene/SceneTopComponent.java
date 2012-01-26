@@ -27,7 +27,7 @@ import org.openide.windows.TopComponent;
  * @author Skye Book
  */
 @TopComponent.Description(preferredID="SceneTopComponent", iconBase="data/new_icon.png", persistenceType=TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "editor", openAtStartup = true)
+@TopComponent.Registration(mode = "editor", openAtStartup = false)
 @ActionID(category = "Window", id = "net.betaville.scene.SceneTopComponent")
 @ActionReferences({
     @ActionReference(path = "Menu/Window", position = 0),
@@ -58,6 +58,8 @@ public class SceneTopComponent extends TopComponent implements ActionListener, C
         canvas.setSize(settings.getWidth(), settings.getHeight());
         
         add(canvas);
+        
+        
     }
 
     @Override

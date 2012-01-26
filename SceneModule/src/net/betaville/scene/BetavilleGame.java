@@ -8,26 +8,32 @@ import com.jme3.app.SimpleApplication;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
-import edu.poly.bxmc.betaville.SceneScape;
-import edu.poly.bxmc.betaville.jme.map.ILocation;
+import edu.poly.bxmc.betaville.SettingsPreferences;
 import edu.poly.bxmc.betaville.model.Wormhole;
-import org.openide.util.Utilities;
+import net.betaville.usercontrol.lookup.CentralLookup;
 
 /**
  *
  * @author skyebook
  */
 public class BetavilleGame extends SimpleApplication {
+    
+    private Wormhole wormhole;
+    private CityAppState cityAppState;
 
     // Core Nodes
     @Override
     public void simpleInitApp() {
-	Wormhole wormhole = Utilities.actionsGlobalContext().lookupResult(Wormhole.class).allInstances().iterator().next();
+	wormhole = CentralLookup.getDefault().lookup(Wormhole.class);
+        
+        System.out.println("Wormhole Name: " + wormhole.getName());
 
 	// create a CityAppState
-	CityAppState cityAppState = new CityAppState(SceneScape.getCity(), wormhole.getLocation());
-	cityAppState.loadBase(wormhole.getLocation());
-	stateManager.attach(cityAppState);
+	cityAppState = new CityAppState(SettingsPreferences.getCity(), wormhole.getLocation());
+        cityAppState.provide(rootNode, assetManager);
+        cityAppState.loadBase(wormhole.getLocation());
+	
+	//stateManager.attach(cityAppState);
 	
 	
 	// create lights
@@ -53,6 +59,10 @@ public class BetavilleGame extends SimpleApplication {
 	 */
 
 	flyCam.setDragToRotate(true);
+    }
+    
+    public void triggerCityLoad(){
+        cityAppState.loadBase(wormhole.getLocation());
     }
 
     @Override
