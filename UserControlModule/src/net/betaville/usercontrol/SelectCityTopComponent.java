@@ -38,7 +38,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "SelectCityTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "explorer", openAtStartup = false)
+@TopComponent.Registration(mode = "editor", openAtStartup = true)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.SelectCityTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333
@@ -58,7 +58,7 @@ public final class SelectCityTopComponent extends TopComponent{
 	initComponents();
 	setName(Bundle.CTL_SelectCityTopComponent());
 	setToolTipText(Bundle.HINT_SelectCityTopComponent());
-	putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
+	//putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
     }
 
     /**
