@@ -6,7 +6,9 @@ package net.betaville.scene;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.collision.CollisionResults;
+import com.jme3.input.MouseInput;
 import com.jme3.input.controls.AnalogListener;
+import com.jme3.input.controls.MouseButtonTrigger;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
 import com.jme3.math.ColorRGBA;
@@ -17,6 +19,8 @@ import com.jme3.scene.Geometry;
 import com.jme3.scene.shape.Box;
 import edu.poly.bxmc.betaville.SettingsPreferences;
 import edu.poly.bxmc.betaville.model.Wormhole;
+import edu.poly.bxmc.betaville.model.Design;
+import net.betaville.scene.DesignPicker.DesignSelectionCallback;
 import net.betaville.usercontrol.lookup.CentralLookup;
 
 /**
@@ -27,6 +31,14 @@ public class BetavilleGame extends SimpleApplication {
     
     private Wormhole wormhole;
     private CityAppState cityAppState;
+    
+    private DesignPicker designPicker;
+    
+    private DesignSelectionCallback designSelectionCallback = null;
+    
+    public BetavilleGame(DesignSelectionCallback designSelectionCallback){
+	this.designSelectionCallback = designSelectionCallback;
+    }
 
     // Core Nodes
     @Override
@@ -70,45 +82,17 @@ public class BetavilleGame extends SimpleApplication {
 	 
 
 	flyCam.setDragToRotate(true);
+	
+	// Create the pickers
+	designPicker = new DesignPicker(inputManager, cam, rootNode, designSelectionCallback);
+	
+	// Add the listeners
+	inputManager.addListener(designPicker, "PickDesign");
+	
+	// Add the design picker by default
+	inputManager.addMapping("PickDesign", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
     }
 
     @Override
     public void simpleUpdate(float tpf) {}
-    
-    private AnalogListener analogListener = new AnalogListener() {
-
-	public void onAnalog(String name, float intensity, float tpf) {
-	    if (name.equals("pick target")) {
-		// Reset results list.
-		CollisionResults results = new CollisionResults();
-		// Convert screen click to 3d position
-		Vector2f click2d = inputManager.getCursorPosition();
-		Vector3f click3d = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 0f).clone();
-		Vector3f dir = cam.getWorldCoordinates(new Vector2f(click2d.x, click2d.y), 1f).subtractLocal(click3d);
-		// Aim the ray from the clicked spot forwards.
-		Ray ray = new Ray(click3d, dir);
-		// Collect intersections between ray and all nodes in results list.
-		rootNode.collideWith(ray, results);
-		// (Print the results so we see what is going on:)
-		for (int i = 0; i < results.size(); i++) {
-		    // (For each “hit”, we know distance, impact point, geometry.)
-		    float dist = results.getCollision(i).getDistance();
-		    Vector3f pt = results.getCollision(i).getContactPoint();
-		    String target = results.getCollision(i).getGeometry().getName();
-		    System.out.println("Selection #" + i + ": " + target + " at " + pt + ", " + dist + " WU away.");
-		}
-		// Use the results -- we rotate the selected geometry.
-		if (results.size() > 0) {
-		    // The closest result is the target that the player picked:
-		    Geometry target = results.getClosestCollision().getGeometry();
-		    // Here comes the action:
-		    if (target.getName().equals("Red Box")) {
-			target.rotate(0, -intensity, 0);
-		    } else if (target.getName().equals("Blue Box")) {
-			target.rotate(0, intensity, 0);
-		    }
-		}
-	    } // else if ...
-	}
-    };
 }

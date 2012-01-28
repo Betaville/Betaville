@@ -6,20 +6,26 @@ package net.betaville.scene;
 
 import com.jme3.system.AppSettings;
 import com.jme3.system.JmeCanvasContext;
+import edu.poly.bxmc.betaville.model.Design;
+import edu.poly.bxmc.betaville.model.DesignNode;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.lang.reflect.InvocationTargetException;
 import javax.swing.BoxLayout;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
+import org.openide.util.lookup.Lookups;
 import org.openide.windows.TopComponent;
 
 /**
@@ -47,7 +53,27 @@ public class SceneTopComponent extends TopComponent implements ActionListener, C
         settings.setWidth(640);
         settings.setHeight(480);
         
-        sceneGame = new BetavilleGame();
+        sceneGame = new BetavilleGame(new DesignPicker.DesignSelectionCallback() {
+
+	    @Override
+	    public void designSelected(final Design selectedDesign) {
+		try {
+		    EventQueue.invokeAndWait(new Runnable() {
+
+			@Override
+			public void run() {
+			    setActivatedNodes(new DesignNode[]{new DesignNode(selectedDesign)});
+			}
+		    });
+		    
+		    //associateLookup(Lookups.singleton(selectedDesign));
+		} catch (InterruptedException ex) {
+		    Exceptions.printStackTrace(ex);
+		} catch (InvocationTargetException ex) {
+		    Exceptions.printStackTrace(ex);
+		}
+	    }
+	});
         sceneGame.setPauseOnLostFocus(false);
         sceneGame.setSettings(settings);
         sceneGame.createCanvas();
