@@ -35,7 +35,6 @@ public class DesignPicker implements AnalogListener {
 
     @Override
     public void onAnalog(String name, float intensity, float tpf) {
-	System.out.println("PICKING NODE");
 	
 	// Reset results list.
 	CollisionResults results = new CollisionResults();

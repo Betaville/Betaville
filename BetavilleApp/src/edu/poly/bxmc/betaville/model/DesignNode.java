@@ -14,6 +14,8 @@ import org.openide.util.lookup.Lookups;
  */
 public class DesignNode extends AbstractNode{
     
+    private Design design;
+    
     public DesignNode(){
 	super(Children.create(new DesignChildFactory(), true));
 	setDisplayName("Root");
@@ -21,5 +23,10 @@ public class DesignNode extends AbstractNode{
     
     public DesignNode(Design design){
 	super(Children.create(new DesignChildFactory(), true), Lookups.singleton(design));
+	this.design=design;
+    }
+    
+    public Design getDesign(){
+	return design;
     }
 }
