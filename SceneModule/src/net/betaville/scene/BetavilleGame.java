@@ -71,20 +71,14 @@ public class BetavilleGame extends SimpleApplication {
 	
 	rootNode.addLight(directionalLight);
 	rootNode.addLight(fillLight);
-
-	
-	/*
-	Box box = new Box(1, 1, 1); Geometry geometry = new Geometry("box", box);
-	Material material = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-	geometry.setMaterial(material);
-	rootNode.attachChild(geometry);
-	*/
-        /*
+        
+        // remove the original fly cam
+        inputManager.removeListener(flyCam);
+        
         flyCam = new CustomFlyByCamera(cam);
         flyCam.setMoveSpeed(1f);
         flyCam.registerWithInput(inputManager);
-        */
-	flyCam.setDragToRotate(true);
+	//flyCam.setDragToRotate(true);
 	
 	// Create the pickers
 	designPicker = new DesignPicker(inputManager, cam, rootNode, designSelectionCallback);
@@ -93,7 +87,7 @@ public class BetavilleGame extends SimpleApplication {
 	inputManager.addListener(designPicker, "PickDesign");
 	
 	// Add the design picker by default
-	inputManager.addMapping("PickDesign", new MouseButtonTrigger(MouseInput.BUTTON_MIDDLE));
+	inputManager.addMapping("PickDesign", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
     }
 
     @Override

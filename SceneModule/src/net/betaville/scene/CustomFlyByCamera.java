@@ -25,6 +25,7 @@ public class CustomFlyByCamera extends FlyByCamera{
         this.inputManager.deleteMapping("FLYCAM_RotateDrag");
         this.inputManager.addMapping("FLYCAM_RotateDrag", new MouseButtonTrigger(MouseInput.BUTTON_MIDDLE));
         this.inputManager.addListener(this, "FLYCAM_RotateDrag");
+        setDragToRotate(true);
     }
     
     @Override
