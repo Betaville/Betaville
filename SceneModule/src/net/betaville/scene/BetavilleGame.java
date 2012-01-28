@@ -79,8 +79,11 @@ public class BetavilleGame extends SimpleApplication {
 	geometry.setMaterial(material);
 	rootNode.attachChild(geometry);
 	*/
-	 
-
+        /*
+        flyCam = new CustomFlyByCamera(cam);
+        flyCam.setMoveSpeed(1f);
+        flyCam.registerWithInput(inputManager);
+        */
 	flyCam.setDragToRotate(true);
 	
 	// Create the pickers
@@ -90,7 +93,7 @@ public class BetavilleGame extends SimpleApplication {
 	inputManager.addListener(designPicker, "PickDesign");
 	
 	// Add the design picker by default
-	inputManager.addMapping("PickDesign", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
+	inputManager.addMapping("PickDesign", new MouseButtonTrigger(MouseInput.BUTTON_MIDDLE));
     }
 
     @Override
