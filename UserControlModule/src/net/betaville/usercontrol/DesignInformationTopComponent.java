@@ -31,15 +31,15 @@ persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.OpenActionRegistration(displayName = "#CTL_DesignInformationTopComponentAction",
 preferredID = "DesignInformationTopComponentTopComponent")
 @Messages({
-    "CTL_DesignInformationTopComponentAction=DesignInformationTopComponent",
+    "CTL_DesignInformationTopComponentAction=Object Information",
     "CTL_DesignInformationTopComponentTopComponent=DesignInformationTopComponent Window",
-    "HINT_DesignInformationTopComponentTopComponent=This is a DesignInformationTopComponent window"
+    "HINT_DesignInformationTopComponentTopComponent=Shows an object's information"
 })
-public final class DesignInformationTopComponentTopComponent extends TopComponent implements LookupListener {
+public final class DesignInformationTopComponent extends TopComponent implements LookupListener {
 
     private Lookup.Result<Design> result = null;
 
-    public DesignInformationTopComponentTopComponent() {
+    public DesignInformationTopComponent() {
         initComponents();
         setName(Bundle.CTL_DesignInformationTopComponentTopComponent());
         setToolTipText(Bundle.HINT_DesignInformationTopComponentTopComponent());
@@ -63,23 +63,23 @@ public final class DesignInformationTopComponentTopComponent extends TopComponen
         urlLabel = new javax.swing.JLabel();
         userIdentifier = new javax.swing.JLabel();
 
-        org.openide.awt.Mnemonics.setLocalizedText(nameLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.nameLabel.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(nameLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponent.class, "DesignInformationTopComponent.nameLabel.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(dateLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.dateLabel.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(dateLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponent.class, "DesignInformationTopComponent.dateLabel.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(userLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.userLabel.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(userLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponent.class, "DesignInformationTopComponent.userLabel.text")); // NOI18N
 
-        descriptionArea.setText(org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.descriptionArea.text")); // NOI18N
+        descriptionArea.setText(org.openide.util.NbBundle.getMessage(DesignInformationTopComponent.class, "DesignInformationTopComponent.descriptionArea.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(addressLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.addressLabel.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(addressLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponent.class, "DesignInformationTopComponent.addressLabel.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(addressIdentifier, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.addressIdentifier.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(addressIdentifier, org.openide.util.NbBundle.getMessage(DesignInformationTopComponent.class, "DesignInformationTopComponent.addressIdentifier.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(urlIdentifier, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.urlIdentifier.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(urlIdentifier, org.openide.util.NbBundle.getMessage(DesignInformationTopComponent.class, "DesignInformationTopComponent.urlIdentifier.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(urlLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.urlLabel.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(urlLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponent.class, "DesignInformationTopComponent.urlLabel.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(userIdentifier, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.userIdentifier.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(userIdentifier, org.openide.util.NbBundle.getMessage(DesignInformationTopComponent.class, "DesignInformationTopComponent.userIdentifier.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
