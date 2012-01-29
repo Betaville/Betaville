@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import net.betaville.scene.DesignPicker.DesignSelectionCallback;
 import net.betaville.usercontrol.lookup.CentralLookup;
+import org.openide.awt.StatusDisplayer;
 
 /**
  *
@@ -37,6 +38,7 @@ public class BetavilleGame extends SimpleApplication {
 
             @Override
             public void designSelected(Design selectedDesign) {
+                StatusDisplayer.getDefault().setStatusText(selectedDesign.getName());
                 CentralLookup lookup = CentralLookup.getDefault();
                 Collection designs = lookup.lookupAll(Design.class);
                 if (!designs.isEmpty()) {

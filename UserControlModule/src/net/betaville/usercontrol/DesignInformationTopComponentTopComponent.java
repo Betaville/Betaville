@@ -5,7 +5,6 @@
 package net.betaville.usercontrol;
 
 import edu.poly.bxmc.betaville.model.Design;
-import java.util.Iterator;
 import net.betaville.usercontrol.lookup.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
@@ -14,7 +13,6 @@ import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import org.openide.util.NbBundle.Messages;
-import org.openide.util.Utilities;
 import org.openide.windows.TopComponent;
 
 /**
@@ -37,14 +35,14 @@ preferredID = "DesignInformationTopComponentTopComponent")
     "CTL_DesignInformationTopComponentTopComponent=DesignInformationTopComponent Window",
     "HINT_DesignInformationTopComponentTopComponent=This is a DesignInformationTopComponent window"
 })
-public final class DesignInformationTopComponentTopComponent extends TopComponent implements LookupListener{
+public final class DesignInformationTopComponentTopComponent extends TopComponent implements LookupListener {
 
     private Lookup.Result<Design> result = null;
-    
+
     public DesignInformationTopComponentTopComponent() {
-	initComponents();
-	setName(Bundle.CTL_DesignInformationTopComponentTopComponent());
-	setToolTipText(Bundle.HINT_DesignInformationTopComponentTopComponent());
+        initComponents();
+        setName(Bundle.CTL_DesignInformationTopComponentTopComponent());
+        setToolTipText(Bundle.HINT_DesignInformationTopComponentTopComponent());
     }
 
     /**
@@ -55,59 +53,133 @@ public final class DesignInformationTopComponentTopComponent extends TopComponen
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        designScrollPanel = new javax.swing.JScrollPane();
+        nameLabel = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
+        userLabel = new javax.swing.JLabel();
+        descriptionArea = new javax.swing.JTextField();
+        addressLabel = new javax.swing.JLabel();
+        addressIdentifier = new javax.swing.JLabel();
+        urlIdentifier = new javax.swing.JLabel();
+        urlLabel = new javax.swing.JLabel();
+        userIdentifier = new javax.swing.JLabel();
+
+        org.openide.awt.Mnemonics.setLocalizedText(nameLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.nameLabel.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(dateLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.dateLabel.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(userLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.userLabel.text")); // NOI18N
+
+        descriptionArea.setText(org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.descriptionArea.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(addressLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.addressLabel.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(addressIdentifier, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.addressIdentifier.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(urlIdentifier, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.urlIdentifier.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(urlLabel, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.urlLabel.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(userIdentifier, org.openide.util.NbBundle.getMessage(DesignInformationTopComponentTopComponent.class, "DesignInformationTopComponentTopComponent.userIdentifier.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(designScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(descriptionArea)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dateLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addressIdentifier)
+                                    .addComponent(urlIdentifier))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(urlLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(userIdentifier)
+                                .addGap(18, 18, 18)
+                                .addComponent(userLabel)))
+                        .addGap(0, 32, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(designScrollPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(dateLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(userLabel)
+                    .addComponent(userIdentifier))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(descriptionArea, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addressLabel)
+                    .addComponent(addressIdentifier))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(urlIdentifier)
+                    .addComponent(urlLabel))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane designScrollPanel;
+    private javax.swing.JLabel addressIdentifier;
+    private javax.swing.JLabel addressLabel;
+    private javax.swing.JLabel dateLabel;
+    private javax.swing.JTextField descriptionArea;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel urlIdentifier;
+    private javax.swing.JLabel urlLabel;
+    private javax.swing.JLabel userIdentifier;
+    private javax.swing.JLabel userLabel;
     // End of variables declaration//GEN-END:variables
-    
+
     @Override
     public void componentOpened() {
-	result = CentralLookup.getDefault().lookupResult(Design.class);
-	result.addLookupListener(this);
+        result = CentralLookup.getDefault().lookupResult(Design.class);
+        result.addLookupListener(this);
     }
 
     @Override
     public void componentClosed() {
-	result.removeLookupListener(this);
-	result = null;
+        result.removeLookupListener(this);
+        result = null;
     }
 
     void writeProperties(java.util.Properties p) {
-	// better to version settings since initial version as advocated at
-	// http://wiki.apidesign.org/wiki/PropertyFiles
-	p.setProperty("version", "1.0");
-	// TODO store your settings
+        // better to version settings since initial version as advocated at
+        // http://wiki.apidesign.org/wiki/PropertyFiles
+        p.setProperty("version", "1.0");
+        // TODO store your settings
     }
 
     void readProperties(java.util.Properties p) {
-	String version = p.getProperty("version");
-	// TODO read your settings according to their version
+        String version = p.getProperty("version");
+        // TODO read your settings according to their version
     }
 
     @Override
     public void resultChanged(LookupEvent ev) {
-	System.out.println("Design Selection Event Captured!");
-	designScrollPanel.removeAll();
-	
-	Iterator<? extends Design> it = result.allInstances().iterator();
-	while(it.hasNext()){
-	    Design design = it.next();
-	    DesignInformationPanel dip = new DesignInformationPanel();
-	    dip.loadData(design);
-	    designScrollPanel.add(dip);
-	}
+        Design design = CentralLookup.getDefault().lookup(Design.class);
+        if (design != null) {
+            nameLabel.setText(design.getName());
+            dateLabel.setText(design.getDateAdded());
+            descriptionArea.setText(design.getDescription());
+            addressLabel.setText(design.getAddress());
+            urlLabel.setText(design.getURL());
+            userLabel.setText(design.getUser());
+        }
     }
 }
