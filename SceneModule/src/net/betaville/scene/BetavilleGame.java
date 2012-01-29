@@ -15,7 +15,6 @@ import edu.poly.bxmc.betaville.jme.map.ILocation;
 import edu.poly.bxmc.betaville.model.Design;
 import edu.poly.bxmc.betaville.model.Wormhole;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import net.betaville.scene.DesignPicker.DesignSelectionCallback;
 import net.betaville.usercontrol.lookup.CentralLookup;
@@ -56,6 +55,8 @@ public class BetavilleGame extends SimpleApplication {
     // Core Nodes
     @Override
     public void simpleInitApp() {
+        cam.setFrustumPerspective(45f, (float)cam.getWidth() / cam.getHeight(), .1f, 500f);
+        
         // add the camera's location to the lookup
         CentralLookup.getDefault().add(cam.getLocation());
 
