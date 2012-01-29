@@ -42,6 +42,10 @@ public class CentralLookup extends AbstractLookup {
     public void remove(Object instance) {
 	content.remove(instance);
     }
+    
+    public InstanceContent getContent(){
+        return content;
+    }
 
     public static CentralLookup getDefault() {
 	return def;

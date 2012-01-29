@@ -4,15 +4,20 @@
  */
 package net.betaville.usercontrol;
 
-import net.betaville.usercontrol.lookup.UserStateManager;
+import com.jme3.math.Vector3f;
+import edu.poly.bxmc.betaville.jme.map.GPSCoordinate;
+import edu.poly.bxmc.betaville.jme.map.ILocation;
+import edu.poly.bxmc.betaville.jme.map.UTMCoordinate;
+import java.util.Collection;
+import net.betaville.usercontrol.lookup.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
-import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
+import org.openide.windows.TopComponent;
 
 /**
  * Top component which displays something.
@@ -34,14 +39,16 @@ preferredID = "CurrentLocationTopComponent")
     "CTL_CurrentLocationTopComponent=CurrentLocation Window",
     "HINT_CurrentLocationTopComponent=This is a CurrentLocation window"
 })
-public final class CurrentLocationTopComponent extends TopComponent implements LookupListener{
+public final class CurrentLocationTopComponent extends TopComponent implements LookupListener {
+
+    private Lookup.Result<ILocation> locationResult;
+    private Lookup.Result<Vector3f> vector3fResult;
 
     public CurrentLocationTopComponent() {
         initComponents();
         setName(Bundle.CTL_CurrentLocationTopComponent());
         setToolTipText(Bundle.HINT_CurrentLocationTopComponent());
         putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
-
     }
 
     /**
@@ -245,7 +252,6 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
             .addComponent(tabbedPane)
         );
     }// </editor-fold>//GEN-END:initComponents
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel eastingValueData;
     private javax.swing.JLabel eastingValueLabel;
@@ -270,14 +276,21 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
     private javax.swing.JLabel zValueData;
     private javax.swing.JLabel zValueLabel;
     // End of variables declaration//GEN-END:variables
+
     @Override
     public void componentOpened() {
-        // TODO add custom code on component opening
+        locationResult = CentralLookup.getDefault().lookupResult(ILocation.class);
+        vector3fResult = CentralLookup.getDefault().lookupResult(Vector3f.class);
+        locationResult.addLookupListener(this);
+        vector3fResult.addLookupListener(this);
     }
 
     @Override
     public void componentClosed() {
-        // TODO add custom code on component closing
+        locationResult.removeLookupListener(this);
+        vector3fResult.removeLookupListener(this);
+        locationResult = null;
+        vector3fResult = null;
     }
 
     void writeProperties(java.util.Properties p) {
@@ -294,6 +307,27 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
 
     @Override
     public void resultChanged(LookupEvent ev) {
-        // HANDLE LOCATION CHANGE!!!! (Using UserStateManager)
+        ILocation location = CentralLookup.getDefault().lookup(ILocation.class);
+        if (location != null) {
+
+            if (tabbedPane.getSelectedComponent() == glPane) {
+                Vector3f glLocation = vector3fResult.allInstances().iterator().next();
+                xValueData.setText("" + glLocation.getX());
+                yValueData.setText("" + glLocation.getY());
+                zValueData.setText("" + glLocation.getZ());
+            } else if (tabbedPane.getSelectedComponent() == utmPane) {
+                UTMCoordinate utm = location.getUTM();
+                eastingValueData.setText(utm.getEasting() + "." + utm.getEastingCentimeters());
+                northingValueData.setText(utm.getNorthing() + "." + utm.getNorthingCentimeters());
+                utmAltitudeValueData.setText("" + utm.getAltitude());
+            } else if (tabbedPane.getSelectedComponent() == latLonPane) {
+                GPSCoordinate gps = location.getGPS();
+                latitudeValueData.setText("" + gps.getLatitude());
+                longitudeValueData.setText("" + gps.getLongitude());
+                wgsAltitudeValueData.setText("" + gps.getAltitude());
+            }
+        }
+
+
     }
 }

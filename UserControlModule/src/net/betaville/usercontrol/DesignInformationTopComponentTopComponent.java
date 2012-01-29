@@ -6,15 +6,16 @@ package net.betaville.usercontrol;
 
 import edu.poly.bxmc.betaville.model.Design;
 import java.util.Iterator;
+import net.betaville.usercontrol.lookup.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
-import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.Utilities;
+import org.openide.windows.TopComponent;
 
 /**
  * Top component which displays something.
@@ -74,7 +75,7 @@ public final class DesignInformationTopComponentTopComponent extends TopComponen
     
     @Override
     public void componentOpened() {
-	result = Utilities.actionsGlobalContext().lookupResult(Design.class);
+	result = CentralLookup.getDefault().lookupResult(Design.class);
 	result.addLookupListener(this);
     }
 
@@ -98,7 +99,7 @@ public final class DesignInformationTopComponentTopComponent extends TopComponen
 
     @Override
     public void resultChanged(LookupEvent ev) {
-	System.out.println("Event");
+	System.out.println("Design Selection Event Captured!");
 	designScrollPanel.removeAll();
 	
 	Iterator<? extends Design> it = result.allInstances().iterator();
