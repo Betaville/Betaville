@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 OpenIDE-Module: net.betaville.usercontrol
+OpenIDE-Module-Install: net/betaville/usercontrol/Installer.class
 OpenIDE-Module-Localizing-Bundle: net/betaville/usercontrol/Bundle.properties
 OpenIDE-Module-Requires: org.openide.windows.WindowManager
 OpenIDE-Module-Specification-Version: 1.0

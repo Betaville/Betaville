@@ -4,9 +4,13 @@
  */
 package net.betaville.usercontrol;
 
+import net.betaville.usercontrol.lookup.UserStateManager;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.util.Lookup;
+import org.openide.util.LookupEvent;
+import org.openide.util.LookupListener;
 import org.openide.windows.TopComponent;
 import org.openide.util.NbBundle.Messages;
 
@@ -30,7 +34,7 @@ preferredID = "CurrentLocationTopComponent")
     "CTL_CurrentLocationTopComponent=CurrentLocation Window",
     "HINT_CurrentLocationTopComponent=This is a CurrentLocation window"
 })
-public final class CurrentLocationTopComponent extends TopComponent {
+public final class CurrentLocationTopComponent extends TopComponent implements LookupListener{
 
     public CurrentLocationTopComponent() {
         initComponents();
@@ -286,5 +290,10 @@ public final class CurrentLocationTopComponent extends TopComponent {
     void readProperties(java.util.Properties p) {
         String version = p.getProperty("version");
         // TODO read your settings according to their version
+    }
+
+    @Override
+    public void resultChanged(LookupEvent ev) {
+        // HANDLE LOCATION CHANGE!!!! (Using UserStateManager)
     }
 }

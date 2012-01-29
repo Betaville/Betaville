@@ -10,6 +10,7 @@ import com.jme3.export.binary.BinaryExporter;
 import com.jme3.export.binary.BinaryImporter;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
+import com.jme3.renderer.Camera;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Node;
 import edu.poly.bxmc.betaville.CacheManager;
@@ -45,6 +46,7 @@ public class CityAppState implements AppState {
     private Node terrainNode;
     private JME3MapManager mapManager;
     private AssetManager assetManager;
+    private Camera camera;
     private City thisCity;
     
     
@@ -134,7 +136,7 @@ public class CityAppState implements AppState {
 
     @Override
     public void initialize(AppStateManager appStateManager, Application application) {
-	
+	camera = application.getCamera();
     }
 
     public void provide(Node rootNode, AssetManager assetManager) {
@@ -171,7 +173,8 @@ public class CityAppState implements AppState {
 
     @Override
     public void update(float f) {
-	// Nothing to see here
+        // set the location of the camera
+        ILocation location = mapManager.betavilleToUTM(camera.getLocation());
     }
 
     @Override

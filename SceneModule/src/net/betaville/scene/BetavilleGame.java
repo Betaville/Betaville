@@ -22,6 +22,7 @@ import edu.poly.bxmc.betaville.model.Wormhole;
 import edu.poly.bxmc.betaville.model.Design;
 import net.betaville.scene.DesignPicker.DesignSelectionCallback;
 import net.betaville.usercontrol.lookup.CentralLookup;
+import net.betaville.usercontrol.lookup.UserStateManager;
 
 /**
  *
@@ -30,7 +31,7 @@ import net.betaville.usercontrol.lookup.CentralLookup;
 public class BetavilleGame extends SimpleApplication {
     
     private Wormhole wormhole;
-    private CityAppState cityAppState;
+    private CityAppState currentCityAppState;
     
     private DesignPicker designPicker;
     
@@ -48,13 +49,13 @@ public class BetavilleGame extends SimpleApplication {
         System.out.println("Wormhole Name: " + wormhole.getName());
 
 	// create a CityAppState
-	cityAppState = new CityAppState(SettingsPreferences.getCity(), wormhole.getLocation());
-        cityAppState.provide(rootNode, assetManager);
-        cityAppState.loadBase(wormhole.getLocation());
-	cam.setLocation(cityAppState.getCoordinateTransformer().locationToBetaville(wormhole.getLocation()));
+	currentCityAppState = new CityAppState(SettingsPreferences.getCity(), wormhole.getLocation());
+        currentCityAppState.provide(rootNode, assetManager);
+        currentCityAppState.loadBase(wormhole.getLocation());
+	cam.setLocation(currentCityAppState.getCoordinateTransformer().locationToBetaville(wormhole.getLocation()));
 	
-	stateManager.attach(cityAppState);
-	cityAppState.setEnabled(true);
+	stateManager.attach(currentCityAppState);
+	currentCityAppState.setEnabled(true);
 	
 	
 	// create lights
@@ -91,5 +92,9 @@ public class BetavilleGame extends SimpleApplication {
     }
 
     @Override
-    public void simpleUpdate(float tpf) {}
+    public void simpleUpdate(float tpf) {
+        // update the user's location
+        CentralLookup.getDefault().lookup(UserStateManager.class).setUserLocation(
+                currentCityAppState.getCoordinateTransformer().betavilleToUTM(cam.getLocation()));
+    }
 }
