@@ -6,9 +6,11 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.asset.AssetManager;
 import com.jme3.asset.AssetNotFoundException;
 import com.jme3.asset.plugins.FileLocator;
+import com.jme3.collision.CollisionResults;
 import com.jme3.export.binary.BinaryExporter;
 import com.jme3.export.binary.BinaryImporter;
 import com.jme3.math.Quaternion;
+import com.jme3.math.Ray;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.Camera;
 import com.jme3.renderer.RenderManager;
@@ -256,6 +258,11 @@ public class CityAppState implements AppState {
 		    updateStatusBar(itemsLoaded.get(), designs.size(), "Models Loaded");
 		}
 	    }
+            
+            StatusDisplayer.getDefault().setStatusText("Pre-Calculating Collision Data");
+            // run a collision calculation so that the collision data for all loaded meshes will already be calculated
+            designNode.collideWith(new Ray(Vector3f.ZERO, Vector3f.UNIT_Y), new CollisionResults());
+            StatusDisplayer.getDefault().setStatusText("Collisions are now cached for " + itemsLoaded.get() + " models");
 	} catch (UnknownHostException ex) {
 	    System.out.println("NO!");
 	    Exceptions.printStackTrace(ex);
