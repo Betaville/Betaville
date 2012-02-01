@@ -4,15 +4,23 @@
  */
 package net.betaville.mapviewer;
 
+import edu.poly.bxmc.betaville.jme.map.GPSCoordinate;
+import edu.poly.bxmc.betaville.jme.map.ILocation;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.Collection;
 import javax.swing.*;
+import net.betaville.usercontrol.lookup.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
-import org.openide.windows.TopComponent;
+import org.openide.util.Lookup;
+import org.openide.util.LookupEvent;
+import org.openide.util.LookupListener;
 import org.openide.util.NbBundle.Messages;
+import org.openide.windows.TopComponent;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
@@ -44,22 +52,21 @@ preferredID = "MapViewerTopComponent")
     "CTL_MapViewerTopComponent=MapViewer Window",
     "HINT_MapViewerTopComponent=This is a MapViewer window"
 })
-public final class MapViewerTopComponent extends TopComponent {
+public final class MapViewerTopComponent extends TopComponent implements LookupListener {
 
+    Lookup.Result<ILocation> result = null;
     private JMapViewer map = new JMapViewer();
     final JLabel mperpLabelName = new JLabel("Meters/Pixels: ");
     final JLabel mperpLabelValue = new JLabel(String.format("%s", map.getMeterPerPixel()));
     final JLabel zoomLabel = new JLabel("Zoom: ");
     final JLabel zoomValue = new JLabel(String.format("%s", map.getZoom()));
+    
+    private MapMarkerDot cameraMapMarker = new MapMarkerDot(Color.RED, 0, 0);
 
     public MapViewerTopComponent() {
         initComponents();
         setName(Bundle.CTL_MapViewerTopComponent());
         setToolTipText(Bundle.HINT_MapViewerTopComponent());
-
-        
-
-        
 
         JPanel panel = new JPanel();
         JPanel helpPanel = new JPanel();
@@ -134,15 +141,10 @@ public final class MapViewerTopComponent extends TopComponent {
         panel.add(zoomValue);
         panel.add(mperpLabelName);
         panel.add(mperpLabelValue);
+        
+        map.addMapMarker(cameraMapMarker);
 
         add(map, BorderLayout.CENTER);
-
-        //
-        map.addMapMarker(new MapMarkerDot(49.814284999, 8.642065999));
-        map.addMapMarker(new MapMarkerDot(49.91, 8.24));
-        map.addMapMarker(new MapMarkerDot(49.71, 8.64));
-        map.addMapMarker(new MapMarkerDot(48.71, -1));
-        map.addMapMarker(new MapMarkerDot(49.8588, 8.643));
 
         // map.setDisplayPositionByLatLon(49.807, 8.6, 11);
         // map.setTileGridVisible(true);
@@ -164,6 +166,9 @@ public final class MapViewerTopComponent extends TopComponent {
     // End of variables declaration                   
     @Override
     public void componentOpened() {
+        result = CentralLookup.getDefault().lookupResult(ILocation.class);
+        result.addLookupListener(this);
+
         map.addJMVListener(new JMapViewerEventListener() {
 
             @Override
@@ -211,7 +216,8 @@ public final class MapViewerTopComponent extends TopComponent {
 
     @Override
     public void componentClosed() {
-        // TODO add custom code on component closing
+        result.removeLookupListener(this);
+        result = null;
     }
 
     void writeProperties(java.util.Properties p) {
@@ -224,5 +230,23 @@ public final class MapViewerTopComponent extends TopComponent {
     void readProperties(java.util.Properties p) {
         String version = p.getProperty("version");
         // TODO read your settings according to their version
+    }
+
+    @Override
+    public void resultChanged(LookupEvent ev) {
+        System.out.println("lookup update");
+        Collection<? extends ILocation> locations = result.allInstances();
+        if (!locations.isEmpty()) {
+            ILocation location = locations.iterator().next();
+            final GPSCoordinate gps = location.getGPS();
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    map.removeMapMarker(cameraMapMarker);
+                    cameraMapMarker = new MapMarkerDot(Color.RED, gps.getLatitude(), gps.getLongitude());
+                    map.addMapMarker(cameraMapMarker);
+                }
+            });
+        }
     }
 }
