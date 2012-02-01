@@ -36,9 +36,16 @@ import org.openide.modules.ModuleInstall;
 import org.openide.util.Exceptions;
 
 public class Installer extends ModuleInstall {
+    
+    private boolean useTheme = false;
 
     @Override
     public void restored() {
+        if(!useTheme){
+            return;
+        }
+        
+        
         try {
             SwingUtilities.invokeAndWait(new Runnable() {
 
@@ -46,7 +53,6 @@ public class Installer extends ModuleInstall {
                 public void run() {
                     try {
                         UIManager.setLookAndFeel(NoireLookAndFeel.class.getName());
-                        UIManager.setLookAndFeel(UIManager.getLookAndFeel());
                     } catch (ClassNotFoundException ex) {
                         Exceptions.printStackTrace(ex);
                     } catch (InstantiationException ex) {

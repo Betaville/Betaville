@@ -33,8 +33,20 @@
             </module-dependencies>
             <public-packages/>
             <class-path-extension>
+                <runtime-relative-path>ext/substance-tools.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/substance-tools.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
                 <runtime-relative-path>ext/JTattoo.jar</runtime-relative-path>
                 <binary-origin>release/modules/ext/JTattoo.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/trident.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/trident.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/substance.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/substance.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>
