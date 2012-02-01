@@ -5,7 +5,6 @@
 package net.betaville.chat.api;
 
 import org.jivesoftware.smack.*;
-import org.jivesoftware.smack.packet.Message;
 
 /**
  *
