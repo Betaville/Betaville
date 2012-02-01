@@ -18,6 +18,7 @@ import net.betaville.usercontrol.lookup.CentralLookup;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
+import org.openide.awt.StatusDisplayer;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
 
@@ -60,8 +61,6 @@ public class SceneTopComponent extends TopComponent implements ActionListener, C
         canvas.setSize(settings.getWidth(), settings.getHeight());
         
         add(canvas);
-        
-        
     }
 
     @Override
@@ -74,7 +73,6 @@ public class SceneTopComponent extends TopComponent implements ActionListener, C
 
     @Override
     public void componentResized(ComponentEvent ce) {
-        System.out.println("top component resized");
     }
 
     @Override
@@ -87,6 +85,12 @@ public class SceneTopComponent extends TopComponent implements ActionListener, C
 
     @Override
     public void componentHidden(ComponentEvent ce) {
+        System.out.println("Shutting down the OpenGL scene");
+        StatusDisplayer.getDefault().setStatusText("Shutting down the OpenGL scene");
+        sceneGame.stop();
+        sceneGame.destroy();
+        System.out.println("OpenGL scene shut down");
+        StatusDisplayer.getDefault().setStatusText("Asking Java to run a Garbage Collection");
+        System.gc();
     }
-    
 }
