@@ -31,13 +31,12 @@
  */
 package net.skyebook.jme2loader.test;
 
-import net.skyebook.jme2loader.JME2Loader;
-
 import com.jme3.app.SimpleApplication;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Spatial;
+import net.skyebook.jme2loader.JME2Loader;
 
 /**
  * A test case for the jME2 loader
