@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 OpenIDE-Module: net.betaville.lookandfeel
+OpenIDE-Module-Install: net/betaville/lookandfeel/Installer.class
 OpenIDE-Module-Localizing-Bundle: net/betaville/lookandfeel/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.0
 
