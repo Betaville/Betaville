@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2008-2012, Brooklyn eXperimental Media Center
- * All rights reserved.
+ * Copyright (c) 2008-2012, Brooklyn eXperimental Media Center All rights
+ * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met: *
@@ -42,107 +42,143 @@ import java.util.Iterator;
 import net.betaville.scene.DesignPicker.DesignSelectionCallback;
 import net.betaville.usercontrol.lookup.CentralLookup;
 import org.openide.awt.StatusDisplayer;
+import org.openide.util.Lookup;
+import org.openide.util.LookupEvent;
+import org.openide.util.LookupListener;
 
 /**
  *
  * @author skyebook
  */
-public class BetavilleGame extends SimpleApplication {
+public class BetavilleGame extends SimpleApplication implements LookupListener {
 
-    private Wormhole wormhole;
+    private Lookup.Result<Wormhole> result = null;
     private CityAppState currentCityAppState;
     private DesignPicker designPicker;
     private DesignSelectionCallback designSelectionCallback = null;
 
-    public BetavilleGame() {
-        // Create the design selection listener
-        designSelectionCallback = new DesignSelectionCallback() {
+    public BetavilleGame(){
+	
+	// Create the design selection listener
+	designSelectionCallback = new DesignSelectionCallback() {
 
-            @Override
-            public void designSelected(Design selectedDesign) {
-                StatusDisplayer.getDefault().setStatusText(selectedDesign.getName());
-                CentralLookup lookup = CentralLookup.getDefault();
-                Collection designs = lookup.lookupAll(Design.class);
-                if (!designs.isEmpty()) {
-                    Iterator it = designs.iterator();
-                    while (it.hasNext()) {
-                        lookup.remove(it.next());
-                    }
-                }
+	    @Override
+	    public void designSelected(Design selectedDesign) {
+		StatusDisplayer.getDefault().setStatusText(selectedDesign.getName());
+		CentralLookup lookup = CentralLookup.getDefault();
+		Collection designs = lookup.lookupAll(Design.class);
+		if (!designs.isEmpty()) {
+		    Iterator it = designs.iterator();
+		    while (it.hasNext()) {
+			lookup.remove(it.next());
+		    }
+		}
 
-                lookup.add(selectedDesign);
-            }
-        };
+		lookup.add(selectedDesign);
+	    }
+	};
     }
 
     // Core Nodes
     @Override
     public void simpleInitApp() {
-        cam.setFrustumPerspective(45f, (float)cam.getWidth() / cam.getHeight(), .1f, 500f);
-        
-        // add the camera's location to the lookup
-        CentralLookup.getDefault().add(cam.getLocation());
+	
+	// Create the wormhole lookup result and add the listener
+	result = CentralLookup.getDefault().lookupResult(Wormhole.class);
+	result.addLookupListener(this);
+	
+	cam.setFrustumPerspective(45f, (float) cam.getWidth() / cam.getHeight(), .1f, 500f);
 
-        wormhole = CentralLookup.getDefault().lookup(Wormhole.class);
+	// add the camera's location to the lookup
+	CentralLookup.getDefault().add(cam.getLocation());
 
-        System.out.println("Wormhole Name: " + wormhole.getName());
+	// create lights
+	ColorRGBA diffuseLightColor = new ColorRGBA(1f, 1f, 1f, 1f);
+	ColorRGBA diffuseLightColor2 = new ColorRGBA(154f / 255f, 160f / 255f, 166f / 255f, 185f / 255f);
 
-        // create a CityAppState
-        currentCityAppState = new CityAppState(SettingsPreferences.getCity(), wormhole.getLocation());
-        currentCityAppState.provide(rootNode, assetManager);
-        currentCityAppState.loadBase(wormhole.getLocation());
-        cam.setLocation(currentCityAppState.getCoordinateTransformer().locationToBetaville(wormhole.getLocation()));
+	DirectionalLight directionalLight = new DirectionalLight();
+	directionalLight.setDirection(new Vector3f(.25f, -.85f, .75f));
+	directionalLight.setColor(diffuseLightColor);
 
-        stateManager.attach(currentCityAppState);
-        currentCityAppState.setEnabled(true);
+	DirectionalLight fillLight = new DirectionalLight();
+	fillLight.setDirection(new Vector3f(-.25f, .85f, -.75f));
+	fillLight.setColor(diffuseLightColor2);
+
+	rootNode.addLight(directionalLight);
+	rootNode.addLight(fillLight);
+
+	// remove the original fly cam
+	inputManager.removeListener(flyCam);
+
+	flyCam = new CustomFlyByCamera(cam);
+	flyCam.setMoveSpeed(1f);
+	flyCam.registerWithInput(inputManager);
+	//flyCam.setDragToRotate(true);
+
+	// Create the picker
+	designPicker = new DesignPicker(inputManager, cam, rootNode, designSelectionCallback);
+
+	// Add the listeners
+	inputManager.addListener(designPicker, "PickDesign");
+
+	// Add the design picker by default
+	inputManager.addMapping("PickDesign", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
 
 
-        // create lights
-        ColorRGBA diffuseLightColor = new ColorRGBA(1f, 1f, 1f, 1f);
-        ColorRGBA diffuseLightColor2 = new ColorRGBA(154f / 255f, 160f / 255f, 166f / 255f, 185f / 255f);
 
-        DirectionalLight directionalLight = new DirectionalLight();
-        directionalLight.setDirection(new Vector3f(.25f, -.85f, .75f));
-        directionalLight.setColor(diffuseLightColor);
+	Wormhole wormhole = CentralLookup.getDefault().lookup(Wormhole.class);
+	if (wormhole != null) {
+	    System.out.println("Wormhole Name: " + wormhole.getName());
 
-        DirectionalLight fillLight = new DirectionalLight();
-        fillLight.setDirection(new Vector3f(-.25f, .85f, -.75f));
-        fillLight.setColor(diffuseLightColor2);
+	    // create a CityAppState
+	    currentCityAppState = loadCity(wormhole);
+	    cam.setLocation(currentCityAppState.getCoordinateTransformer().locationToBetaville(wormhole.getLocation()));
 
-        rootNode.addLight(directionalLight);
-        rootNode.addLight(fillLight);
+	    stateManager.attach(currentCityAppState);
+	    currentCityAppState.setEnabled(true);
+	}
+    }
 
-        // remove the original fly cam
-        inputManager.removeListener(flyCam);
-
-        flyCam = new CustomFlyByCamera(cam);
-        flyCam.setMoveSpeed(1f);
-        flyCam.registerWithInput(inputManager);
-        //flyCam.setDragToRotate(true);
-
-        // Create the picker
-        designPicker = new DesignPicker(inputManager, cam, rootNode, designSelectionCallback);
-
-        // Add the listeners
-        inputManager.addListener(designPicker, "PickDesign");
-
-        // Add the design picker by default
-        inputManager.addMapping("PickDesign", new MouseButtonTrigger(MouseInput.BUTTON_LEFT));
+    private CityAppState loadCity(Wormhole wormhole) {
+	CityAppState appState = new CityAppState(SettingsPreferences.getCity(), wormhole.getLocation());
+	appState.provide(rootNode, assetManager);
+	appState.loadBase(wormhole.getLocation());
+	return appState;
     }
 
     @Override
     public void simpleUpdate(float tpf) {
-        // update the user's location
-        CentralLookup lookup = CentralLookup.getDefault();
-        Collection locations = lookup.lookupAll(ILocation.class);
-        if (!locations.isEmpty()) {
-            Iterator it = locations.iterator();
-            while (it.hasNext()) {
-                lookup.remove(it.next());
-            }
-        }
+	// update the user's location
+	if (currentCityAppState != null) {
+	    CentralLookup lookup = CentralLookup.getDefault();
+	    Collection locations = lookup.lookupAll(ILocation.class);
+	    if (!locations.isEmpty()) {
+		Iterator it = locations.iterator();
+		while (it.hasNext()) {
+		    lookup.remove(it.next());
+		}
+	    }
 
-        lookup.add(currentCityAppState.getCoordinateTransformer().betavilleToUTM(cam.getLocation()));
+	    lookup.add(currentCityAppState.getCoordinateTransformer().betavilleToUTM(cam.getLocation()));
+	}
 
+    }
+
+    @Override
+    public void resultChanged(LookupEvent ev) {
+	if(result.allInstances().size()>0){
+	    Wormhole wormhole = result.allInstances().iterator().next();
+	    System.out.println("Wormhole Name: " + wormhole.getName());
+
+	    // create a CityAppState
+	    CityAppState newCityAppState = loadCity(wormhole);
+	    
+	    if(currentCityAppState!=null){
+		stateManager.detach(currentCityAppState);
+		stateManager.attach(newCityAppState);
+		cam.setLocation(currentCityAppState.getCoordinateTransformer().locationToBetaville(wormhole.getLocation()));
+		newCityAppState.setEnabled(true);
+	    }
+	}
     }
 }
