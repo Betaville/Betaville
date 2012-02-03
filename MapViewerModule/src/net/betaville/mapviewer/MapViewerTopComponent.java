@@ -29,27 +29,32 @@ package net.betaville.mapviewer;
 
 import edu.poly.bxmc.betaville.jme.map.GPSCoordinate;
 import edu.poly.bxmc.betaville.jme.map.ILocation;
+import edu.poly.bxmc.betaville.model.Wormhole;
+import edu.poly.bxmc.betaville.net.NetPool;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.*;
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.*;
 import net.betaville.usercontrol.lookup.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.TopComponent;
-import org.openstreetmap.gui.jmapviewer.JMapViewer;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
-import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
-import org.openstreetmap.gui.jmapviewer.OsmTileLoader;
+import org.openstreetmap.gui.jmapviewer.*;
 import org.openstreetmap.gui.jmapviewer.events.JMVCommandEvent;
 import org.openstreetmap.gui.jmapviewer.interfaces.JMapViewerEventListener;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
@@ -83,7 +88,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
     final JLabel mperpLabelValue = new JLabel(String.format("%s", map.getMeterPerPixel()));
     final JLabel zoomLabel = new JLabel("Zoom: ");
     final JLabel zoomValue = new JLabel(String.format("%s", map.getZoom()));
-    private MapMarkerDot cameraMapMarker = new MapMarkerDot(Color.RED, 0, 0);
+    private MapMarkerDot cameraMapMarker = null;
 
     public MapViewerTopComponent() {
         initComponents();
@@ -170,13 +175,47 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
         panel.add(mperpLabelName);
         panel.add(mperpLabelValue);
 
-        map.addMapMarker(cameraMapMarker);
-
         add(map, BorderLayout.CENTER);
+	try {
+	    // map.setDisplayPositionByLatLon(49.807, 8.6, 11);
+	    // map.setTileGridVisible(true);
+	    
+	    List<Wormhole> wormholes = NetPool.getPool().getConnection().getAllWormholes();
+	    for(Wormhole wormhole : wormholes){
+		addWormhole(wormhole);
+	    }
+	} catch (UnknownHostException ex) {
+	    Exceptions.printStackTrace(ex);
+	} catch (IOException ex) {
+	    Exceptions.printStackTrace(ex);
+	}
 
-        // map.setDisplayPositionByLatLon(49.807, 8.6, 11);
-        // map.setTileGridVisible(true);
+    }
 
+    public void addWormhole(Wormhole wormhole) {
+	GPSCoordinate gps = wormhole.getLocation().getGPS();
+
+	WormholeMarkerDot dot = new WormholeMarkerDot(wormhole);
+	dot.addWormholeMapMarkerSelectionListener(new WormholeMarkerDot.WormholeMarkerDotSelectionListener() {
+
+	    @Override
+	    public void wormholeMarkerDotSelected(Wormhole wormhole) {
+		
+		System.out.println("Selected " + wormhole.getName());
+		
+		CentralLookup lookup = CentralLookup.getDefault();
+		Collection locations = lookup.lookupAll(Wormhole.class);
+		if (!locations.isEmpty()) {
+		    Iterator it = locations.iterator();
+		    while (it.hasNext()) {
+			lookup.remove(it.next());
+		    }
+		}
+
+		lookup.add(wormhole);
+	    }
+	});
+	map.addMapMarker(dot);
     }
 
     /**
@@ -187,7 +226,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        setLayout(new java.awt.BorderLayout());
+	setLayout(new java.awt.BorderLayout());
     }// </editor-fold>                        
 
     // Variables declaration - do not modify                     
@@ -218,10 +257,56 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
         });
 
         map.addMouseListener(new MouseListener() {
+	    
+	    int mouseDistanceTolerance = 5;
 
             @Override
             public void mouseReleased(MouseEvent arg0) {
-                System.out.println(map.getPosition(arg0.getPoint()));
+                //System.out.println(map.getPosition(arg0.getPoint()));
+		
+		// find the closest map marker
+		Point mousePoint = arg0.getPoint();
+		Coordinate mouseCoordinate = map.getPosition(mousePoint);
+		List<MapMarker> markers = map.getMapMarkerList();
+		
+		double closestDistance = -1;
+		MapMarker closestMarker = null;
+		
+		for(MapMarker marker : markers){
+		    
+		    //System.out.println("Checking Marker at: " + marker.getLat()+", "+marker.getLon());
+		    
+		    // Get the position of the item on the map.  This will return null if it is outside the viewport
+		    Point mapPos = map.getMapPosition(marker.getLat(), marker.getLon());
+		    
+		    if(mapPos==null){
+			continue;
+		    }
+		    
+		    //System.out.println("MARKER");
+		    
+		    double distance = mousePoint.distance(mapPos);
+		    if(closestDistance==-1){
+			closestDistance = distance;
+		    }
+		    else{
+			if(distance < closestDistance){
+			    closestDistance = distance;
+			    closestMarker = marker;
+			}
+		    }
+		}
+		
+		if(closestDistance < mouseDistanceTolerance){
+		    if(closestMarker instanceof WormholeMarkerDot){
+			((WormholeMarkerDot)closestMarker).fireSelectionEvent();
+		    }
+		    //System.out.println("Closest Distance: " + closestDistance);
+		    //System.out.println("Marker selected!");
+		}
+		else{
+		    //System.out.println("Closest Distance: " + closestDistance);
+		}
             }
 
             @Override
@@ -238,6 +323,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 
             @Override
             public void mouseClicked(MouseEvent arg0) {
+		//System.out.println("Mouse Clicked: " + map.getPosition(arg0.getPoint()));
             }
         });
     }
@@ -271,7 +357,9 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 
                 @Override
                 public void run() {
-                    map.removeMapMarker(cameraMapMarker);
+		    if(cameraMapMarker!=null){
+			map.removeMapMarker(cameraMapMarker);
+		    }
                     cameraMapMarker = new MapMarkerDot(Color.RED, gps.getLatitude(), gps.getLongitude());
                     map.addMapMarker(cameraMapMarker);
                 }
