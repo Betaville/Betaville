@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2008-2012, Brooklyn eXperimental Media Center
- * All rights reserved.
+ * Copyright (c) 2008-2012, Brooklyn eXperimental Media Center All rights
+ * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met: *
@@ -27,14 +27,17 @@
  */
 package net.betaville.options;
 
+import org.netbeans.api.keyring.Keyring;
+import org.openide.util.NbPreferences;
+
 final class AccountPanel extends javax.swing.JPanel {
 
     private final AccountOptionsPanelController controller;
 
     AccountPanel(AccountOptionsPanelController controller) {
-        this.controller = controller;
-        initComponents();
-        // TODO listen to changes in form fields and call controller.changed()
+	this.controller = controller;
+	initComponents();
+	// TODO listen to changes in form fields and call controller.changed()
     }
 
     /**
@@ -50,12 +53,13 @@ final class AccountPanel extends javax.swing.JPanel {
         passwordLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         passwordField = new javax.swing.JPasswordField();
-        logInAutomaticallyCheckbox = new javax.swing.JCheckBox();
+        logInAutomaticallyCheckBox = new javax.swing.JCheckBox();
         loginButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         connectedAsLabel = new javax.swing.JLabel();
         currentlyLoggedInUserLabel = new javax.swing.JLabel();
         logoutButton = new javax.swing.JButton();
+        rememberPasswordCheckBox = new javax.swing.JCheckBox();
 
         org.openide.awt.Mnemonics.setLocalizedText(explanationLabel, org.openide.util.NbBundle.getMessage(AccountPanel.class, "AccountPanel.explanationLabel.text")); // NOI18N
 
@@ -72,8 +76,8 @@ final class AccountPanel extends javax.swing.JPanel {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(logInAutomaticallyCheckbox, org.openide.util.NbBundle.getMessage(AccountPanel.class, "AccountPanel.logInAutomaticallyCheckbox.text")); // NOI18N
-        logInAutomaticallyCheckbox.setToolTipText(org.openide.util.NbBundle.getMessage(AccountPanel.class, "AccountPanel.logInAutomaticallyCheckbox.toolTipText")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(logInAutomaticallyCheckBox, org.openide.util.NbBundle.getMessage(AccountPanel.class, "AccountPanel.logInAutomaticallyCheckBox.text")); // NOI18N
+        logInAutomaticallyCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(AccountPanel.class, "AccountPanel.logInAutomaticallyCheckBox.toolTipText")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(loginButton, org.openide.util.NbBundle.getMessage(AccountPanel.class, "AccountPanel.loginButton.text")); // NOI18N
         loginButton.addActionListener(new java.awt.event.ActionListener() {
@@ -93,6 +97,14 @@ final class AccountPanel extends javax.swing.JPanel {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(rememberPasswordCheckBox, org.openide.util.NbBundle.getMessage(AccountPanel.class, "AccountPanel.rememberPasswordCheckBox.text")); // NOI18N
+        rememberPasswordCheckBox.setToolTipText(org.openide.util.NbBundle.getMessage(AccountPanel.class, "AccountPanel.rememberPasswordCheckBox.toolTipText")); // NOI18N
+        rememberPasswordCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rememberPasswordCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,24 +116,28 @@ final class AccountPanel extends javax.swing.JPanel {
                     .addComponent(explanationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(loginButton)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(logInAutomaticallyCheckbox))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(passwordLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(passwordField))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(usernameLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(connectedAsLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(currentlyLoggedInUserLabel))
-                            .addComponent(logoutButton))
+                            .addComponent(logoutButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(usernameLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(usernameField)
+                                        .addGap(22, 22, 22))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(loginButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(rememberPasswordCheckBox)))
+                                .addGap(19, 19, 19)
+                                .addComponent(logInAutomaticallyCheckBox))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(passwordLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -140,8 +156,9 @@ final class AccountPanel extends javax.swing.JPanel {
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(logInAutomaticallyCheckbox)
-                    .addComponent(loginButton))
+                    .addComponent(logInAutomaticallyCheckBox)
+                    .addComponent(loginButton)
+                    .addComponent(rememberPasswordCheckBox))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -155,59 +172,87 @@ final class AccountPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
-        // TODO add your handling code here:
+	// TODO add your handling code here:
     }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        if(usernameField.getText().isEmpty() || passwordField.getPassword()==null){
-            // show error to user
-        }
-        else{
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
-	    
+	if (usernameField.getText().isEmpty() || passwordField.getPassword() == null) {
+	    // show error to user
+	} else {
+	    String username = usernameField.getText();
+	    String password = new String(passwordField.getPassword());
+
 	    // Grab a connection and log in
-        }
+	}
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        // TODO add your handling code here:
+	// TODO add your handling code here:
     }//GEN-LAST:event_logoutButtonActionPerformed
 
+    private void rememberPasswordCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberPasswordCheckBoxActionPerformed
+	/*
+	 * If the option to remember the password we must: 1) Remove the
+	 * password 2) Disable automatic login and 3) Grey out the automatic
+	 * login button
+	 */
+	if (!rememberPasswordCheckBox.isSelected()) {
+	    // Remove the password
+	    Keyring.delete("Betaville");
+
+	    // Turn off automatic login
+	    if (logInAutomaticallyCheckBox.isSelected()) {
+		logInAutomaticallyCheckBox.doClick();
+	    }
+
+	    // Grey out the option for automatic login
+	    logInAutomaticallyCheckBox.setEnabled(false);
+	} else {
+	    // Enable the option for automatic login
+	    logInAutomaticallyCheckBox.setEnabled(true);
+	}
+    }//GEN-LAST:event_rememberPasswordCheckBoxActionPerformed
+
     void load() {
-        // TODO read settings and initialize GUI
-        // Example:        
-        // someCheckBox.setSelected(Preferences.userNodeForPackage(AccountPanel.class).getBoolean("someFlag", false));
-        // or for org.openide.util with API spec. version >= 7.4:
-        // someCheckBox.setSelected(NbPreferences.forModule(AccountPanel.class).getBoolean("someFlag", false));
-        // or:
-        // someTextField.setText(SomeSystemOption.getDefault().getSomeStringProperty());
+	System.out.println("LOADING PREFERENCES");
+	rememberPasswordCheckBox.setSelected(NbPreferences.forModule(AccountPanel.class).getBoolean("rememberPasswordCheckBox", false));
+	logInAutomaticallyCheckBox.setSelected(NbPreferences.forModule(AccountPanel.class).getBoolean("logInAutomaticallyCheckBox", false));
+
+	if (!rememberPasswordCheckBox.isSelected()) {
+	    logInAutomaticallyCheckBox.setEnabled(false);
+	} else {
+	    passwordField.setText("Not a real password");
+	}
+
+	usernameField.setText(NbPreferences.root().get("Username", ""));
     }
 
     void store() {
-        // TODO store modified settings
-        // Example:
-        // Preferences.userNodeForPackage(AccountPanel.class).putBoolean("someFlag", someCheckBox.isSelected());
-        // or for org.openide.util with API spec. version >= 7.4:
-        // NbPreferences.forModule(AccountPanel.class).putBoolean("someFlag", someCheckBox.isSelected());
-        // or:
-        // SomeSystemOption.getDefault().setSomeStringProperty(someTextField.getText());
+	NbPreferences.forModule(AccountPanel.class).putBoolean("logInAutomaticallyCheckBox", logInAutomaticallyCheckBox.isSelected());
+	NbPreferences.forModule(AccountPanel.class).putBoolean("rememberPasswordCheckBox", rememberPasswordCheckBox.isSelected());
+	NbPreferences.root().put("Username", usernameField.getText());
+
+	// Store the user's password if the remember password checkbox is selected
+	if (rememberPasswordCheckBox.isSelected()) {
+	    Keyring.save("Betaville", passwordField.getPassword(), "User information for logging into Betaville");
+	}
     }
 
     boolean valid() {
-        // TODO check whether form is consistent and complete
-        return true;
+	// TODO check whether form is consistent and complete
+	return true;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel connectedAsLabel;
     private javax.swing.JLabel currentlyLoggedInUserLabel;
     private javax.swing.JLabel explanationLabel;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JCheckBox logInAutomaticallyCheckbox;
+    private javax.swing.JCheckBox logInAutomaticallyCheckBox;
     private javax.swing.JButton loginButton;
     private javax.swing.JButton logoutButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JCheckBox rememberPasswordCheckBox;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables

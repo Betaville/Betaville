@@ -166,13 +166,19 @@ final class NetworkingPanel extends javax.swing.JPanel {
 
     void load() {
         javaServerRadioButton.setSelected(true);
-        serverAddressField.setText(NbPreferences.forModule(NetworkingPanel.class).get("ServerAddress", "master.betaville.net"));
+        serverAddressField.setText(NbPreferences.root().get("ServerAddress", "master.betaville.net"));
+	if(NbPreferences.root().get("NetworkConnection", InsecureClientManager.class.getName()).equals(InsecureClientManager.class.getName())){
+	    javaServerRadioButton.setSelected(true);
+	}
+	else{
+	    webServiceRadioButton.setSelected(true);
+	}
     }
 
     void store() {
         if(javaServerRadioButton.isSelected()) NbPreferences.forModule(NetworkingPanel.class).put("NetworkConnection", InsecureClientManager.class.getName());
-        else NbPreferences.forModule(NetworkingPanel.class).put("NetworkConnection", "JSON CONNECTION CLASS");
-        NbPreferences.forModule(NetworkingPanel.class).put("ServerAddress", serverAddressField.getText());
+        else NbPreferences.root().put("NetworkConnection", "JSON CONNECTION CLASS");
+        NbPreferences.root().put("ServerAddress", serverAddressField.getText());
     }
 
     boolean valid() {
