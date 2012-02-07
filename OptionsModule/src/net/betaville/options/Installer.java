@@ -23,66 +23,31 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package edu.poly.bxmc.betaville.model;
+package net.betaville.options;
 
-/**
- * Contains information about a user session
- * @author Skye Book
- */
-public class ClientSession {
+import edu.poly.bxmc.betaville.model.ClientSession;
+import net.betaville.usercontrol.lookup.CentralLookup;
+import org.openide.modules.ModuleInstall;
+import org.openide.util.NbPreferences;
+
+public class Installer extends ModuleInstall {
     
-    private String user = null;
-    private String sessionToken = null;
-    
-    private String server = null;
-    
-    public ClientSession(){}
-    
-    public ClientSession(String user, String sessionToken, String server){
-	this.user = user;
-	this.sessionToken = sessionToken;
-	this.server = server;
-    }
+    private static boolean initialized = false;
 
-    /**
-     * @return the user
-     */
-    public String getUser() {
-	return user;
-    }
-
-    /**
-     * @return the sessionToken
-     */
-    public String getSessionToken() {
-	return sessionToken;
-    }
-
-    /**
-     * @return the server
-     */
-    public String getServer() {
-	return server;
-    }
-
-    /**
-     * @param user the user to set
-     */
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    /**
-     * @param sessionToken the sessionToken to set
-     */
-    public void setSessionToken(String sessionToken) {
-        this.sessionToken = sessionToken;
-    }
-
-    /**
-     * @param server the server to set
-     */
-    public void setServer(String server) {
-        this.server = server;
+    @Override
+    public void restored() {
+        // If the client session has already been initialized, return now
+        if(initialized) return;
+        
+        
+        
+        // create the session
+        ClientSession session = new ClientSession();
+        CentralLookup.getDefault().add(session);
+        session.setServer(NbPreferences.root().get("ServerAddress", "master.betaville.net"));
+        session.setUser(NbPreferences.root().get("Username", null));
+        
+        System.out.println("SERVER ADDRESS IS " + session.getServer());
+        initialized = true;
     }
 }

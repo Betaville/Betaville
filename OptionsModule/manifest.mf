@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 OpenIDE-Module: net.betaville.options
+OpenIDE-Module-Install: net/betaville/options/Installer.class
 OpenIDE-Module-Localizing-Bundle: net/betaville/options/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.0
 

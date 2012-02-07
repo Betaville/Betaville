@@ -29,8 +29,9 @@ package net.betaville.mapviewer;
 
 import edu.poly.bxmc.betaville.jme.map.GPSCoordinate;
 import edu.poly.bxmc.betaville.jme.map.ILocation;
+import edu.poly.bxmc.betaville.model.ClientSession;
 import edu.poly.bxmc.betaville.model.Wormhole;
-import edu.poly.bxmc.betaville.net.NetPool;
+import edu.poly.bxmc.betaville.net.InsecureClientManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Point;
@@ -179,8 +180,9 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 	try {
 	    // map.setDisplayPositionByLatLon(49.807, 8.6, 11);
 	    // map.setTileGridVisible(true);
-	    
-	    List<Wormhole> wormholes = NetPool.getPool().getConnection().getAllWormholes();
+	    InsecureClientManager icm = new InsecureClientManager(null, CentralLookup.getDefault().lookup(ClientSession.class).getServer());
+	    List<Wormhole> wormholes = icm.getAllWormholes();
+            icm.close();
 	    for(Wormhole wormhole : wormholes){
 		addWormhole(wormhole);
 	    }

@@ -122,22 +122,20 @@ final class AccountPanel extends javax.swing.JPanel {
                                 .addComponent(currentlyLoggedInUserLabel))
                             .addComponent(logoutButton)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(usernameLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(usernameField)
-                                        .addGap(22, 22, 22))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(loginButton)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rememberPasswordCheckBox)))
+                                .addComponent(loginButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rememberPasswordCheckBox)
                                 .addGap(19, 19, 19)
                                 .addComponent(logInAutomaticallyCheckBox))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(passwordLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(usernameLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(passwordLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -216,7 +214,7 @@ final class AccountPanel extends javax.swing.JPanel {
     void load() {
 	System.out.println("LOADING PREFERENCES");
 	rememberPasswordCheckBox.setSelected(NbPreferences.forModule(AccountPanel.class).getBoolean("rememberPasswordCheckBox", false));
-	logInAutomaticallyCheckBox.setSelected(NbPreferences.forModule(AccountPanel.class).getBoolean("logInAutomaticallyCheckBox", false));
+	logInAutomaticallyCheckBox.setSelected(NbPreferences.root().getBoolean("LogInAutomatically", false));
 
 	if (!rememberPasswordCheckBox.isSelected()) {
 	    logInAutomaticallyCheckBox.setEnabled(false);
@@ -228,7 +226,7 @@ final class AccountPanel extends javax.swing.JPanel {
     }
 
     void store() {
-	NbPreferences.forModule(AccountPanel.class).putBoolean("logInAutomaticallyCheckBox", logInAutomaticallyCheckBox.isSelected());
+	NbPreferences.root().putBoolean("LogInAutomatically", logInAutomaticallyCheckBox.isSelected());
 	NbPreferences.forModule(AccountPanel.class).putBoolean("rememberPasswordCheckBox", rememberPasswordCheckBox.isSelected());
 	NbPreferences.root().put("Username", usernameField.getText());
 

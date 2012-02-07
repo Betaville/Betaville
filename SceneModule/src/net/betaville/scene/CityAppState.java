@@ -47,7 +47,6 @@ import edu.poly.bxmc.betaville.jme.loaders.util.DriveFinder;
 import edu.poly.bxmc.betaville.jme.map.ILocation;
 import edu.poly.bxmc.betaville.model.*;
 import edu.poly.bxmc.betaville.net.InsecureClientManager;
-import edu.poly.bxmc.betaville.net.NetPool;
 import edu.poly.bxmc.betaville.net.ProgressInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -56,6 +55,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import net.betaville.usercontrol.lookup.CentralLookup;
 import net.skyebook.jme2loader.JME2Loader;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
@@ -233,7 +233,7 @@ public class CityAppState implements AppState {
 
 	    final AtomicInteger itemsLoaded = new AtomicInteger(0);
 
-	    InsecureClientManager icm = NetPool.getPool().getConnection();
+	    InsecureClientManager icm = new InsecureClientManager(null, CentralLookup.getDefault().lookup(ClientSession.class).getServer());
 	    icm.getProgressInputStream().setListener(new ProgressInputStream.ProgressInputListener() {
 
 		@Override
@@ -242,7 +242,8 @@ public class CityAppState implements AppState {
 		}
 	    });
 
-	    List<Design> designs = NetPool.getPool().getConnection().findBaseDesignsByCity(thisCity.getCityID());
+	    List<Design> designs = icm.findBaseDesignsByCity(thisCity.getCityID());
+            icm.close();
 
 	    // If the designs are null, we can't do anything
 	    if (designs == null) {

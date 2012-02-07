@@ -30,8 +30,9 @@ package net.betaville.usercontrol;
 import edu.poly.bxmc.betaville.SettingsPreferences;
 import edu.poly.bxmc.betaville.jme.map.MapManager;
 import edu.poly.bxmc.betaville.model.City;
+import edu.poly.bxmc.betaville.model.ClientSession;
 import edu.poly.bxmc.betaville.model.Wormhole;
-import edu.poly.bxmc.betaville.net.NetPool;
+import edu.poly.bxmc.betaville.net.InsecureClientManager;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -128,7 +129,9 @@ public final class SelectCityTopComponent extends TopComponent{
 	// Set the currently selected City
 	try {
 	    Wormhole location = locations.get(cityList.getSelectedIndex());
-	    String[] cityInfo = NetPool.getPool().getConnection().findCityByID(location.getCityID());
+            InsecureClientManager icm = new InsecureClientManager(null, CentralLookup.getDefault().lookup(ClientSession.class).getServer());
+	    String[] cityInfo = icm.findCityByID(location.getCityID());
+            icm.close();
 	    City city = new City(cityInfo[0], cityInfo[1], cityInfo[2]);
             city.setCityID(location.getCityID());
 	    
@@ -176,13 +179,15 @@ public final class SelectCityTopComponent extends TopComponent{
 	try {
 	    // Disable the select button
 	    selectButton.setEnabled(false);
+            
+            InsecureClientManager icm = new InsecureClientManager(null, CentralLookup.getDefault().lookup(ClientSession.class).getServer());
 
 	    // get the wormholes from the server and put them into a list
-	    locations = NetPool.getPool().getConnection().getAllWormholes();
+	    locations = icm.getAllWormholes();
 	    DefaultListModel dlm = new DefaultListModel();
 
 	    for (Wormhole location : locations) {
-		String[] cityInfo = NetPool.getPool().getConnection().findCityByID(location.getCityID());
+		String[] cityInfo = icm.findCityByID(location.getCityID());
 		dlm.addElement(((cityInfo != null) ? cityInfo[0] + " - " : "") + location.getName());
 	    }
 
@@ -195,6 +200,8 @@ public final class SelectCityTopComponent extends TopComponent{
 		    selectButton.setEnabled(true);
 		}
 	    });
+            
+            icm.close();
 	} catch (UnknownHostException ex) {
 	    DialogDisplayer.getDefault().notifyLater(new NotifyDescriptor.Message("Could not connect to server"));
 	    cityList.setModel(new DefaultListModel());
