@@ -110,10 +110,10 @@ public class BetavilleGame extends SimpleApplication implements LookupListener {
 	// remove the original fly cam
 	inputManager.removeListener(flyCam);
 
-	flyCam = new CustomFlyByCamera(cam);
-	flyCam.setMoveSpeed(1f);
-	flyCam.registerWithInput(inputManager);
-	//flyCam.setDragToRotate(true);
+	CustomFlyByCamera customFlyCam = new CustomFlyByCamera(cam);
+	customFlyCam.setMoveSpeed(1f);
+	customFlyCam.registerWithInput(inputManager);
+	customFlyCam.setDragToRotate(true);
 
 	// Create the picker
 	designPicker = new DesignPicker(inputManager, cam, rootNode, designSelectionCallback);
