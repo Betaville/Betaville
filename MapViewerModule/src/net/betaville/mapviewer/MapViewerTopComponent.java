@@ -96,16 +96,82 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
         setName(Bundle.CTL_MapViewerTopComponent());
         setToolTipText(Bundle.HINT_MapViewerTopComponent());
 
-        JPanel panel = new JPanel();
+	JPanel mapConfigurationPanel = createMapConfigurationPanel();
         JPanel helpPanel = new JPanel();
+	
+	JPanel displayFilters = createBetavilleDisplayFilters();
 
 
-        add(panel, BorderLayout.NORTH);
+        add(mapConfigurationPanel, BorderLayout.NORTH);
+	
+	add(displayFilters, BorderLayout.NORTH);
         add(helpPanel, BorderLayout.SOUTH);
         JLabel helpLabel = new JLabel("Use right mouse button to move,\n "
                 + "left double click or mouse wheel to zoom.");
         helpPanel.add(helpLabel);
-        JButton button = new JButton("setDisplayToFitMapMarkers");
+        
+        
+
+        add(map, BorderLayout.CENTER);
+	try {
+	    // map.setDisplayPositionByLatLon(49.807, 8.6, 11);
+	    // map.setTileGridVisible(true);
+	    InsecureClientManager icm = new InsecureClientManager(null, CentralLookup.getDefault().lookup(ClientSession.class).getServer());
+	    List<Wormhole> wormholes = icm.getAllWormholes();
+            icm.close();
+	    for(Wormhole wormhole : wormholes){
+		addWormhole(wormhole);
+	    }
+	} catch (UnknownHostException ex) {
+	    Exceptions.printStackTrace(ex);
+	} catch (IOException ex) {
+	    Exceptions.printStackTrace(ex);
+	}
+
+    }
+    
+    private JPanel createBetavilleDisplayFilters(){
+	JPanel displayFilters = new JPanel();
+	
+	JCheckBox showWormholes = new JCheckBox("Show Wormholes");
+	showWormholes.addActionListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent ae) {
+		// Turn wormholes on or off
+	    }
+	});
+	
+	JCheckBox showProposals = new JCheckBox("Show Proposals");
+	showProposals.addActionListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent ae) {
+		// Turn proposals on or off
+	    }
+	});
+	
+	JCheckBox showMyLocation = new JCheckBox("Show My Location");
+	showMyLocation.addActionListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent ae) {
+		// Turn location marker on or off
+	    }
+	});
+	
+	displayFilters.add(showWormholes);
+	displayFilters.add(showProposals);
+	displayFilters.add(showMyLocation);
+	
+	return displayFilters;
+    }
+    
+    // TODO: Put this in an application preferences panel
+    private JPanel createMapConfigurationPanel(){
+	JPanel mapConfigurationPanel = new JPanel();
+	
+	JButton button = new JButton("setDisplayToFitMapMarkers");
         button.addActionListener(new ActionListener() {
 
             @Override
@@ -137,8 +203,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
             }
         });
         map.setTileLoader((TileLoader) tileLoaderSelector.getSelectedItem());
-        panel.add(tileSourceSelector);
-        panel.add(tileLoaderSelector);
+        
         final JCheckBox showMapMarker = new JCheckBox("Map markers visible");
         showMapMarker.setSelected(map.getMapMarkersVisible());
         showMapMarker.addActionListener(new ActionListener() {
@@ -148,7 +213,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
                 map.setMapMarkerVisible(showMapMarker.isSelected());
             }
         });
-        panel.add(showMapMarker);
+        
         final JCheckBox showTileGrid = new JCheckBox("Tile grid visible");
         showTileGrid.setSelected(map.isTileGridVisible());
         showTileGrid.addActionListener(new ActionListener() {
@@ -158,7 +223,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
                 map.setTileGridVisible(showTileGrid.isSelected());
             }
         });
-        panel.add(showTileGrid);
+        
         final JCheckBox showZoomControls = new JCheckBox("Show zoom controls");
         showZoomControls.setSelected(map.getZoomContolsVisible());
         showZoomControls.addActionListener(new ActionListener() {
@@ -168,30 +233,22 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
                 map.setZoomContolsVisible(showZoomControls.isSelected());
             }
         });
-        panel.add(showZoomControls);
-        panel.add(button);
+	
+	mapConfigurationPanel.add(tileSourceSelector);
+        mapConfigurationPanel.add(tileLoaderSelector);
+	
+	mapConfigurationPanel.add(showMapMarker);
+	mapConfigurationPanel.add(showTileGrid);
+	
+	mapConfigurationPanel.add(showZoomControls);
+        mapConfigurationPanel.add(button);
 
-        panel.add(zoomLabel);
-        panel.add(zoomValue);
-        panel.add(mperpLabelName);
-        panel.add(mperpLabelValue);
-
-        add(map, BorderLayout.CENTER);
-	try {
-	    // map.setDisplayPositionByLatLon(49.807, 8.6, 11);
-	    // map.setTileGridVisible(true);
-	    InsecureClientManager icm = new InsecureClientManager(null, CentralLookup.getDefault().lookup(ClientSession.class).getServer());
-	    List<Wormhole> wormholes = icm.getAllWormholes();
-            icm.close();
-	    for(Wormhole wormhole : wormholes){
-		addWormhole(wormhole);
-	    }
-	} catch (UnknownHostException ex) {
-	    Exceptions.printStackTrace(ex);
-	} catch (IOException ex) {
-	    Exceptions.printStackTrace(ex);
-	}
-
+        mapConfigurationPanel.add(zoomLabel);
+        mapConfigurationPanel.add(zoomValue);
+        mapConfigurationPanel.add(mperpLabelName);
+        mapConfigurationPanel.add(mperpLabelValue);
+	
+	return mapConfigurationPanel;
     }
 
     public void addWormhole(Wormhole wormhole) {
