@@ -51,6 +51,7 @@ import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import org.openide.util.NbBundle.Messages;
+import org.openide.util.lookup.Lookups;
 import org.openide.windows.TopComponent;
 import org.openstreetmap.gui.jmapviewer.*;
 import org.openstreetmap.gui.jmapviewer.events.JMVCommandEvent;
@@ -104,7 +105,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 
         add(mapConfigurationPanel, BorderLayout.NORTH);
 	
-	add(displayFilters, BorderLayout.NORTH);
+	//add(displayFilters, BorderLayout.NORTH);
         add(helpPanel, BorderLayout.SOUTH);
         JLabel helpLabel = new JLabel("Use right mouse button to move,\n "
                 + "left double click or mouse wheel to zoom.");
@@ -127,6 +128,8 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 	} catch (IOException ex) {
 	    Exceptions.printStackTrace(ex);
 	}
+        
+        associateLookup(Lookups.singleton(map));
 
     }
     

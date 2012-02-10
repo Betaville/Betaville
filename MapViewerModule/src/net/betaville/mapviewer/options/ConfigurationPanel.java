@@ -4,14 +4,74 @@
  */
 package net.betaville.mapviewer.options;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.IOException;
+import javax.swing.*;
+import org.openide.util.NbPreferences;
+import org.openide.windows.WindowManager;
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
+import org.openstreetmap.gui.jmapviewer.OsmTileLoader;
+import org.openstreetmap.gui.jmapviewer.interfaces.TileLoader;
+import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
+import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
+import org.openstreetmap.gui.jmapviewer.tilesources.OsmTileSource;
+
 final class ConfigurationPanel extends javax.swing.JPanel {
 
     private final ConfigurationOptionsPanelController controller;
+    private JMapViewer map = null;
+    private JLabel mperpLabelName = null;
+    private JLabel mperpLabelValue = null;
+    private JLabel zoomLabel = null;
+    private JLabel zoomValue = null;
 
     ConfigurationPanel(ConfigurationOptionsPanelController controller) {
-	this.controller = controller;
-	initComponents();
-	// TODO listen to changes in form fields and call controller.changed()
+        this.controller = controller;
+        
+        map = WindowManager.getDefault().findTopComponent("MapViewerTopComponent").getLookup().lookup(JMapViewer.class);
+        
+        
+        initComponents();
+        // TODO listen to changes in form fields and call controller.changed()
+        
+        
+        mperpLabelName = new JLabel("Meters/Pixels: ");
+        mperpLabelValue = new JLabel(String.format("%s", map.getMeterPerPixel()));
+        zoomLabel = new JLabel("Zoom: ");
+        zoomValue = new JLabel(String.format("%s", map.getZoom()));
+
+        //add(createMapConfigurationPanel());
+    }
+
+    // TODO: Put this in an application preferences panel
+    private JPanel createMapConfigurationPanel() {
+        JPanel mapConfigurationPanel = new JPanel();
+
+        JButton button = new JButton("setDisplayToFitMapMarkers");
+        button.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                map.setDisplayToFitMapMarkers();
+            }
+        });
+
+        //mapConfigurationPanel.add(showMapMarker);
+        //mapConfigurationPanel.add(showTileGrid);
+
+        //mapConfigurationPanel.add(showZoomControls);
+        //mapConfigurationPanel.add(button);
+
+        mapConfigurationPanel.add(zoomLabel);
+        mapConfigurationPanel.add(zoomValue);
+        mapConfigurationPanel.add(mperpLabelName);
+        mapConfigurationPanel.add(mperpLabelValue);
+
+        return mapConfigurationPanel;
     }
 
     /**
@@ -22,42 +82,185 @@ final class ConfigurationPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        tileSourceComboBox = createTileSourceComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        tileCacheComboBox = createTileCacheComboBox();
+        mapMarkersVisibleCheckbox = createMapMarkersVisible();
+        tileGridVisibleCheckBox = createTileGridVisible();
+        showZoomControlsCheckBox = createShowZoomControls();
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(ConfigurationPanel.class, "ConfigurationPanel.jLabel1.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(ConfigurationPanel.class, "ConfigurationPanel.jLabel2.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(mapMarkersVisibleCheckbox, org.openide.util.NbBundle.getMessage(ConfigurationPanel.class, "ConfigurationPanel.mapMarkersVisibleCheckbox.text")); // NOI18N
+        mapMarkersVisibleCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mapMarkersVisibleCheckboxActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(tileGridVisibleCheckBox, org.openide.util.NbBundle.getMessage(ConfigurationPanel.class, "ConfigurationPanel.tileGridVisibleCheckBox.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(showZoomControlsCheckBox, org.openide.util.NbBundle.getMessage(ConfigurationPanel.class, "ConfigurationPanel.showZoomControlsCheckBox.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(showZoomControlsCheckBox)
+                    .addComponent(tileGridVisibleCheckBox)
+                    .addComponent(mapMarkersVisibleCheckbox)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tileCacheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tileSourceComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(402, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tileSourceComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(tileCacheComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mapMarkersVisibleCheckbox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tileGridVisibleCheckBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(showZoomControlsCheckBox)
+                .addContainerGap(166, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void mapMarkersVisibleCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mapMarkersVisibleCheckboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mapMarkersVisibleCheckboxActionPerformed
+
     void load() {
-	// TODO read settings and initialize GUI
-	// Example:        
-	// someCheckBox.setSelected(Preferences.userNodeForPackage(ConfigurationPanel.class).getBoolean("someFlag", false));
-	// or for org.openide.util with API spec. version >= 7.4:
-	// someCheckBox.setSelected(NbPreferences.forModule(ConfigurationPanel.class).getBoolean("someFlag", false));
-	// or:
-	// someTextField.setText(SomeSystemOption.getDefault().getSomeStringProperty());
+        // load preferences
+        mapMarkersVisibleCheckbox.setSelected(NbPreferences.forModule(ConfigurationPanel.class).getBoolean("mapMarkersVisibleCheckbox", true));
+        showZoomControlsCheckBox.setSelected(NbPreferences.forModule(ConfigurationPanel.class).getBoolean("showZoomControlsCheckBox", true));
+        tileGridVisibleCheckBox.setSelected(NbPreferences.forModule(ConfigurationPanel.class).getBoolean("tileGridVisibleCheckBox", false));
+        //tileCacheComboBox.setSelectedIndex(NbPreferences.forModule(ConfigurationPanel.class).getInt("tileCacheComboBox", 0));
+        //tileSourceComboBox.setSelectedIndex(NbPreferences.forModule(ConfigurationPanel.class).getInt("tileSourceComboBox", 0));
+        
+        // apply preferences to the map
+        map.setMapMarkerVisible(mapMarkersVisibleCheckbox.isSelected());
+        map.setZoomContolsVisible(showZoomControlsCheckBox.isSelected());
+        map.setTileGridVisible(tileGridVisibleCheckBox.isSelected());
+        //map.setTileLoader((TileLoader) tileCacheComboBox.getSelectedItem());
+        //map.setTileSource((TileSource) tileSourceComboBox.getSelectedItem());
     }
 
     void store() {
-	// TODO store modified settings
-	// Example:
-	// Preferences.userNodeForPackage(ConfigurationPanel.class).putBoolean("someFlag", someCheckBox.isSelected());
-	// or for org.openide.util with API spec. version >= 7.4:
-	// NbPreferences.forModule(ConfigurationPanel.class).putBoolean("someFlag", someCheckBox.isSelected());
-	// or:
-	// SomeSystemOption.getDefault().setSomeStringProperty(someTextField.getText());
+        NbPreferences.forModule(ConfigurationPanel.class).putBoolean("mapMarkersVisibleCheckbox", mapMarkersVisibleCheckbox.isSelected());
+        NbPreferences.forModule(ConfigurationPanel.class).putBoolean("showZoomControlsCheckBox", showZoomControlsCheckBox.isSelected());
+        NbPreferences.forModule(ConfigurationPanel.class).putBoolean("tileGridVisibleCheckBox", tileGridVisibleCheckBox.isSelected());
+        NbPreferences.forModule(ConfigurationPanel.class).putInt("tileCacheComboBox", tileSourceComboBox.getSelectedIndex());
+        NbPreferences.forModule(ConfigurationPanel.class).putInt("tileSourceComboBox", tileSourceComboBox.getSelectedIndex());
     }
 
     boolean valid() {
-	// TODO check whether form is consistent and complete
-	return true;
+        // TODO check whether form is consistent and complete
+        return true;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JCheckBox mapMarkersVisibleCheckbox;
+    private javax.swing.JCheckBox showZoomControlsCheckBox;
+    private javax.swing.JComboBox tileCacheComboBox;
+    private javax.swing.JCheckBox tileGridVisibleCheckBox;
+    private javax.swing.JComboBox tileSourceComboBox;
     // End of variables declaration//GEN-END:variables
+
+    private JComboBox createTileSourceComboBox() {
+        JComboBox tileSourceSelector = new JComboBox(new TileSource[]{new OsmTileSource.Mapnik(),
+                    new OsmTileSource.TilesAtHome(), new OsmTileSource.CycleMap(), new BingAerialTileSource()});
+        tileSourceSelector.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                map.setTileSource((TileSource) e.getItem());
+            }
+        });
+
+        return tileSourceSelector;
+    }
+
+    private JComboBox createTileCacheComboBox() {
+        JComboBox tileLoaderSelector;
+        try {
+            tileLoaderSelector = new JComboBox(new TileLoader[]{new OsmFileCacheTileLoader(map),
+                        new OsmTileLoader(map)});
+        } catch (IOException e) {
+            tileLoaderSelector = new JComboBox(new TileLoader[]{new OsmTileLoader(map)});
+        }
+        tileLoaderSelector.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                map.setTileLoader((TileLoader) e.getItem());
+            }
+        });
+        //map.setTileLoader((TileLoader) tileLoaderSelector.getSelectedItem());
+
+        return tileLoaderSelector;
+    }
+
+    private JCheckBox createShowZoomControls() {
+        final JCheckBox showZoomControls = new JCheckBox("Show zoom controls");
+        //showZoomControls.setSelected(map.getZoomContolsVisible());
+        showZoomControls.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                map.setZoomContolsVisible(showZoomControls.isSelected());
+            }
+        });
+
+        return showZoomControls;
+    }
+
+    private JCheckBox createMapMarkersVisible() {
+        final JCheckBox showMapMarker = new JCheckBox("Map markers visible");
+        //showMapMarker.setSelected(map.getMapMarkersVisible());
+        showMapMarker.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                map.setMapMarkerVisible(showMapMarker.isSelected());
+            }
+        });
+        
+        return showMapMarker;
+    }
+
+    private JCheckBox createTileGridVisible() {
+        final JCheckBox showTileGrid = new JCheckBox("Tile grid visible");
+        //showTileGrid.setSelected(map.isTileGridVisible());
+        showTileGrid.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                map.setTileGridVisible(showTileGrid.isSelected());
+            }
+        });
+        
+        return showTileGrid;
+    }
 }
