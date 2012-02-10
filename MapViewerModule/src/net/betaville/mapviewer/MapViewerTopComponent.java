@@ -98,9 +98,13 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 
 	JPanel mapConfigurationPanel = createMapConfigurationPanel();
         JPanel helpPanel = new JPanel();
+	
+	JPanel displayFilters = createBetavilleDisplayFilters();
 
 
         add(mapConfigurationPanel, BorderLayout.NORTH);
+	
+	add(displayFilters, BorderLayout.NORTH);
         add(helpPanel, BorderLayout.SOUTH);
         JLabel helpLabel = new JLabel("Use right mouse button to move,\n "
                 + "left double click or mouse wheel to zoom.");
@@ -126,6 +130,44 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 
     }
     
+    private JPanel createBetavilleDisplayFilters(){
+	JPanel displayFilters = new JPanel();
+	
+	JCheckBox showWormholes = new JCheckBox("Show Wormholes");
+	showWormholes.addActionListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent ae) {
+		// Turn wormholes on or off
+	    }
+	});
+	
+	JCheckBox showProposals = new JCheckBox("Show Proposals");
+	showProposals.addActionListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent ae) {
+		// Turn proposals on or off
+	    }
+	});
+	
+	JCheckBox showMyLocation = new JCheckBox("Show My Location");
+	showMyLocation.addActionListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent ae) {
+		// Turn location marker on or off
+	    }
+	});
+	
+	displayFilters.add(showWormholes);
+	displayFilters.add(showProposals);
+	displayFilters.add(showMyLocation);
+	
+	return displayFilters;
+    }
+    
+    // TODO: Put this in an application preferences panel
     private JPanel createMapConfigurationPanel(){
 	JPanel mapConfigurationPanel = new JPanel();
 	
