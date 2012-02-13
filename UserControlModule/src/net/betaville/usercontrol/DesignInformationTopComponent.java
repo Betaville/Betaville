@@ -28,7 +28,7 @@
 package net.betaville.usercontrol;
 
 import edu.poly.bxmc.betaville.model.Design;
-import net.betaville.usercontrol.lookup.CentralLookup;
+import edu.poly.bxmc.betaville.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;

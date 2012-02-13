@@ -25,8 +25,8 @@
 */
 package net.betaville.options;
 
+import edu.poly.bxmc.betaville.CentralLookup;
 import edu.poly.bxmc.betaville.model.ClientSession;
-import net.betaville.usercontrol.lookup.CentralLookup;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.NbPreferences;
 

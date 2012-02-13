@@ -31,7 +31,7 @@ import com.jme3.math.Vector3f;
 import edu.poly.bxmc.betaville.jme.map.GPSCoordinate;
 import edu.poly.bxmc.betaville.jme.map.ILocation;
 import edu.poly.bxmc.betaville.jme.map.UTMCoordinate;
-import net.betaville.usercontrol.lookup.CentralLookup;
+import edu.poly.bxmc.betaville.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;

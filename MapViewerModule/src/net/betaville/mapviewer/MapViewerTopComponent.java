@@ -27,6 +27,7 @@
  */
 package net.betaville.mapviewer;
 
+import edu.poly.bxmc.betaville.CentralLookup;
 import edu.poly.bxmc.betaville.jme.map.GPSCoordinate;
 import edu.poly.bxmc.betaville.jme.map.ILocation;
 import edu.poly.bxmc.betaville.model.ClientSession;
@@ -42,7 +43,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.*;
-import net.betaville.usercontrol.lookup.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;

@@ -1,4 +1,4 @@
-package net.betaville.usercontrol.lookup;
+package edu.poly.bxmc.betaville;
 
 import org.openide.util.lookup.AbstractLookup;
 import org.openide.util.lookup.InstanceContent;

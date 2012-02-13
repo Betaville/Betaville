@@ -39,7 +39,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import net.betaville.usercontrol.lookup.CentralLookup;
+import edu.poly.bxmc.betaville.CentralLookup;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;

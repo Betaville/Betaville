@@ -40,7 +40,7 @@ import edu.poly.bxmc.betaville.model.Wormhole;
 import java.util.Collection;
 import java.util.Iterator;
 import net.betaville.scene.DesignPicker.DesignSelectionCallback;
-import net.betaville.usercontrol.lookup.CentralLookup;
+import edu.poly.bxmc.betaville.CentralLookup;
 import org.openide.awt.StatusDisplayer;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;

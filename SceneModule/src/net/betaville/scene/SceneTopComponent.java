@@ -37,7 +37,7 @@ import java.awt.event.ComponentListener;
 import javax.swing.BoxLayout;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import net.betaville.usercontrol.lookup.CentralLookup;
+import edu.poly.bxmc.betaville.CentralLookup;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
