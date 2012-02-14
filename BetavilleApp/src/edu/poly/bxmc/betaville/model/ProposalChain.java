@@ -35,7 +35,6 @@ import java.util.List;
 public class ProposalChain {
     
     private Design proposalDesign;
-    
     private List<Design> versions;
     
     private String owner;
@@ -45,8 +44,8 @@ public class ProposalChain {
         if(!rootProposalDesign.isClassification(Design.Classification.PROPOSAL)){
             throw new IllegalArgumentException("The root of a proposal must be a design classified as a proposal");
         }
-        
-        proposalDesign = rootProposalDesign;
+	
+	this.proposalDesign = proposalDesign;
         
         versions = new ArrayList<Design>();
     }
@@ -58,5 +57,13 @@ public class ProposalChain {
         else{
             versions.add(versionDesign);
         }
+    }
+    
+    public Design getProposalRoot(){
+	return proposalDesign;
+    }
+    
+    public List<Design> getAllVersions(){
+	return versions;
     }
 }
