@@ -373,7 +373,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
             });
         }
 	
-	/*
+	
 	Wormhole wormhole = CentralLookup.getDefault().lookup(Wormhole.class);
 	if(wormhole!=null){
 	    System.out.println("Wormhole selection in progress");
@@ -381,6 +381,8 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 		List<ProposalChain> proposals = ProposalFetcher.fetchProposals(wormhole.getCityID());
 		
 		for(ProposalChain proposal : proposals){
+		    System.out.println("Proposal: " + proposal.getProposalRoot().getName());
+
 		    final ProposalMarkerDot dot = new ProposalMarkerDot(proposal);
 		    dot.setText(proposal.getProposalRoot().getName());
 		    dot.addActionListener(new ActionListener() {
@@ -401,6 +403,6 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 	    }
 	    
 	}
-	*/
+	
     }
 }
