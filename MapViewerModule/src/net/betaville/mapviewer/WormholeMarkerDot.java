@@ -28,6 +28,7 @@
 package net.betaville.mapviewer;
 
 import edu.poly.bxmc.betaville.model.Wormhole;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -35,10 +36,13 @@ import edu.poly.bxmc.betaville.model.Wormhole;
  */
 public class WormholeMarkerDot extends ButtonMarkerDot{
     
+    private static ImageIcon imageIcon = new ImageIcon("wormhole_32.png");
+    
     private Wormhole wormhole;
     
     public WormholeMarkerDot(Wormhole wormhole){
 	super(wormhole.getLocation().getGPS());
+	setIcon(imageIcon);
 	this.wormhole = wormhole;
     }
     

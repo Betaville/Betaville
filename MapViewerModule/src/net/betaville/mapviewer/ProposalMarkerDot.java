@@ -28,6 +28,7 @@
 package net.betaville.mapviewer;
 
 import edu.poly.bxmc.betaville.model.ProposalChain;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -35,10 +36,13 @@ import edu.poly.bxmc.betaville.model.ProposalChain;
  */
 public class ProposalMarkerDot extends ButtonMarkerDot{
     
+    private static ImageIcon imageIcon = new ImageIcon("idea_32.png");
+    
     private ProposalChain proposalChain;
     
     public ProposalMarkerDot(ProposalChain proposalChain){
 	super(proposalChain.getProposalRoot().getCoordinate().getGPS());
+	setIcon(imageIcon);
 	this.proposalChain = proposalChain;
     }
     
