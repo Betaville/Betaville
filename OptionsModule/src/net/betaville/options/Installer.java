@@ -44,7 +44,7 @@ public class Installer extends ModuleInstall {
         // create the session
         ClientSession session = new ClientSession();
         CentralLookup.getDefault().add(session);
-        session.setServer(NbPreferences.root().get("ServerAddress", "master.betaville.net"));
+        session.setServer(NbPreferences.root().get("ServerAddress", "localhost"));
         session.setUser(NbPreferences.root().get("Username", null));
         
         System.out.println("SERVER ADDRESS IS " + session.getServer());

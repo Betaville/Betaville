@@ -31,12 +31,16 @@ import edu.poly.bxmc.betaville.CentralLookup;
 import edu.poly.bxmc.betaville.jme.map.GPSCoordinate;
 import edu.poly.bxmc.betaville.jme.map.ILocation;
 import edu.poly.bxmc.betaville.model.ClientSession;
+import edu.poly.bxmc.betaville.model.ProposalChain;
+import edu.poly.bxmc.betaville.model.ProposalFetcher;
 import edu.poly.bxmc.betaville.model.Wormhole;
 import edu.poly.bxmc.betaville.net.InsecureClientManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Point;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Collection;
@@ -46,6 +50,7 @@ import javax.swing.*;
 import org.netbeans.api.settings.ConvertAsProperties;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.awt.StatusDisplayer;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
@@ -53,10 +58,12 @@ import org.openide.util.LookupListener;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.lookup.Lookups;
 import org.openide.windows.TopComponent;
-import org.openstreetmap.gui.jmapviewer.*;
+import org.openstreetmap.gui.jmapviewer.JMapViewer;
+import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import org.openstreetmap.gui.jmapviewer.OsmFileCacheTileLoader;
+import org.openstreetmap.gui.jmapviewer.OsmTileLoader;
 import org.openstreetmap.gui.jmapviewer.events.JMVCommandEvent;
 import org.openstreetmap.gui.jmapviewer.interfaces.JMapViewerEventListener;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileLoader;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
@@ -85,6 +92,8 @@ preferredID = "MapViewerTopComponent")
 public final class MapViewerTopComponent extends TopComponent implements LookupListener {
 
     Lookup.Result<ILocation> result = null;
+    Lookup.Result<Wormhole> wormholeResult = null;
+    
     private JMapViewer map = new JMapViewer();
     final JLabel mperpLabelName = new JLabel("Meters/Pixels: ");
     final JLabel mperpLabelValue = new JLabel(String.format("%s", map.getMeterPerPixel()));
@@ -255,15 +264,13 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
     }
 
     public void addWormhole(Wormhole wormhole) {
-	GPSCoordinate gps = wormhole.getLocation().getGPS();
-
-	WormholeMarkerDot dot = new WormholeMarkerDot(wormhole);
-	dot.addWormholeMapMarkerSelectionListener(new WormholeMarkerDot.WormholeMarkerDotSelectionListener() {
+	final WormholeMarkerDot dot = new WormholeMarkerDot(wormhole);
+	dot.setText(wormhole.getName());
+	dot.addActionListener(new ActionListener() {
 
 	    @Override
-	    public void wormholeMarkerDotSelected(Wormhole wormhole) {
-		
-		System.out.println("Selected " + wormhole.getName());
+	    public void actionPerformed(ActionEvent e) {
+		StatusDisplayer.getDefault().setStatusText("Wormhole Selected " + dot.getWormhole().getName());
 		
 		CentralLookup lookup = CentralLookup.getDefault();
 		Collection locations = lookup.lookupAll(Wormhole.class);
@@ -274,9 +281,11 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 		    }
 		}
 
-		lookup.add(wormhole);
+		lookup.add(dot.getWormhole());
 	    }
 	});
+	
+	map.add(dot);
 	map.addMapMarker(dot);
     }
 
@@ -297,6 +306,9 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
     public void componentOpened() {
         result = CentralLookup.getDefault().lookupResult(ILocation.class);
         result.addLookupListener(this);
+	
+	wormholeResult = CentralLookup.getDefault().lookupResult(Wormhole.class);
+        wormholeResult.addLookupListener(this);
 
         map.addJMVListener(new JMapViewerEventListener() {
 
@@ -318,82 +330,15 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
             }
         });
 
-        map.addMouseListener(new MouseListener() {
-	    
-	    int mouseDistanceTolerance = 5;
-
-            @Override
-            public void mouseReleased(MouseEvent arg0) {
-                //System.out.println(map.getPosition(arg0.getPoint()));
-		
-		// find the closest map marker
-		Point mousePoint = arg0.getPoint();
-		Coordinate mouseCoordinate = map.getPosition(mousePoint);
-		List<MapMarker> markers = map.getMapMarkerList();
-		
-		double closestDistance = -1;
-		MapMarker closestMarker = null;
-		
-		for(MapMarker marker : markers){
-		    
-		    //System.out.println("Checking Marker at: " + marker.getLat()+", "+marker.getLon());
-		    
-		    // Get the position of the item on the map.  This will return null if it is outside the viewport
-		    Point mapPos = map.getMapPosition(marker.getLat(), marker.getLon());
-		    
-		    if(mapPos==null){
-			continue;
-		    }
-		    
-		    //System.out.println("MARKER");
-		    
-		    double distance = mousePoint.distance(mapPos);
-		    if(closestDistance==-1){
-			closestDistance = distance;
-		    }
-		    else{
-			if(distance < closestDistance){
-			    closestDistance = distance;
-			    closestMarker = marker;
-			}
-		    }
-		}
-		
-		if(closestDistance < mouseDistanceTolerance){
-		    if(closestMarker instanceof WormholeMarkerDot){
-			((WormholeMarkerDot)closestMarker).fireSelectionEvent();
-		    }
-		    //System.out.println("Closest Distance: " + closestDistance);
-		    //System.out.println("Marker selected!");
-		}
-		else{
-		    //System.out.println("Closest Distance: " + closestDistance);
-		}
-            }
-
-            @Override
-            public void mousePressed(MouseEvent arg0) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent arg0) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent arg0) {
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent arg0) {
-		//System.out.println("Mouse Clicked: " + map.getPosition(arg0.getPoint()));
-            }
-        });
     }
 
     @Override
     public void componentClosed() {
         result.removeLookupListener(this);
         result = null;
+	
+	wormholeResult.removeLookupListener(this);
+	wormholeResult = null;
     }
 
     void writeProperties(java.util.Properties p) {
@@ -427,5 +372,35 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
                 }
             });
         }
+	
+	/*
+	Wormhole wormhole = CentralLookup.getDefault().lookup(Wormhole.class);
+	if(wormhole!=null){
+	    System.out.println("Wormhole selection in progress");
+	    try {
+		List<ProposalChain> proposals = ProposalFetcher.fetchProposals(wormhole.getCityID());
+		
+		for(ProposalChain proposal : proposals){
+		    final ProposalMarkerDot dot = new ProposalMarkerDot(proposal);
+		    dot.setText(proposal.getProposalRoot().getName());
+		    dot.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			    StatusDisplayer.getDefault().setStatusText("Selected Proposal: " + dot.getProposalChain().getProposalRoot().getName());
+			}
+		    });
+		    
+		    map.addMapMarker(dot);
+		    map.add(dot);
+		}
+	    } catch (UnknownHostException ex) {
+		Exceptions.printStackTrace(ex);
+	    } catch (IOException ex) {
+		Exceptions.printStackTrace(ex);
+	    }
+	    
+	}
+	*/
     }
 }

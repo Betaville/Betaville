@@ -27,22 +27,22 @@
  */
 package net.betaville.mapviewer;
 
-import edu.poly.bxmc.betaville.model.Wormhole;
+import edu.poly.bxmc.betaville.model.ProposalChain;
 
 /**
  *
  * @author Skye Book
  */
-public class WormholeMarkerDot extends ButtonMarkerDot{
+public class ProposalMarkerDot extends ButtonMarkerDot{
     
-    private Wormhole wormhole;
+    private ProposalChain proposalChain;
     
-    public WormholeMarkerDot(Wormhole wormhole){
-	super(wormhole.getLocation().getGPS());
-	this.wormhole = wormhole;
+    public ProposalMarkerDot(ProposalChain proposalChain){
+	super(proposalChain.getProposalRoot().getCoordinate().getGPS());
+	this.proposalChain = proposalChain;
     }
     
-    public Wormhole getWormhole(){
-	return wormhole;
+    public ProposalChain getProposalChain(){
+	return proposalChain;
     }
 }
