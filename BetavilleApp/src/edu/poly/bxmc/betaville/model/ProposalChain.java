@@ -45,7 +45,7 @@ public class ProposalChain {
             throw new IllegalArgumentException("The root of a proposal must be a design classified as a proposal");
         }
 	
-	this.proposalDesign = proposalDesign;
+	this.proposalDesign = rootProposalDesign;
         
         versions = new ArrayList<Design>();
     }

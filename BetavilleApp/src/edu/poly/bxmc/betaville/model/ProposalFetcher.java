@@ -21,6 +21,8 @@ public class ProposalFetcher {
 	InsecureClientManager icm = new InsecureClientManager(null, CentralLookup.getDefault().lookup(ClientSession.class).getServer());
 	List<Design> proposalRoots = icm.findAllProposalsInCity(cityID);
 	
+	System.out.println(proposalRoots.size() + " proposal roots retrieved");
+	
 	List<ProposalChain> chains = new ArrayList<ProposalChain>();
 	
 	for(Design proposalRoot : proposalRoots){
