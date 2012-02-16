@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2008-2012, Brooklyn eXperimental Media Center
- * All rights reserved.
+ * Copyright (c) 2008-2012, Brooklyn eXperimental Media Center All rights
+ * reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met: *
@@ -93,7 +93,6 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 
     Lookup.Result<ILocation> result = null;
     Lookup.Result<Wormhole> wormholeResult = null;
-    
     private JMapViewer map = new JMapViewer();
     final JLabel mperpLabelName = new JLabel("Meters/Pixels: ");
     final JLabel mperpLabelValue = new JLabel(String.format("%s", map.getMeterPerPixel()));
@@ -102,34 +101,34 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
     private MapMarkerDot cameraMapMarker = null;
 
     public MapViewerTopComponent() {
-        initComponents();
-        setName(Bundle.CTL_MapViewerTopComponent());
-        setToolTipText(Bundle.HINT_MapViewerTopComponent());
+	initComponents();
+	setName(Bundle.CTL_MapViewerTopComponent());
+	setToolTipText(Bundle.HINT_MapViewerTopComponent());
 
 	JPanel mapConfigurationPanel = createMapConfigurationPanel();
-        JPanel helpPanel = new JPanel();
-	
+	JPanel helpPanel = new JPanel();
+
 	JPanel displayFilters = createBetavilleDisplayFilters();
 
 
-        add(mapConfigurationPanel, BorderLayout.NORTH);
-	
-	//add(displayFilters, BorderLayout.NORTH);
-        add(helpPanel, BorderLayout.SOUTH);
-        JLabel helpLabel = new JLabel("Use right mouse button to move,\n "
-                + "left double click or mouse wheel to zoom.");
-        helpPanel.add(helpLabel);
-        
-        
+	add(mapConfigurationPanel, BorderLayout.NORTH);
 
-        add(map, BorderLayout.CENTER);
+	//add(displayFilters, BorderLayout.NORTH);
+	add(helpPanel, BorderLayout.SOUTH);
+	JLabel helpLabel = new JLabel("Use right mouse button to move,\n "
+		+ "left double click or mouse wheel to zoom.");
+	helpPanel.add(helpLabel);
+
+
+
+	add(map, BorderLayout.CENTER);
 	try {
 	    // map.setDisplayPositionByLatLon(49.807, 8.6, 11);
 	    // map.setTileGridVisible(true);
 	    InsecureClientManager icm = new InsecureClientManager(null, CentralLookup.getDefault().lookup(ClientSession.class).getServer());
 	    List<Wormhole> wormholes = icm.getAllWormholes();
-            icm.close();
-	    for(Wormhole wormhole : wormholes){
+	    icm.close();
+	    for (Wormhole wormhole : wormholes) {
 		addWormhole(wormhole);
 	    }
 	} catch (UnknownHostException ex) {
@@ -137,14 +136,14 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 	} catch (IOException ex) {
 	    Exceptions.printStackTrace(ex);
 	}
-        
-        associateLookup(Lookups.singleton(map));
+
+	associateLookup(Lookups.singleton(map));
 
     }
-    
-    private JPanel createBetavilleDisplayFilters(){
+
+    private JPanel createBetavilleDisplayFilters() {
 	JPanel displayFilters = new JPanel();
-	
+
 	JCheckBox showWormholes = new JCheckBox("Show Wormholes");
 	showWormholes.addActionListener(new ActionListener() {
 
@@ -153,7 +152,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 		// Turn wormholes on or off
 	    }
 	});
-	
+
 	JCheckBox showProposals = new JCheckBox("Show Proposals");
 	showProposals.addActionListener(new ActionListener() {
 
@@ -162,7 +161,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 		// Turn proposals on or off
 	    }
 	});
-	
+
 	JCheckBox showMyLocation = new JCheckBox("Show My Location");
 	showMyLocation.addActionListener(new ActionListener() {
 
@@ -171,95 +170,95 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 		// Turn location marker on or off
 	    }
 	});
-	
+
 	displayFilters.add(showWormholes);
 	displayFilters.add(showProposals);
 	displayFilters.add(showMyLocation);
-	
+
 	return displayFilters;
     }
-    
+
     // TODO: Put this in an application preferences panel
-    private JPanel createMapConfigurationPanel(){
+    private JPanel createMapConfigurationPanel() {
 	JPanel mapConfigurationPanel = new JPanel();
-	
+
 	JButton button = new JButton("setDisplayToFitMapMarkers");
-        button.addActionListener(new ActionListener() {
+	button.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                map.setDisplayToFitMapMarkers();
-            }
-        });
-        JComboBox tileSourceSelector = new JComboBox(new TileSource[]{new OsmTileSource.Mapnik(),
-                    new OsmTileSource.TilesAtHome(), new OsmTileSource.CycleMap(), new BingAerialTileSource()});
-        tileSourceSelector.addItemListener(new ItemListener() {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		map.setDisplayToFitMapMarkers();
+	    }
+	});
+	JComboBox tileSourceSelector = new JComboBox(new TileSource[]{new OsmTileSource.Mapnik(),
+		    new OsmTileSource.TilesAtHome(), new OsmTileSource.CycleMap(), new BingAerialTileSource()});
+	tileSourceSelector.addItemListener(new ItemListener() {
 
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                map.setTileSource((TileSource) e.getItem());
-            }
-        });
-        JComboBox tileLoaderSelector;
-        try {
-            tileLoaderSelector = new JComboBox(new TileLoader[]{new OsmFileCacheTileLoader(map),
-                        new OsmTileLoader(map)});
-        } catch (IOException e) {
-            tileLoaderSelector = new JComboBox(new TileLoader[]{new OsmTileLoader(map)});
-        }
-        tileLoaderSelector.addItemListener(new ItemListener() {
+	    @Override
+	    public void itemStateChanged(ItemEvent e) {
+		map.setTileSource((TileSource) e.getItem());
+	    }
+	});
+	JComboBox tileLoaderSelector;
+	try {
+	    tileLoaderSelector = new JComboBox(new TileLoader[]{new OsmFileCacheTileLoader(map),
+			new OsmTileLoader(map)});
+	} catch (IOException e) {
+	    tileLoaderSelector = new JComboBox(new TileLoader[]{new OsmTileLoader(map)});
+	}
+	tileLoaderSelector.addItemListener(new ItemListener() {
 
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                map.setTileLoader((TileLoader) e.getItem());
-            }
-        });
-        map.setTileLoader((TileLoader) tileLoaderSelector.getSelectedItem());
-        
-        final JCheckBox showMapMarker = new JCheckBox("Map markers visible");
-        showMapMarker.setSelected(map.getMapMarkersVisible());
-        showMapMarker.addActionListener(new ActionListener() {
+	    @Override
+	    public void itemStateChanged(ItemEvent e) {
+		map.setTileLoader((TileLoader) e.getItem());
+	    }
+	});
+	map.setTileLoader((TileLoader) tileLoaderSelector.getSelectedItem());
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                map.setMapMarkerVisible(showMapMarker.isSelected());
-            }
-        });
-        
-        final JCheckBox showTileGrid = new JCheckBox("Tile grid visible");
-        showTileGrid.setSelected(map.isTileGridVisible());
-        showTileGrid.addActionListener(new ActionListener() {
+	final JCheckBox showMapMarker = new JCheckBox("Map markers visible");
+	showMapMarker.setSelected(map.getMapMarkersVisible());
+	showMapMarker.addActionListener(new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                map.setTileGridVisible(showTileGrid.isSelected());
-            }
-        });
-        
-        final JCheckBox showZoomControls = new JCheckBox("Show zoom controls");
-        showZoomControls.setSelected(map.getZoomContolsVisible());
-        showZoomControls.addActionListener(new ActionListener() {
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		map.setMapMarkerVisible(showMapMarker.isSelected());
+	    }
+	});
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                map.setZoomContolsVisible(showZoomControls.isSelected());
-            }
-        });
-	
+	final JCheckBox showTileGrid = new JCheckBox("Tile grid visible");
+	showTileGrid.setSelected(map.isTileGridVisible());
+	showTileGrid.addActionListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		map.setTileGridVisible(showTileGrid.isSelected());
+	    }
+	});
+
+	final JCheckBox showZoomControls = new JCheckBox("Show zoom controls");
+	showZoomControls.setSelected(map.getZoomContolsVisible());
+	showZoomControls.addActionListener(new ActionListener() {
+
+	    @Override
+	    public void actionPerformed(ActionEvent e) {
+		map.setZoomContolsVisible(showZoomControls.isSelected());
+	    }
+	});
+
 	mapConfigurationPanel.add(tileSourceSelector);
-        mapConfigurationPanel.add(tileLoaderSelector);
-	
+	mapConfigurationPanel.add(tileLoaderSelector);
+
 	mapConfigurationPanel.add(showMapMarker);
 	mapConfigurationPanel.add(showTileGrid);
-	
-	mapConfigurationPanel.add(showZoomControls);
-        mapConfigurationPanel.add(button);
 
-        mapConfigurationPanel.add(zoomLabel);
-        mapConfigurationPanel.add(zoomValue);
-        mapConfigurationPanel.add(mperpLabelName);
-        mapConfigurationPanel.add(mperpLabelValue);
-	
+	mapConfigurationPanel.add(showZoomControls);
+	mapConfigurationPanel.add(button);
+
+	mapConfigurationPanel.add(zoomLabel);
+	mapConfigurationPanel.add(zoomValue);
+	mapConfigurationPanel.add(mperpLabelName);
+	mapConfigurationPanel.add(mperpLabelValue);
+
 	return mapConfigurationPanel;
     }
 
@@ -271,7 +270,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		StatusDisplayer.getDefault().setStatusText("Wormhole Selected " + dot.getWormhole().getName());
-		
+
 		CentralLookup lookup = CentralLookup.getDefault();
 		Collection locations = lookup.lookupAll(Wormhole.class);
 		if (!locations.isEmpty()) {
@@ -284,7 +283,7 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 		lookup.add(dot.getWormhole());
 	    }
 	});
-	
+
 	map.add(dot);
 	map.addMapMarker(dot);
     }
@@ -304,84 +303,84 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
     // End of variables declaration                   
     @Override
     public void componentOpened() {
-        result = CentralLookup.getDefault().lookupResult(ILocation.class);
-        result.addLookupListener(this);
-	
+	result = CentralLookup.getDefault().lookupResult(ILocation.class);
+	result.addLookupListener(this);
+
 	wormholeResult = CentralLookup.getDefault().lookupResult(Wormhole.class);
-        wormholeResult.addLookupListener(this);
+	wormholeResult.addLookupListener(this);
 
-        map.addJMVListener(new JMapViewerEventListener() {
+	map.addJMVListener(new JMapViewerEventListener() {
 
-            @Override
-            public void processCommand(JMVCommandEvent command) {
-                if (command.getCommand().equals(JMVCommandEvent.COMMAND.ZOOM)
-                        || command.getCommand().equals(JMVCommandEvent.COMMAND.MOVE)) {
-                    updateZoomParameters();
-                }
-            }
+	    @Override
+	    public void processCommand(JMVCommandEvent command) {
+		if (command.getCommand().equals(JMVCommandEvent.COMMAND.ZOOM)
+			|| command.getCommand().equals(JMVCommandEvent.COMMAND.MOVE)) {
+		    updateZoomParameters();
+		}
+	    }
 
-            private void updateZoomParameters() {
-                if (mperpLabelValue != null) {
-                    mperpLabelValue.setText(String.format("%s", map.getMeterPerPixel()));
-                }
-                if (zoomValue != null) {
-                    zoomValue.setText(String.format("%s", map.getZoom()));
-                }
-            }
-        });
+	    private void updateZoomParameters() {
+		if (mperpLabelValue != null) {
+		    mperpLabelValue.setText(String.format("%s", map.getMeterPerPixel()));
+		}
+		if (zoomValue != null) {
+		    zoomValue.setText(String.format("%s", map.getZoom()));
+		}
+	    }
+	});
 
     }
 
     @Override
     public void componentClosed() {
-        result.removeLookupListener(this);
-        result = null;
-	
+	result.removeLookupListener(this);
+	result = null;
+
 	wormholeResult.removeLookupListener(this);
 	wormholeResult = null;
     }
 
     void writeProperties(java.util.Properties p) {
-        // better to version settings since initial version as advocated at
-        // http://wiki.apidesign.org/wiki/PropertyFiles
-        p.setProperty("version", "1.0");
-        // TODO store your settings
+	// better to version settings since initial version as advocated at
+	// http://wiki.apidesign.org/wiki/PropertyFiles
+	p.setProperty("version", "1.0");
+	// TODO store your settings
     }
 
     void readProperties(java.util.Properties p) {
-        String version = p.getProperty("version");
-        // TODO read your settings according to their version
+	String version = p.getProperty("version");
+	// TODO read your settings according to their version
     }
 
     @Override
     public void resultChanged(LookupEvent ev) {
-        System.out.println("lookup update");
-        Collection<? extends ILocation> locations = result.allInstances();
-        if (!locations.isEmpty()) {
-            ILocation location = locations.iterator().next();
-            final GPSCoordinate gps = location.getGPS();
-            SwingUtilities.invokeLater(new Runnable() {
+	System.out.println("lookup update");
+	Collection<? extends ILocation> locations = result.allInstances();
+	if (!locations.isEmpty()) {
+	    ILocation location = locations.iterator().next();
+	    final GPSCoordinate gps = location.getGPS();
+	    SwingUtilities.invokeLater(new Runnable() {
 
-                @Override
-                public void run() {
-		    if(cameraMapMarker!=null){
+		@Override
+		public void run() {
+		    if (cameraMapMarker != null) {
 			map.removeMapMarker(cameraMapMarker);
 		    }
-                    cameraMapMarker = new MapMarkerDot(Color.RED, gps.getLatitude(), gps.getLongitude());
-                    map.addMapMarker(cameraMapMarker);
-                }
-            });
-        }
-	
-	
+		    cameraMapMarker = new MapMarkerDot(Color.RED, gps.getLatitude(), gps.getLongitude());
+		    map.addMapMarker(cameraMapMarker);
+		}
+	    });
+	}
+
+
 	Wormhole wormhole = CentralLookup.getDefault().lookup(Wormhole.class);
-	if(wormhole!=null){
-	    System.out.println("Wormhole selection in progress");
+	if (wormhole != null) {
+	    //System.out.println("Wormhole selection in progress");
 	    try {
 		List<ProposalChain> proposals = ProposalFetcher.fetchProposals(wormhole.getCityID());
-		
-		for(ProposalChain proposal : proposals){
-		    System.out.println("Proposal: " + proposal.getProposalRoot().getName());
+
+		for (ProposalChain proposal : proposals) {
+		    //System.out.println("Proposal: " + proposal.getProposalRoot().getName());
 
 		    final ProposalMarkerDot dot = new ProposalMarkerDot(proposal);
 		    dot.setText(proposal.getProposalRoot().getName());
@@ -390,9 +389,22 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			    StatusDisplayer.getDefault().setStatusText("Selected Proposal: " + dot.getProposalChain().getProposalRoot().getName());
+			    
+			    // Update the proposal chain in the lookup
+			    CentralLookup lookup = CentralLookup.getDefault();
+			    Collection chains = lookup.lookupAll(ProposalChain.class);
+			    if (!chains.isEmpty()) {
+				Iterator it = chains.iterator();
+				while (it.hasNext()) {
+				    lookup.remove(it.next());
+				}
+			    }
+
+			    lookup.add(dot.getProposalChain());
+			    System.out.println("Lookup changed");
 			}
 		    });
-		    
+
 		    map.addMapMarker(dot);
 		    map.add(dot);
 		}
@@ -401,8 +413,8 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 	    } catch (IOException ex) {
 		Exceptions.printStackTrace(ex);
 	    }
-	    
+
 	}
-	
+
     }
 }
