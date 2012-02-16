@@ -1,4 +1,4 @@
-/** Copyright (c) 2008-2012, Brooklyn eXperimental Media Center
+/* Copyright (c) 2008-2012, Brooklyn eXperimental Media Center
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -22,7 +22,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 package net.betaville.admin;
 
 import org.netbeans.api.settings.ConvertAsProperties;
@@ -54,9 +54,9 @@ preferredID = "AdminModuleTopComponent")
 public final class AdminModuleTopComponent extends TopComponent {
 
     public AdminModuleTopComponent() {
-        initComponents();
-        setName(Bundle.CTL_AdminModuleTopComponent());
-        setToolTipText(Bundle.HINT_AdminModuleTopComponent());
+	initComponents();
+	setName(Bundle.CTL_AdminModuleTopComponent());
+	setToolTipText(Bundle.HINT_AdminModuleTopComponent());
 
     }
 
@@ -84,23 +84,23 @@ public final class AdminModuleTopComponent extends TopComponent {
     // End of variables declaration//GEN-END:variables
     @Override
     public void componentOpened() {
-        // TODO add custom code on component opening
+	// TODO add custom code on component opening
     }
 
     @Override
     public void componentClosed() {
-        // TODO add custom code on component closing
+	// TODO add custom code on component closing
     }
 
     void writeProperties(java.util.Properties p) {
-        // better to version settings since initial version as advocated at
-        // http://wiki.apidesign.org/wiki/PropertyFiles
-        p.setProperty("version", "1.0");
-        // TODO store your settings
+	// better to version settings since initial version as advocated at
+	// http://wiki.apidesign.org/wiki/PropertyFiles
+	p.setProperty("version", "1.0");
+	// TODO store your settings
     }
 
     void readProperties(java.util.Properties p) {
-        String version = p.getProperty("version");
-        // TODO read your settings according to their version
+	String version = p.getProperty("version");
+	// TODO read your settings according to their version
     }
 }
