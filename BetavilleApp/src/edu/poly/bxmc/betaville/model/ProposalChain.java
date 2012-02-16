@@ -51,7 +51,7 @@ public class ProposalChain {
     }
     
     public void addVersion(Design versionDesign){
-        if(!versionDesign.isClassification(Design.Classification.PROPOSAL)){
+        if(!versionDesign.isClassification(Design.Classification.VERSION)){
             throw new IllegalArgumentException("Version designs must be classified as a version");
         }
         else{
