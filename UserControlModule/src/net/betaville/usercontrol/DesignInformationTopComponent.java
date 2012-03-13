@@ -44,7 +44,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "DesignInformationTopComponentTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "explorer", openAtStartup = true)
+@TopComponent.Registration(mode = "bottom_left", openAtStartup = true)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.DesignInformationTopComponentTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333
@@ -64,6 +64,11 @@ public final class DesignInformationTopComponent extends TopComponent implements
         initComponents();
         setName(Bundle.CTL_DesignInformationTopComponentTopComponent());
         setToolTipText(Bundle.HINT_DesignInformationTopComponentTopComponent());
+        putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.TRUE);
+        putClientProperty(TopComponent.PERSISTENCE_ALWAYS, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_KEEP_PREFERRED_SIZE_WHEN_SLIDED_IN, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_SLIDING_DISABLED, Boolean.TRUE);
     }
 
     /**

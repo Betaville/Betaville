@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mode version="2.4">
+    <module name="org.netbeans.core.ui/1" spec="1.2"/>
+    <name unique="topSlidingSide"/>
+  <kind type="sliding"/>
+  <slidingSide side="top"/>
+  <slide-in-size tc-id="DesignViewComponentTopComponent_6" size="165"/>
+  <state type="joined"/>
+  <bounds x="22" y="22" width="1322" height="165"/>
+  <frame state="0"/>
+    <empty-behavior permanent="true"/>
+</mode>

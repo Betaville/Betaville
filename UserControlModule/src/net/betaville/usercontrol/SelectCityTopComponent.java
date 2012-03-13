@@ -54,7 +54,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "SelectCityTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "explorer", openAtStartup = true)
+@TopComponent.Registration(mode = "bottom_right", openAtStartup = true)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.SelectCityTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333
@@ -74,7 +74,11 @@ public final class SelectCityTopComponent extends TopComponent{
 	initComponents();
 	setName(Bundle.CTL_SelectCityTopComponent());
 	setToolTipText(Bundle.HINT_SelectCityTopComponent());
-	//putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
+	putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.TRUE);
+        putClientProperty(TopComponent.PERSISTENCE_ALWAYS, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_KEEP_PREFERRED_SIZE_WHEN_SLIDED_IN, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_SLIDING_DISABLED, Boolean.TRUE);
         populateCityList();
     }
 

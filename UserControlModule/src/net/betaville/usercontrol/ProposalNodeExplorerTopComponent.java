@@ -50,7 +50,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "ProposalNodeExplorerTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "explorer", openAtStartup = false)
+@TopComponent.Registration(mode = "bottom_center", openAtStartup = false)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.ProposalNodeExplorerTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333

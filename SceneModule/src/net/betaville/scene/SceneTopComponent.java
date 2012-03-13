@@ -47,7 +47,7 @@ import org.openide.windows.TopComponent;
  *
  * @author Skye Book
  */
-@TopComponent.Description(preferredID="SceneTopComponent", iconBase="data/new_icon.png", persistenceType=TopComponent.PERSISTENCE_ALWAYS)
+@TopComponent.Description(preferredID = "SceneTopComponent", iconBase = "data/new_icon.png", persistenceType = TopComponent.PERSISTENCE_ALWAYS)
 @TopComponent.Registration(mode = "editor", openAtStartup = false)
 @ActionID(category = "Window", id = "net.betaville.scene.SceneTopComponent")
 @ActionReferences({
@@ -55,32 +55,36 @@ import org.openide.windows.TopComponent;
     @ActionReference(path = "Toolbars/File", position = 0)
 })
 @TopComponent.OpenActionRegistration(displayName = "#CTL_NewCanvasAction")
-@Messages({"CTL_NewCanvasAction=New Canvas"})
-public class SceneTopComponent extends TopComponent implements ActionListener, ChangeListener, ComponentListener{
+@Messages({"CTL_NewCanvasAction=New Canvas",
+    "CTL_CanvasTopComponent=Canvas Window",
+    "HINT_CanvasTopComponent=This is a Canvas window"})
+public class SceneTopComponent extends TopComponent implements ActionListener, ChangeListener, ComponentListener {
+
     private BetavilleGame sceneGame;
     private JmeCanvasContext context;
     private Canvas canvas;
-    
-    public SceneTopComponent(){
+
+    public SceneTopComponent() {
         setName("Scene");
         setLayout(new BoxLayout(this, WIDTH));
         AppSettings settings = new AppSettings(true);
         settings.setWidth(640);
         settings.setHeight(480);
-        
+
         associateLookup(CentralLookup.getDefault());
-        
+
         sceneGame = new BetavilleGame();
-        
+
         sceneGame.setPauseOnLostFocus(false);
         sceneGame.setSettings(settings);
         sceneGame.createCanvas();
         sceneGame.startCanvas();
-        
-        context = (JmeCanvasContext)sceneGame.getContext();
+
+        context = (JmeCanvasContext) sceneGame.getContext();
         canvas = context.getCanvas();
-        canvas.setSize(settings.getWidth(), settings.getHeight());
-        
+        // this statement actually resize's the scene to full, so the canvas actually occupies the whole screen of the editor.
+        //canvas.setSize(settings.getWidth(), settings.getHeight());
+
         add(canvas);
     }
 

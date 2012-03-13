@@ -47,7 +47,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "CurrentLocationTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "properties", openAtStartup = true)
+@TopComponent.Registration(mode = "output", openAtStartup = true)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.CurrentLocationTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333
@@ -66,9 +66,17 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
 
     public CurrentLocationTopComponent() {
         initComponents();
+        
         setName(Bundle.CTL_CurrentLocationTopComponent());
         setToolTipText(Bundle.HINT_CurrentLocationTopComponent());
         putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_DRAGGING_DISABLED, Boolean.TRUE);
+        putClientProperty(TopComponent.PERSISTENCE_ALWAYS, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_KEEP_PREFERRED_SIZE_WHEN_SLIDED_IN, Boolean.TRUE);
+        putClientProperty(TopComponent.PROP_SLIDING_DISABLED, Boolean.TRUE);
+        
+        
     }
 
     /**

@@ -54,7 +54,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="longitudeValueLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="231" max="32767" attributes="0"/>
+                              <EmptySpace pref="259" max="32767" attributes="0"/>
                               <Component id="longitudeValueData" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -154,7 +154,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="northingValueLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="245" max="32767" attributes="0"/>
+                              <EmptySpace pref="271" max="32767" attributes="0"/>
                               <Component id="northingValueData" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
