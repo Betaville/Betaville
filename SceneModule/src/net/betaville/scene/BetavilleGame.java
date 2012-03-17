@@ -34,8 +34,10 @@ import com.jme3.math.Vector3f;
 import edu.poly.bxmc.betaville.CentralLookup;
 import edu.poly.bxmc.betaville.SettingsPreferences;
 import edu.poly.bxmc.betaville.jme.map.ILocation;
+import edu.poly.bxmc.betaville.model.ClientSession;
 import edu.poly.bxmc.betaville.model.Design;
 import edu.poly.bxmc.betaville.model.Wormhole;
+import edu.poly.bxmc.betaville.net.InsecureClientManager;
 import java.util.Collection;
 import java.util.Iterator;
 import net.betaville.scene.DesignPicker.DesignSelectionCallback;
@@ -169,13 +171,13 @@ public class BetavilleGame extends SimpleApplication implements LookupListener {
 	    System.out.println("Wormhole Name: " + wormhole.getName());
 
 	    // create a CityAppState
-	    CityAppState newCityAppState = loadCity(wormhole);
+	    //CityAppState newCityAppState = loadCity(wormhole);
 	    
 	    if(currentCityAppState!=null){
-		stateManager.detach(currentCityAppState);
-		stateManager.attach(newCityAppState);
-		cam.setLocation(currentCityAppState.getCoordinateTransformer().locationToBetaville(wormhole.getLocation()));
-		newCityAppState.setEnabled(true);
+		//stateManager.detach(currentCityAppState);
+		//stateManager.attach(newCityAppState);
+		//cam.setLocation(currentCityAppState.getCoordinateTransformer().locationToBetaville(wormhole.getLocation()));
+		//newCityAppState.setEnabled(true);
 	    }
 	}
     }

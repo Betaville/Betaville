@@ -26,12 +26,11 @@
 package net.betaville.mapviewer;
 
 import edu.poly.bxmc.betaville.CentralLookup;
+import edu.poly.bxmc.betaville.SettingsPreferences;
 import edu.poly.bxmc.betaville.jme.map.GPSCoordinate;
 import edu.poly.bxmc.betaville.jme.map.ILocation;
-import edu.poly.bxmc.betaville.model.ClientSession;
-import edu.poly.bxmc.betaville.model.ProposalChain;
-import edu.poly.bxmc.betaville.model.ProposalFetcher;
-import edu.poly.bxmc.betaville.model.Wormhole;
+import edu.poly.bxmc.betaville.jme.map.MapManager;
+import edu.poly.bxmc.betaville.model.*;
 import edu.poly.bxmc.betaville.net.InsecureClientManager;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -268,7 +267,6 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 	    @Override
 	    public void actionPerformed(ActionEvent e) {
 		StatusDisplayer.getDefault().setStatusText("Wormhole Selected " + dot.getWormhole().getName());
-
 		CentralLookup lookup = CentralLookup.getDefault();
 		Collection locations = lookup.lookupAll(Wormhole.class);
 		if (!locations.isEmpty()) {
@@ -278,7 +276,25 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 		    }
 		}
 
-		lookup.add(dot.getWormhole());
+		try {
+		    InsecureClientManager icm = new InsecureClientManager(null, CentralLookup.getDefault().lookup(ClientSession.class).getServer());
+		    Wormhole location = dot.getWormhole();
+		    String[] cityInfo = icm.findCityByID(location.getCityID());
+		    icm.close();
+		    City city = new City(cityInfo[0], cityInfo[1], cityInfo[2]);
+		    city.setCityID(location.getCityID());
+		    
+		    System.out.println("Created City: " + city.getCity());
+
+		    MapManager.setUTMZone(location.getLocation().getLonZone(), location.getLocation().getLatZone());
+		    SettingsPreferences.addCityAndSetToCurrent(city);
+		    lookup.add(location);
+		} catch (UnknownHostException ex) {
+		    Exceptions.printStackTrace(ex);
+		} catch (IOException ex) {
+		    Exceptions.printStackTrace(ex);
+		}
+
 	    }
 	});
 
@@ -373,47 +389,37 @@ public final class MapViewerTopComponent extends TopComponent implements LookupL
 
 	Wormhole wormhole = CentralLookup.getDefault().lookup(Wormhole.class);
 	/*
-	if (wormhole != null) {
-	    //System.out.println("Wormhole selection in progress");
-	    try {
-		List<ProposalChain> proposals = ProposalFetcher.fetchProposals(wormhole.getCityID());
-
-		for (ProposalChain proposal : proposals) {
-		    //System.out.println("Proposal: " + proposal.getProposalRoot().getName());
-
-		    final ProposalMarkerDot dot = new ProposalMarkerDot(proposal);
-		    dot.setText(proposal.getProposalRoot().getName());
-		    dot.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			    StatusDisplayer.getDefault().setStatusText("Selected Proposal: " + dot.getProposalChain().getProposalRoot().getName());
-
-			    // Update the proposal chain in the lookup
-			    CentralLookup lookup = CentralLookup.getDefault();
-			    Collection chains = lookup.lookupAll(ProposalChain.class);
-			    if (!chains.isEmpty()) {
-				Iterator it = chains.iterator();
-				while (it.hasNext()) {
-				    lookup.remove(it.next());
-				}
-			    }
-
-			    lookup.add(dot.getProposalChain());
-			    System.out.println("Lookup changed");
-			}
-		    });
-
-		    map.addMapMarker(dot);
-		    map.add(dot);
-		}
-	    } catch (UnknownHostException ex) {
-		Exceptions.printStackTrace(ex);
-	    } catch (IOException ex) {
-		Exceptions.printStackTrace(ex);
-	    }
-
-	}*/
+	 * if (wormhole != null) { //System.out.println("Wormhole selection in
+	 * progress"); try { List<ProposalChain> proposals =
+	 * ProposalFetcher.fetchProposals(wormhole.getCityID());
+	 *
+	 * for (ProposalChain proposal : proposals) {
+	 * //System.out.println("Proposal: " +
+	 * proposal.getProposalRoot().getName());
+	 *
+	 * final ProposalMarkerDot dot = new ProposalMarkerDot(proposal);
+	 * dot.setText(proposal.getProposalRoot().getName());
+	 * dot.addActionListener(new ActionListener() {
+	 *
+	 * @Override public void actionPerformed(ActionEvent e) {
+	 * StatusDisplayer.getDefault().setStatusText("Selected Proposal: " +
+	 * dot.getProposalChain().getProposalRoot().getName());
+	 *
+	 * // Update the proposal chain in the lookup CentralLookup lookup =
+	 * CentralLookup.getDefault(); Collection chains =
+	 * lookup.lookupAll(ProposalChain.class); if (!chains.isEmpty()) {
+	 * Iterator it = chains.iterator(); while (it.hasNext()) {
+	 * lookup.remove(it.next()); } }
+	 *
+	 * lookup.add(dot.getProposalChain()); System.out.println("Lookup
+	 * changed"); } });
+	 *
+	 * map.addMapMarker(dot); map.add(dot); } } catch (UnknownHostException
+	 * ex) { Exceptions.printStackTrace(ex); } catch (IOException ex) {
+	 * Exceptions.printStackTrace(ex); }
+	 *
+	 * }
+	 */
 
     }
 }
