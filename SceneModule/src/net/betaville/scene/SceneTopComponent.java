@@ -47,7 +47,7 @@ import org.openide.windows.TopComponent;
  *
  * @author Skye Book
  */
-@TopComponent.Description(preferredID = "SceneTopComponent", iconBase = "data/new_icon.png", persistenceType = TopComponent.PERSISTENCE_ALWAYS)
+@TopComponent.Description(preferredID = "SceneTopComponent", iconBase = "data/new_icon.png", persistenceType = TopComponent.PERSISTENCE_NEVER)
 @TopComponent.Registration(mode = "editor", openAtStartup = false)
 @ActionID(category = "Window", id = "net.betaville.scene.SceneTopComponent")
 @ActionReferences({
