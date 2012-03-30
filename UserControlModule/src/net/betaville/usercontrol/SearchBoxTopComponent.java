@@ -58,9 +58,25 @@ public final class SearchBoxTopComponent extends TopComponent {
         searchAllCheckBox = new javax.swing.JCheckBox();
 
         searchField.setText(org.openide.util.NbBundle.getMessage(SearchBoxTopComponent.class, "SearchBoxTopComponent.searchField.text")); // NOI18N
+        searchField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchFieldMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                searchFieldMouseExited(evt);
+            }
+        });
         searchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchFieldActionPerformed(evt);
+            }
+        });
+        searchField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                searchFieldFocusLost(evt);
             }
         });
 
@@ -112,8 +128,23 @@ public final class SearchBoxTopComponent extends TopComponent {
     }// </editor-fold>//GEN-END:initComponents
 
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
-        searchField.setText("");
     }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void searchFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchFieldMouseClicked
+        
+    }//GEN-LAST:event_searchFieldMouseClicked
+
+    private void searchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFieldFocusGained
+        searchField.setText("");
+    }//GEN-LAST:event_searchFieldFocusGained
+
+    private void searchFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFieldFocusLost
+        searchField.setText("Enter Term to Search...");
+    }//GEN-LAST:event_searchFieldFocusLost
+
+    private void searchFieldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchFieldMouseExited
+
+    }//GEN-LAST:event_searchFieldMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
@@ -123,6 +154,7 @@ public final class SearchBoxTopComponent extends TopComponent {
     private javax.swing.JComboBox searchDropDownList;
     private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
+
     @Override
     public void componentOpened() {
         // TODO add custom code on component opening
