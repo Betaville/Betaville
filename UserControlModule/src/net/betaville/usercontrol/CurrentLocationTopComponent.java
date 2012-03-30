@@ -47,7 +47,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "CurrentLocationTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "output", openAtStartup = true)
+@TopComponent.Registration(mode = "bottom_center", openAtStartup = true)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.CurrentLocationTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333
@@ -110,6 +110,8 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
         yValueData = new javax.swing.JLabel();
         xValueData = new javax.swing.JLabel();
 
+        tabbedPane.setPreferredSize(new java.awt.Dimension(243, 104));
+
         org.openide.awt.Mnemonics.setLocalizedText(latitudeValueLabel, org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.latitudeValueLabel.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(longitudeValueLabel, org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.longitudeValueLabel.text")); // NOI18N
@@ -135,7 +137,7 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
                         .addComponent(latitudeValueData))
                     .addGroup(latLonPaneLayout.createSequentialGroup()
                         .addComponent(longitudeValueLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                         .addComponent(longitudeValueData))
                     .addGroup(latLonPaneLayout.createSequentialGroup()
                         .addComponent(wgsAltitudeValueLabel)
@@ -158,7 +160,7 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
                 .addGroup(latLonPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wgsAltitudeValueLabel)
                     .addComponent(wgsAltitudeValueData))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab(org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.latLonPane.TabConstraints.tabTitle"), latLonPane); // NOI18N
@@ -184,11 +186,11 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
                 .addGroup(utmPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(utmPaneLayout.createSequentialGroup()
                         .addComponent(northingValueLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                         .addComponent(northingValueData))
                     .addGroup(utmPaneLayout.createSequentialGroup()
                         .addComponent(eastingValueLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                         .addComponent(eastingValueData))
                     .addGroup(utmPaneLayout.createSequentialGroup()
                         .addComponent(utmAltitudeValueLabel)
@@ -211,7 +213,7 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
                 .addGroup(utmPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(utmAltitudeValueLabel)
                     .addComponent(utmAltitudeValueData))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab(org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.utmPane.TabConstraints.tabTitle"), utmPane); // NOI18N
@@ -237,11 +239,11 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
                 .addGroup(glPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(glPaneLayout.createSequentialGroup()
                         .addComponent(xValueLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                         .addComponent(xValueData))
                     .addGroup(glPaneLayout.createSequentialGroup()
                         .addComponent(yValueLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 313, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                         .addComponent(yValueData))
                     .addGroup(glPaneLayout.createSequentialGroup()
                         .addComponent(zValueLabel)
@@ -264,7 +266,7 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
                 .addGroup(glPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(zValueLabel)
                     .addComponent(zValueData))
-                .addContainerGap(188, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab(org.openide.util.NbBundle.getMessage(CurrentLocationTopComponent.class, "CurrentLocationTopComponent.glPane.TabConstraints.tabTitle"), glPane); // NOI18N
@@ -273,11 +275,11 @@ public final class CurrentLocationTopComponent extends TopComponent implements L
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane)
+            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabbedPane)
+            .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables

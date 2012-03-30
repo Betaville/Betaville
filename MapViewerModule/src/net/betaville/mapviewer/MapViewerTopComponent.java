@@ -74,9 +74,9 @@ autostore = false)
 @TopComponent.Description(preferredID = "MapViewerTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "editor", openAtStartup = false)
-@ActionID(category = "Window", id = "net.betaville.mapviewer.MapViewerTopComponent")
-@ActionReference(path = "Menu/Window" /*
+@TopComponent.Registration(mode = "editor", openAtStartup = true)
+@ActionID(category = "Edit", id = "net.betaville.mapviewer.MapViewerTopComponent")
+@ActionReference(path = "Menu/Edit" /*
  * , position = 333
  */)
 @TopComponent.OpenActionRegistration(displayName = "#CTL_MapViewerAction",
