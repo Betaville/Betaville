@@ -5,7 +5,7 @@
   <kind type="view"/>
   <state type="joined"/>
   <constraints>
-    <path orientation="horizontal" number="20" weight="0.3"/>
+    <path orientation="horizontal" number="20" weight="0.155"/>
     <path orientation="vertical" number="20" weight="0.5"/>
   </constraints>
   <bounds x="136" y="160" width="437" height="364"/>

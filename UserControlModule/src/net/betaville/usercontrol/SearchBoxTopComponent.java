@@ -58,6 +58,7 @@ public final class SearchBoxTopComponent extends TopComponent {
         searchAllCheckBox = new javax.swing.JCheckBox();
 
         searchField.setText(org.openide.util.NbBundle.getMessage(SearchBoxTopComponent.class, "SearchBoxTopComponent.searchField.text")); // NOI18N
+        searchField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         searchField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 searchFieldMouseClicked(evt);
