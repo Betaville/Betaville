@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: net.betaville.search
+OpenIDE-Module-Layer: net/betaville/search/layer.xml
+OpenIDE-Module-Localizing-Bundle: net/betaville/search/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
