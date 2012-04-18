@@ -32,10 +32,11 @@ public class BetavilleSearchProvider implements SearchProvider {
      * SearchResponse.addResult(...) method and stop computation if false value
      * is returned.
      */
+    @Override
     public void evaluate(SearchRequest request, SearchResponse response) {
         try {
             //The URL we are providing a search for:
-            URL url = new URL("http://betaville.net");
+            URL url = new URL("http://betaville.net/");
             //Stuff needed by Tidy:
             Tidy tidy = new Tidy();
             tidy.setXHTML(true);
@@ -43,8 +44,7 @@ public class BetavilleSearchProvider implements SearchProvider {
             tidy.setShowWarnings(false);
             tidy.setQuiet(true);
 
-            //Get the org.w3c.dom.Document from Tidy,
-            //or use a different parser of your choice:
+            //Get the org.w3c.dom.Document from Tidy:
             org.w3c.dom.Document doc = tidy.parseDOM(url.openStream(), null);
 
             //Get all "a" elements:
@@ -103,7 +103,7 @@ public class BetavilleSearchProvider implements SearchProvider {
         @Override
         public void run() {
             try {
-                URL url = new URL("http://betaville.net" + article);
+                URL url = new URL("http://betaville.net/" + article);
                 StatusDisplayer.getDefault().setStatusText(url.toString());
                 HtmlBrowser.URLDisplayer.getDefault().showURL(url);
             } catch (MalformedURLException ex) {
