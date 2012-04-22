@@ -33,7 +33,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "CommentBoxTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "rightSlidingSide", openAtStartup = true)
+@TopComponent.Registration(mode = "rightSlidingSide", openAtStartup = false)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.CommentBoxTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333

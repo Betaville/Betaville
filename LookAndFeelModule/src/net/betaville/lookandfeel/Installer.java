@@ -79,7 +79,7 @@ public class Installer extends ModuleInstall {
                 
                 try {
                 // TODO
-                    UIManager.setLookAndFeel(new SubstanceGraphiteGlassLookAndFeel());
+                    UIManager.setLookAndFeel(new SubstanceBetavilleGraphiteLookAndFeel());
                 } catch (UnsupportedLookAndFeelException ex) {
                     Exceptions.printStackTrace(ex);
                 }

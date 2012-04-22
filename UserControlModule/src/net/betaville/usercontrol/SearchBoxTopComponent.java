@@ -18,7 +18,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "SearchBoxTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "bottom_right", openAtStartup = true)
+@TopComponent.Registration(mode = "bottom_right", openAtStartup = false)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.SearchBoxTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333
@@ -58,6 +58,7 @@ public final class SearchBoxTopComponent extends TopComponent {
         searchAllCheckBox = new javax.swing.JCheckBox();
 
         searchField.setText(org.openide.util.NbBundle.getMessage(SearchBoxTopComponent.class, "SearchBoxTopComponent.searchField.text")); // NOI18N
+        searchField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         searchField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 searchFieldMouseClicked(evt);
