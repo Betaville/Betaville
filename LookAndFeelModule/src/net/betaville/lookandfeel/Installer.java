@@ -27,8 +27,6 @@
  */
 package net.betaville.lookandfeel;
 
-//import com.jtattoo.plaf.noire.NoireLookAndFeel;
-import com.jtattoo.plaf.graphite.GraphiteLookAndFeel;
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
