@@ -1,193 +1,265 @@
 Graphite Enabled {
     kind=Dark
-    colorUltraLight=#4A4A4A
-    colorExtraLight=#464646
-    colorLight=#424242
-    colorMid=#3F3F3F
-#    colorDark=#353535 >> temporarily changing to yellow (FFCC00) - worked for enabled(selected windows - right partial tab of current window)!
-    colorDark=#353535
-    colorUltraDark=#313131
+# top of the background gradient in buttons, left side of gradient for vertical scrollbars in menus 
+    colorUltraLight=#003300
+# ?
+    colorExtraLight=#0000FF
+# bottom of the background gradient in buttons, right side of the gradient in vertical scrollbars, .5 (?) alpha for editable text fields    
+    colorLight=#003300
+# bottom of gradient for unselected checkbox, tint for search text box?
+    colorMid=#003300
+# background of alt tag, background of SELECTED TAB (some show a gradient on the left)
+    colorDark=#003300
+# ?
+    colorUltraDark=#0000FF
 # the foreground (font) color by default - yellow
     colorForeground=#FFCC00
 }
 
 Graphite Border {
     kind=Dark
-    colorUltraLight=#616161
-    colorExtraLight=#5A5A5A
-    colorLight=#4F4F4F
-    colorMid=#414141
-#    colorDark=#323232 >> temporarily changing to red (FF0000) - worked for the borders of all the components - switching back to what they were for now !
-    colorDark=#323232
-    colorUltraDark=#2B2B2B
-    colorForeground=#EDEDED
+# ?
+    colorUltraLight=#FF0000
+# ?
+    colorExtraLight=#FF0000
+# ?
+    colorLight=#000000
+# ?
+    colorMid=#FFFFCC
+# button and menu borders default
+    colorDark=#FFCC00
+# color of the little dashed line inside a button to indicate that it's selected (or armed?)
+    colorUltraDark=#000000
+# checkmarks and arrows in buttons, unselected
+    colorForeground=#FFCC00
 }
 
-#new highlightComponentBorder scheme for the component borders!
+# new highlightComponentBorder scheme for the component borders!
 Graphite Highlight Component Border {
     kind=Dark
-    colorUltraLight=#616161
-    colorExtraLight=#5A5A5A
-    colorLight=#4F4F4F
-    colorMid=#414141
-# this is the working - border color when highlighted (hovered over) - baje color (FCF0C2) !
-    colorDark=#FCF0C2
-    colorUltraDark=#2B2B2B
-    colorForeground=#EDEDED
+# ?
+    colorUltraLight=#FF0000
+#?
+    colorExtraLight=#000000
+# ?
+    colorLight=#000000
+# ?
+    colorMid=#FF0000
+# button border color HOVER
+    colorDark=#FFFFCC
+# inside dashed line- hover
+    colorUltraDark=#FF0000
+# hover color of arrows and checkmarks in combo boxes
+    colorForeground=#FFFFCC
 }
 
-#new highlightMenuBorder scheme for the Menu borders for now!
+# new highlightMenuBorder scheme for the Menu borders for now!
 Graphite Highlight Menu Border {
     kind=Dark
-    colorUltraLight=#616161
-    colorExtraLight=#5A5A5A
-    colorLight=#4F4F4F
-    colorMid=#414141
+    colorUltraLight=#FFFF00
+# ?
+    colorExtraLight=#FFCC00
+#?
+    colorLight=#FFCC00
+# ?
+    colorMid=#FFCC00
 # borders of each selected item in the lists and menus when highlighted (hovered over) - yellow !
     colorDark=#FFCC00
-    colorUltraDark=#2B2B2B
-    colorForeground=#EDEDED
+# ?
+    colorUltraDark=#FFCC00
+# ?
+    colorForeground=#FFCC00
 }
 
 Graphite Background {
     kind=Dark
-    colorUltraLight=#5F5F5F
-    colorExtraLight=#595959
-    colorLight=#4F4F4F
-    colorMid=#424242
-# background is set to black !
+# ?
+    colorUltraLight=#00FF00
+# ?
+    colorExtraLight=#00FF00
+# ?
+    colorLight=#00FF00
+# ?
+    colorMid=#00FF00
+# background is set to black
     colorDark=#000000
-    colorUltraDark=#2F2F2F
-#    colorForeground=#B4B4B4 >> changing to red temporarily to check whether each component background changes or not ! - does not change.
-    colorForeground=#FF0000
+# ?
+    colorUltraDark=#00FF00
+# ?
+    colorForeground=#00FF00
 }
 
 Graphite Active {
     kind=Dark
-    colorUltraLight=#777777
-    colorExtraLight=#6F6F6F
-    colorLight=#636363
-#    colorMid=#535353 >> temporarily changing to blue (0000FF) - lets c!
-    colorMid=#0000FF
-#    colorDark=#434343 >> temporarily changing to blue (0000FF) - initially yellow !
-    colorDark=#0000FF
-    colorUltraDark=#3B3B3B
-# color of the foreground(text) when the component is selected or active (gray C8C8C8).. changing to black for now ! - worked for some buttons, not for the green ones.
-    colorForeground=#000000 
+# top of gradient for alert box button (unselected)
+    colorUltraLight=#003300
+# ?
+    colorExtraLight=#000000
+# bottom of gradient for alert box button (unselected)
+    colorLight=#003300
+# ?
+    colorMid=#003300
+# ?
+    colorDark=#00FF00
+# ?
+    colorUltraDark=#00FF00
+# color of the foreground(text) in alert box button
+    colorForeground=#FFCC00 
 }
 
 Graphite Selected {
     kind=Dark
-    colorUltraLight=#727272
-    colorExtraLight=#696969
-    colorLight=#606060
-    colorMid=#505050
-    colorDark=#404040
-    colorUltraDark=#383838
-#    colorForeground=#C8C8C8 - trying green(00FF00) - worked for the text colors of the selected item in the lists and button text - changing back now!
-    colorForeground=#C8C8C8
+# top of gradient in check box background
+    colorUltraLight=#003300
+# ?
+    colorExtraLight=#000000
+# bottom of gradient in check box background
+    colorLight=#003300
+# ?
+    colorMid=#00FF00
+# ?
+    colorDark=#00FF00
+# ?
+    colorUltraDark=#00FF00
+# text in Combo Box header when scrolling through items
+    colorForeground=#FFCC00
 }
 
 Graphite Selected Disabled {
     kind=Dark
-    colorUltraLight=#777777
-    colorExtraLight=#6F6F6F
-    colorLight=#636363
-    colorMid=#535353
-    colorDark=#434343
-    colorUltraDark=#3B3B3B
-    colorForeground=#202020
+# ?
+    colorUltraLight=#00FF00
+# ?
+    colorExtraLight=#00FF00
+# non-editable text field backgrounds (mixes with Mid)
+    colorLight=#333333
+# non-editable text field background (Mixes with Light)
+    colorMid=#333333
+# ?
+    colorDark=#000000
+# ?
+    colorUltraDark=#FF0000
+# ?
+    colorForeground=#FF0000
 }
 
 Graphite Disabled {
     kind=Dark
-    colorUltraLight=#646464
-    colorExtraLight=#5E5E5E
-    colorLight=#545454
-    colorMid=#474747
-    colorDark=#3A3A3A
-#    colorUltraDark=#333333 trying green (00FF00) for the side bars - didnt work
-    colorUltraDark=#00FF00
-    colorForeground=#202020
+# Select City button background gradient TOP (disabled)
+    colorUltraLight=#333333
+# ?
+    colorExtraLight=#000000
+# Select City button background gradient BOTTOM (disabled)
+    colorLight=#333333
+# back and forward arrows, gradient top in HELP window (disabled)
+    colorMid=#00FF00
+# ?
+    colorDark=#00FF00
+# ?
+    colorUltraDark=#FFCC00
+# Select City button background gradient TEXT (disabled) (seems to be ca. 0.5 alpha)
+    colorForeground=#FFCC00
 }
 
 Graphite Highlight {
     kind=Dark
-#color of the button's upper background part
-    colorUltraLight=#777777
-    colorExtraLight=#F2F6FB
-#color of the button's lower background part
-    colorLight=#636363
-    colorMid=#BCC0C5
-#    colorDark=#62666B - trying green(00FF00) - didn't work !
-    colorDark=#00FF00
-    colorUltraDark=#363B3F
-#color of text in the button when highlighted - baje color
-    colorForeground=#fcf0c2
+# color of the button's upper background part SELECTED, top-bottom gradient of menu item SELECTED (tint)
+    colorUltraLight=#006600
+# ?
+    colorExtraLight=#FF0000
+# color of the button's lower background part SELECTED
+    colorLight=#006600
+#  top of menu item gradient, .5 alpha on hover/selected (.5 alpha on hover, full on press for combo box item)
+    colorMid=#006600
+# ?
+    colorDark=#FF0000
+# ?
+    colorUltraDark=#FF0000
+#color of text in the button when highlighted - base color
+    colorForeground=#FFFFCC
 }
 
 Graphite Tab Highlight {
     kind=Light
-#    colorUltraLight=#FBFCFF
-#    colorExtraLight=#F2F6FB
-#    colorLight=#CED7E0
-#    colorMid=#BCC0C5
-#    colorDark=#62666B
-#    colorUltraDark=#363B3F
-    colorUltraLight=#FFCC00
-    colorExtraLight=#FFCC00
-    colorLight=#FFCC00
-    colorMid=#FFCC00
-    colorDark=#FFCC00
+# Seleced tab highlight
+    colorUltraLight=#000000
+#?
+    colorExtraLight=#FF0000
+# Tab background lower gradient ACTIVE (alpha tint)
+    colorLight=#FF0000
+# ?
+    colorMid=#FF0000
+# ?
+    colorDark=#FF0000
+# ?
     colorUltraDark=#FFCC00
-#probably the tab background color.. from yellow (FFCC00) to red to black - worked for the selected tab !
-    colorForeground=#000000
+# selected tab TEXT
+    colorForeground=#FFCC00
 }
 
 Graphite Highlight Mark {
     kind=Dark
-    colorUltraLight=#616161
-    colorExtraLight=#5A5A5A
-    colorLight=#4F4F4F
-    colorMid=#414141
-    colorDark=#323232
-    colorUltraDark=#2B2B2B
-    colorForeground=#2B2B2B
+# ?
+    colorUltraLight=#00FF00
+# ?
+    colorExtraLight=#00FF00
+# ?
+    colorLight=#00FF00
+# ?
+    colorMid=#00FF00
+# ?
+    colorDark=#00FF00
+# ?
+    colorUltraDark=#FF0000
+# ?
+    colorForeground=#FF0000
 }
 
 Graphite Text Highlight {
     kind=Light
-    colorUltraLight=#BDBEC0
-    colorExtraLight=#B8BBBD
-    colorLight=#A4A9AE
-    colorMid=#9A9D9F
-    colorDark=#686B6D
-    colorUltraDark=#505355
-    colorForeground=#2B2F33
+# ?
+    colorUltraLight=#FF0000
+# Editable TEXT SELECTED Background, "recent searches" item SELECTED
+    colorExtraLight=#FFFFFF
+# ?
+    colorLight=#FF0000
+# ?
+    colorMid=#FF0000
+# ?
+    colorDark=#FF0000
+# top-level tab background gradient left SELECTED, 0.X alpha over grey
+    colorUltraDark=#FF0000
+# text SELECTED
+    colorForeground=#FF0000
 }
 
 Graphite Separator {
     kind=Dark
-    colorUltraLight=#565656
-    colorExtraLight=#525252
-    colorLight=#4F4F4F
-    colorMid=#383838
-# seperator color
+# ?
+    colorUltraLight=#FF0000
+# separator upper face (black so the lower face gives a single-pixel rule)
+    colorExtraLight=#000000
+# ?
+    colorLight=#FFCC00
+# separator Lower face
+    colorMid=#FFCC00
+# separator color
     colorDark=#FFCC00
-#    colorUltraDark=#333333 trying green (00FF00) for the side bars
-    colorUltraDark=#00FF00
-    colorForeground=#B4B4B4
+# ?
+    colorUltraDark=#00FFFF
+# ?
+    colorForeground=#00FFFF
 }
 
 Graphite Aqua {
     kind=Light
-    colorUltraLight=#6383FF
-    colorExtraLight=#577EFF
-    colorLight=#4A6FFF
-    colorMid=#355FFB
-    colorDark=#1A3DE6
-    colorUltraDark=#153BE1
-    colorForeground=#FFFFFF
+    colorUltraLight=#FF0000
+    colorExtraLight=#FF0000
+    colorLight=#FF0000
+    colorMid=#FF0000
+    colorDark=#FF0000
+    colorUltraDark=#FF0000
+    colorForeground=#FF0000
 }
 
 Raven Selected Mark {
