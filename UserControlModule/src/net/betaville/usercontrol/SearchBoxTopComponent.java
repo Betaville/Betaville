@@ -18,7 +18,7 @@ autostore = false)
 @TopComponent.Description(preferredID = "SearchBoxTopComponent",
 //iconBase="SET/PATH/TO/ICON/HERE", 
 persistenceType = TopComponent.PERSISTENCE_ALWAYS)
-@TopComponent.Registration(mode = "bottom_right", openAtStartup = true)
+@TopComponent.Registration(mode = "bottom_right", openAtStartup = false)
 @ActionID(category = "Window", id = "net.betaville.usercontrol.SearchBoxTopComponent")
 @ActionReference(path = "Menu/Window" /*
  * , position = 333

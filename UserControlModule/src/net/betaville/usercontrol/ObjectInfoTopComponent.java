@@ -115,56 +115,35 @@ public final class ObjectInfoTopComponent extends TopComponent implements Lookup
 
         setBackground(new java.awt.Color(0, 0, 0));
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setPreferredSize(new java.awt.Dimension(370, 100));
 
-        descriptionlLabel1.setBackground(new java.awt.Color(153, 153, 0));
-        descriptionlLabel1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        descriptionlLabel1.setForeground(new java.awt.Color(255, 255, 255));
         org.openide.awt.Mnemonics.setLocalizedText(descriptionlLabel1, org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.descriptionlLabel1.text")); // NOI18N
 
-        nameLabel.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        nameLabel.setForeground(new java.awt.Color(255, 255, 0));
         org.openide.awt.Mnemonics.setLocalizedText(nameLabel, org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.nameLabel.text")); // NOI18N
 
-        nameTextField.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         nameTextField.setText(org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.nameTextField.text")); // NOI18N
         nameTextField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        dateCreatedLabel.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        dateCreatedLabel.setForeground(new java.awt.Color(255, 255, 0));
         org.openide.awt.Mnemonics.setLocalizedText(dateCreatedLabel, org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.dateCreatedLabel.text")); // NOI18N
 
-        dateCreatedTextfield.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         dateCreatedTextfield.setText(org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.dateCreatedTextfield.text")); // NOI18N
         dateCreatedTextfield.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        creatorLabel.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        creatorLabel.setForeground(new java.awt.Color(255, 255, 0));
         org.openide.awt.Mnemonics.setLocalizedText(creatorLabel, org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.creatorLabel.text")); // NOI18N
 
-        creatorTextfield.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         creatorTextfield.setText(org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.creatorTextfield.text")); // NOI18N
         creatorTextfield.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        addressLabel.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        addressLabel.setForeground(new java.awt.Color(255, 255, 0));
         org.openide.awt.Mnemonics.setLocalizedText(addressLabel, org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.addressLabel.text")); // NOI18N
 
-        addressTextfield.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         addressTextfield.setText(org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.addressTextfield.text")); // NOI18N
         addressTextfield.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        urlLabel1.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        urlLabel1.setForeground(new java.awt.Color(255, 255, 0));
         org.openide.awt.Mnemonics.setLocalizedText(urlLabel1, org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.urlLabel1.text")); // NOI18N
 
-        urlTextfield.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         urlTextfield.setText(org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.urlTextfield.text")); // NOI18N
         urlTextfield.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        descriptionlLabel.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        descriptionlLabel.setForeground(new java.awt.Color(255, 255, 0));
         org.openide.awt.Mnemonics.setLocalizedText(descriptionlLabel, org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.descriptionlLabel.text")); // NOI18N
 
         updateDescriptionButton.setBackground(new java.awt.Color(153, 153, 0));
@@ -177,15 +156,11 @@ public final class ObjectInfoTopComponent extends TopComponent implements Lookup
         displayText.setBorder(null);
         displayText.setContentType(org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.displayText.contentType")); // NOI18N
         displayText.setEditable(false);
-        displayText.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         jScrollPane1.setViewportView(displayText);
 
-        commentLabel.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        commentLabel.setForeground(new java.awt.Color(255, 255, 0));
         org.openide.awt.Mnemonics.setLocalizedText(commentLabel, org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.commentLabel.text")); // NOI18N
 
         textArea.setColumns(20);
-        textArea.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
         textArea.setLineWrap(true);
         textArea.setRows(2);
         textArea.setWrapStyleWord(true);
@@ -205,14 +180,11 @@ public final class ObjectInfoTopComponent extends TopComponent implements Lookup
             }
         });
 
-        addCommentLabel.setFont(new java.awt.Font("Tahoma", 0, 9)); // NOI18N
-        addCommentLabel.setForeground(new java.awt.Color(255, 255, 0));
         org.openide.awt.Mnemonics.setLocalizedText(addCommentLabel, org.openide.util.NbBundle.getMessage(ObjectInfoTopComponent.class, "ObjectInfoTopComponent.addCommentLabel.text")); // NOI18N
 
         jScrollPane3.setHorizontalScrollBar(null);
 
         descriptionArea.setColumns(20);
-        descriptionArea.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         descriptionArea.setRows(2);
         descriptionArea.setWrapStyleWord(true);
         descriptionArea.setBorder(null);
@@ -223,39 +195,28 @@ public final class ObjectInfoTopComponent extends TopComponent implements Lookup
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(nameLabel)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(descriptionlLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(109, 109, 109))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(addCommentLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(commentLabel))
-                    .addComponent(creatorTextfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nameLabel)
+                    .addComponent(commentLabel)
+                    .addComponent(addCommentLabel))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(urlLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dateCreatedLabel)
-                                    .addComponent(dateCreatedTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(creatorLabel)
-                                    .addGap(134, 134, 134))
-                                .addComponent(addressTextfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(urlTextfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addressTextfield, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(descriptionlLabel1))
@@ -264,7 +225,17 @@ public final class ObjectInfoTopComponent extends TopComponent implements Lookup
                         .addComponent(updateDescriptionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(postCommentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(postCommentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateCreatedTextfield, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(urlTextfield, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(dateCreatedLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(creatorTextfield, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(creatorLabel)
+                        .addGap(134, 134, 134)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -279,11 +250,11 @@ public final class ObjectInfoTopComponent extends TopComponent implements Lookup
                 .addComponent(dateCreatedLabel)
                 .addGap(1, 1, 1)
                 .addComponent(dateCreatedTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(creatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
-                .addComponent(creatorTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addComponent(creatorTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addComponent(addressLabel)
                 .addGap(1, 1, 1)
                 .addComponent(addressTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,12 +286,12 @@ public final class ObjectInfoTopComponent extends TopComponent implements Lookup
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 566, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

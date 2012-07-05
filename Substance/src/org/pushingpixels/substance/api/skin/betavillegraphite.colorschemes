@@ -1,0 +1,307 @@
+Graphite Enabled {
+    kind=Dark
+# top of the background gradient in buttons, left side of gradient for vertical scrollbars in menus 
+    colorUltraLight=#003300
+# ?
+    colorExtraLight=#0000FF
+# bottom of the background gradient in buttons, right side of the gradient in vertical scrollbars, .5 (?) alpha for editable text fields    
+    colorLight=#003300
+# bottom of gradient for unselected checkbox, tint for search text box?
+    colorMid=#003300
+# background of alt tag, background of SELECTED TAB (some show a gradient on the left)
+    colorDark=#003300
+# ?
+    colorUltraDark=#0000FF
+# the foreground (font) color by default - yellow
+    colorForeground=#FFCC00
+}
+
+Graphite Border {
+    kind=Dark
+# ?
+    colorUltraLight=#FF0000
+# ?
+    colorExtraLight=#FF0000
+# ?
+    colorLight=#000000
+# ?
+    colorMid=#FFFFCC
+# button and menu borders default
+    colorDark=#FFCC00
+# color of the little dashed line inside a button to indicate that it's selected (or armed?)
+    colorUltraDark=#000000
+# checkmarks and arrows in buttons, unselected
+    colorForeground=#FFCC00
+}
+
+# new highlightComponentBorder scheme for the component borders!
+Graphite Highlight Component Border {
+    kind=Dark
+# ?
+    colorUltraLight=#FF0000
+#?
+    colorExtraLight=#000000
+# ?
+    colorLight=#000000
+# ?
+    colorMid=#FF0000
+# button border color HOVER
+    colorDark=#FFFFCC
+# inside dashed line- hover
+    colorUltraDark=#FF0000
+# hover color of arrows and checkmarks in combo boxes
+    colorForeground=#FFFFCC
+}
+
+# new highlightMenuBorder scheme for the Menu borders for now!
+Graphite Highlight Menu Border {
+    kind=Dark
+    colorUltraLight=#FFFF00
+# ?
+    colorExtraLight=#FFCC00
+#?
+    colorLight=#FFCC00
+# ?
+    colorMid=#FFCC00
+# borders of each selected item in the lists and menus when highlighted (hovered over) - yellow !
+    colorDark=#FFCC00
+# ?
+    colorUltraDark=#FFCC00
+# ?
+    colorForeground=#FFCC00
+}
+
+Graphite Background {
+    kind=Dark
+# ?
+    colorUltraLight=#00FF00
+# ?
+    colorExtraLight=#00FF00
+# ?
+    colorLight=#00FF00
+# ?
+    colorMid=#00FF00
+# background is set to black
+    colorDark=#000000
+# ?
+    colorUltraDark=#00FF00
+# ?
+    colorForeground=#00FF00
+}
+
+Graphite Active {
+    kind=Dark
+# top of gradient for alert box button (unselected)
+    colorUltraLight=#003300
+# ?
+    colorExtraLight=#000000
+# bottom of gradient for alert box button (unselected)
+    colorLight=#003300
+# ?
+    colorMid=#003300
+# ?
+    colorDark=#00FF00
+# ?
+    colorUltraDark=#00FF00
+# color of the foreground(text) in alert box button
+    colorForeground=#FFCC00 
+}
+
+Graphite Selected {
+    kind=Dark
+# top of gradient in check box background
+    colorUltraLight=#003300
+# ?
+    colorExtraLight=#000000
+# bottom of gradient in check box background
+    colorLight=#003300
+# ?
+    colorMid=#00FF00
+# ?
+    colorDark=#00FF00
+# ?
+    colorUltraDark=#00FF00
+# text in Combo Box header when scrolling through items
+    colorForeground=#FFCC00
+}
+
+Graphite Selected Disabled {
+    kind=Dark
+# ?
+    colorUltraLight=#00FF00
+# ?
+    colorExtraLight=#00FF00
+# non-editable text field backgrounds (mixes with Mid)
+    colorLight=#333333
+# non-editable text field background (Mixes with Light)
+    colorMid=#333333
+# ?
+    colorDark=#000000
+# ?
+    colorUltraDark=#FF0000
+# ?
+    colorForeground=#FF0000
+}
+
+Graphite Disabled {
+    kind=Dark
+# Select City button background gradient TOP (disabled)
+    colorUltraLight=#333333
+# ?
+    colorExtraLight=#000000
+# Select City button background gradient BOTTOM (disabled)
+    colorLight=#333333
+# back and forward arrows, gradient top in HELP window (disabled)
+    colorMid=#00FF00
+# ?
+    colorDark=#00FF00
+# ?
+    colorUltraDark=#FFCC00
+# Select City button background gradient TEXT (disabled) (seems to be ca. 0.5 alpha)
+    colorForeground=#FFCC00
+}
+
+Graphite Highlight {
+    kind=Dark
+# color of the button's upper background part SELECTED, top-bottom gradient of menu item SELECTED (tint)
+    colorUltraLight=#006600
+# ?
+    colorExtraLight=#FF0000
+# color of the button's lower background part SELECTED
+    colorLight=#006600
+#  top of menu item gradient, .5 alpha on hover/selected (.5 alpha on hover, full on press for combo box item)
+    colorMid=#006600
+# ?
+    colorDark=#FF0000
+# ?
+    colorUltraDark=#FF0000
+#color of text in the button when highlighted - base color
+    colorForeground=#FFFFCC
+}
+
+Graphite Tab Highlight {
+    kind=Light
+# Seleced tab highlight
+    colorUltraLight=#000000
+#?
+    colorExtraLight=#FF0000
+# Tab background lower gradient ACTIVE (alpha tint)
+    colorLight=#FF0000
+# ?
+    colorMid=#FF0000
+# ?
+    colorDark=#FF0000
+# ?
+    colorUltraDark=#FFCC00
+# selected tab TEXT
+    colorForeground=#FFCC00
+}
+
+Graphite Highlight Mark {
+    kind=Dark
+# ?
+    colorUltraLight=#00FF00
+# ?
+    colorExtraLight=#00FF00
+# ?
+    colorLight=#00FF00
+# ?
+    colorMid=#00FF00
+# ?
+    colorDark=#00FF00
+# ?
+    colorUltraDark=#FF0000
+# ?
+    colorForeground=#FF0000
+}
+
+Graphite Text Highlight {
+    kind=Light
+# ?
+    colorUltraLight=#FF0000
+# Editable TEXT SELECTED Background, "recent searches" item SELECTED
+    colorExtraLight=#FFFFFF
+# ?
+    colorLight=#FF0000
+# ?
+    colorMid=#FF0000
+# ?
+    colorDark=#FF0000
+# top-level tab background gradient left SELECTED, 0.X alpha over grey
+    colorUltraDark=#FF0000
+# text SELECTED
+    colorForeground=#FF0000
+}
+
+Graphite Separator {
+    kind=Dark
+# ?
+    colorUltraLight=#FF0000
+# separator upper face (black so the lower face gives a single-pixel rule)
+    colorExtraLight=#000000
+# ?
+    colorLight=#FFCC00
+# separator Lower face
+    colorMid=#FFCC00
+# separator color
+    colorDark=#FFCC00
+# ?
+    colorUltraDark=#00FFFF
+# ?
+    colorForeground=#00FFFF
+}
+
+Graphite Aqua {
+    kind=Light
+    colorUltraLight=#FF0000
+    colorExtraLight=#FF0000
+    colorLight=#FF0000
+    colorMid=#FF0000
+    colorDark=#FF0000
+    colorUltraDark=#FF0000
+    colorForeground=#FF0000
+}
+
+Raven Selected Mark {
+    kind=Dark
+    colorUltraLight=#000000
+    colorExtraLight=#000000
+    colorLight=#000000
+    colorMid=#000000
+    colorDark=#000000
+    colorUltraDark=#000000
+    colorForeground=#000000
+}
+
+Raven Highlight Mark {
+    kind=Dark
+    colorUltraLight=#1E1E1E
+    colorExtraLight=#1E1E1E
+    colorLight=#1E1E1E
+    colorMid=#1E1E1E
+    colorDark=#1E1E1E
+    colorUltraDark=#1E1E1E
+    colorForeground=#1E1E1E
+}
+
+Raven Disabled {
+    kind=Dark
+    colorUltraLight=#2B2B2B
+    colorExtraLight=#262626
+    colorLight=#1E1E1E
+    colorMid=#141414
+    colorDark=#0A0A0A
+    colorUltraDark=#050505
+    colorForeground=#505050
+}
+
+Raven Selected Disabled {
+    kind=Dark
+    colorUltraLight=#777777
+    colorExtraLight=#6F6F6F
+    colorLight=#636363
+    colorMid=#535353
+    colorDark=#434343
+    colorUltraDark=#3B3B3B
+    colorForeground=#C8C8C8
+}

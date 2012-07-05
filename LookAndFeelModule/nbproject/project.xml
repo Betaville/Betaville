@@ -7,6 +7,14 @@
             <suite-component/>
             <module-dependencies>
                 <dependency>
+                    <code-name-base>net.betaville.substance</code-name-base>
+                    <build-prerequisite/>
+                    <compile-dependency/>
+                    <run-dependency>
+                        <implementation-version/>
+                    </run-dependency>
+                </dependency>
+                <dependency>
                     <code-name-base>org.openide.awt</code-name-base>
                     <build-prerequisite/>
                     <compile-dependency/>
@@ -32,22 +40,6 @@
                 </dependency>
             </module-dependencies>
             <public-packages/>
-            <class-path-extension>
-                <runtime-relative-path>ext/Substance6.0.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/Substance6.0.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/laf-plugin-6.3.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/laf-plugin-6.3.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/laf-widget-5.0.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/laf-widget-5.0.jar</binary-origin>
-            </class-path-extension>
-            <class-path-extension>
-                <runtime-relative-path>ext/trident.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/trident.jar</binary-origin>
-            </class-path-extension>
         </data>
     </configuration>
 </project>

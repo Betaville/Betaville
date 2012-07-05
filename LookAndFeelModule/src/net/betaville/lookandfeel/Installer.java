@@ -27,14 +27,13 @@
  */
 package net.betaville.lookandfeel;
 
-//import com.jtattoo.plaf.noire.NoireLookAndFeel;
 import java.lang.reflect.InvocationTargetException;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.Exceptions;
-import org.pushingpixels.substance.api.skin.*;
+import org.pushingpixels.substance.api.skin.SubstanceBetavilleGraphiteLookAndFeel;
 
 public class Installer extends ModuleInstall {
     
@@ -79,7 +78,7 @@ public class Installer extends ModuleInstall {
                 
                 try {
                 // TODO
-                    UIManager.setLookAndFeel(new SubstanceGraphiteGlassLookAndFeel());
+                    UIManager.setLookAndFeel(new SubstanceBetavilleGraphiteLookAndFeel());
                 } catch (UnsupportedLookAndFeelException ex) {
                     Exceptions.printStackTrace(ex);
                 }
